@@ -9338,6 +9338,12 @@ public final class Settings {
         public static final int ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW = 0x2;
 
         /**
+         * Whether to vibrate when quick settings tile is pressed.
+         * @hide
+         */
+        public static final String QUICK_SETTINGS_VIBRATE = "quick_settings_vibrate";
+
+        /**
          * Wheter to have transparent background on lockscreen notifications
          *
          * @hide
