@@ -87,4 +87,7 @@
     <!-- Whether device has a big physical display cutout -->
     <java-symbol type="bool" name="config_physicalDisplayCutoutCentered" />
 
+    <!-- System update service -->
+    <java-symbol type="array" name="config_forceEnabledComponents" />
+
 </resources>
