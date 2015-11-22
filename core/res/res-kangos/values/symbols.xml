@@ -75,7 +75,10 @@
     <java-symbol type="array" name="config_rebootActionsList" />
     <java-symbol type="array" name="values_globalActionsList" />
  
-  <!-- Flashlight proximity check -->
-  <java-symbol type="integer" name="config_flashlightProximityTimeout" />
+    <!-- Flashlight proximity check -->
+    <java-symbol type="integer" name="config_flashlightProximityTimeout" />
+
+    <!-- Rotation sensor -->
+    <java-symbol type="bool" name="config_useSystemClockforRotationSensor" />
 
 </resources>
