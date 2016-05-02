@@ -50,4 +50,10 @@
          less than config_pulsePathEffect_1, measured in pixels
          This allows for the first block in PathEffect to fade -->
     <integer name="config_pulseDbFuzz">2</integer>
+
+    <!-- Should we listen for fingerprints when the screen is off?  Devices
+         with a rear-mounted sensor want this, but certain devices have
+         the sensor embedded in the power key and listening all the time
+         causes a poor experience. -->
+    <bool name="config_fingerprintWakeAndUnlock">true</bool>
 </resources>

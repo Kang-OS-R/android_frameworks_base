@@ -294,6 +294,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
 
     // Face unlock
     private static final boolean mCustomFaceUnlockSupported = FaceUnlockUtils.isFaceUnlockSupported();
+    private final boolean mFingerprintWakeAndUnlock;
 
     /**
      * Short delay before restarting fingerprint authentication after a successful try. This should
@@ -1614,6 +1615,8 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
         mSubscriptionManager = SubscriptionManager.from(context);
         mDeviceProvisioned = isDeviceProvisionedInSettingsDb();
         mStrongAuthTracker = new StrongAuthTracker(context, this::notifyStrongAuthStateChanged);
+        mFingerprintWakeAndUnlock = mContext.getResources().getBoolean(
+                com.android.systemui.R.bool.config_fingerprintWakeAndUnlock);
         mBackgroundExecutor = backgroundExecutor;
         mBroadcastDispatcher = broadcastDispatcher;
         mRingerModeTracker = ringerModeTracker;
@@ -1994,13 +1997,20 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
 
         // Only listen if this KeyguardUpdateMonitor belongs to the primary user. There is an
         // instance of KeyguardUpdateMonitor for each user but KeyguardUpdateMonitor is user-aware.
-        final boolean shouldListen = (mKeyguardIsVisible || !mDeviceInteractive ||
+        if (!mFingerprintWakeAndUnlock) {
+            return (mKeyguardIsVisible || mBouncer || shouldListenForFingerprintAssistant() ||
+                (mKeyguardOccluded && mIsDreaming)) && mDeviceInteractive && !mGoingToSleep
+                && !mSwitchingUser && !isFingerprintDisabled(getCurrentUser())
+                && (!mKeyguardGoingAway || !mDeviceInteractive) && mIsPrimaryUser
+                && allowedOnBouncer;
+        } else {
+           return (mKeyguardIsVisible || !mDeviceInteractive ||
                 (mBouncer && !mKeyguardGoingAway) || mGoingToSleep ||
                 shouldListenForFingerprintAssistant() || (mKeyguardOccluded && mIsDreaming))
                 && !mSwitchingUser && !isFingerprintDisabled(getCurrentUser())
                 && (!mKeyguardGoingAway || !mDeviceInteractive) && mIsPrimaryUser
                 && allowedOnBouncer;
-        return shouldListen;
+        }
     }
 
     /**
