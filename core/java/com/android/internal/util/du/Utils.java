@@ -45,6 +45,8 @@ import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.app.IActivityManager;
 import android.os.SystemProperties;
 import android.os.SystemClock;
 import android.telephony.TelephonyManager;
