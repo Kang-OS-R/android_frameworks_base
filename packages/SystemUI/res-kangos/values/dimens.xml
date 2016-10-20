@@ -30,4 +30,7 @@
     <!-- Weather condition icon  -->
     <dimen name="weather_icon_size">24dp</dimen>
 
+    <!-- Custom Carrier Label -->
+    <dimen name="status_bar_carrier_height">14dp</dimen>
+
 </resources>
