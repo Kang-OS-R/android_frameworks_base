@@ -4858,6 +4858,11 @@ public final class Settings {
         public static final String KEY_HOME_LONG_PRESS_ACTION = "key_home_long_press_action";
 
         /**
+         * @hide
+         */
+        public static final String GLOBAL_ACTIONS_LIST = "global_actions_list";
+
+        /**
          * Action to perform when the home key is double-tapped.
          * (Default can be configured via config_doubleTapOnHomeBehaviorHwkeys)
          * (See KEY_HOME_LONG_PRESS_ACTION for valid values)
@@ -8875,6 +8880,11 @@ public final class Settings {
          * @hide
          */
         public static final String NOTIFICATION_DISMISS_RTL = "notification_dismiss_rtl";
+
+        /**
+         * @hide
+         */
+        public static final String ADVANCED_REBOOT = "advanced_reboot";
 
         /**
          * Comma separated list of QS tiles that have been auto-added already.
