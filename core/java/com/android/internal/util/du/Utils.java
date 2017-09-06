@@ -71,6 +71,9 @@ public class Utils {
 
     private static OverlayManager mOverlayService;
 
+    public static final String INTENT_SCREENSHOT = "action_take_screenshot";
+    public static final String INTENT_REGION_SCREENSHOT = "action_take_region_screenshot";
+
 	// Check if device is connected to Wi-Fi
     public static boolean isWiFiConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -98,6 +101,14 @@ public class Utils {
         return telephony != null && telephony.isVoiceCapable();
     }
 
+    public static void takeScreenshot(boolean full) {
+        IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+        try {
+            wm.sendCustomAction(new Intent(full? INTENT_SCREENSHOT : INTENT_REGION_SCREENSHOT));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 
 	// Check if device is connected to the internet
     public static boolean isConnected(Context context) {
