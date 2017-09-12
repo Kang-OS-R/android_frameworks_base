@@ -69,7 +69,6 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
     private final StatusBarStateController mStatusBarStateController;
     private final NotificationFilter mNotificationFilter;
     private final ContentResolver mContentResolver;
-    private final Context mContext;
     private final PowerManager mPowerManager;
     private final IDreamManager mDreamManager;
     private final AmbientDisplayConfiguration mAmbientDisplayConfiguration;
