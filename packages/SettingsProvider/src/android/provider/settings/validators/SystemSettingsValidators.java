@@ -17,6 +17,7 @@
 package android.provider.settings.validators;
 
 import static android.provider.settings.validators.SettingsValidators.BOOLEAN_VALIDATOR;
+import static android.provider.settings.validators.SettingsValidators.ANY_STRING_VALIDATOR;
 import static android.provider.settings.validators.SettingsValidators.COMPONENT_NAME_VALIDATOR;
 import static android.provider.settings.validators.SettingsValidators.DATE_FORMAT_VALIDATOR;
 import static android.provider.settings.validators.SettingsValidators.LENIENT_IP_ADDRESS_VALIDATOR;
@@ -246,5 +247,12 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.GAMING_MODE_MEDIA_ENABLED, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.GAMING_MODE_MEDIA, new InclusiveIntegerRangeValidator(0, 100));
         VALIDATORS.put(System.QS_LAYOUT_ROWS, new InclusiveIntegerRangeValidator(2, 3));
+        VALIDATORS.put(System.BATTERY_LIGHT_ENABLED, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.BATTERY_LIGHT_ALLOW_ON_DND, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.BATTERY_LIGHT_LOW_BLINKING, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.BATTERY_LIGHT_LOW_COLOR, ANY_STRING_VALIDATOR);
+        VALIDATORS.put(System.BATTERY_LIGHT_MEDIUM_COLOR, ANY_STRING_VALIDATOR);
+        VALIDATORS.put(System.BATTERY_LIGHT_FULL_COLOR, ANY_STRING_VALIDATOR);
+        VALIDATORS.put(System.BATTERY_LIGHT_REALLYFULL_COLOR, ANY_STRING_VALIDATOR);
     }
 }
