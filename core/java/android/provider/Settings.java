@@ -5097,6 +5097,22 @@ public final class Settings {
 
         /**
          * @hide
+         * Applications list where heasdup should't show
+         * @hide
+         */
+        public static final String HEADS_UP_STOPLIST_VALUES = "heads_up_stoplist_values";
+
+         /**
+         * Which applications to disable heads up notifications for
+         * @hide
+         */
+        public static final String HEADS_UP_BLACKLIST_VALUES = "heads_up_blacklist_values";
+
+        /**
+         * IMPORTANT: If you add a new public settings you also have to add it to
+         * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
+         * it to PRIVATE_SETTINGS below. Also add a validator that can validate
+         * the setting value. See an example above.
          */
         public static final String DATA_DISABLED_ICON = "data_disabled_icon";
 
@@ -5568,6 +5584,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNIJAWS_WEATHER_ICON_PACK);
             PRIVATE_SETTINGS.add(OMNI_LOCKSCREEN_WEATHER_ENABLED);
             PRIVATE_SETTINGS.add(AICP_LOCKSCREEN_WEATHER_STYLE);
+            PRIVATE_SETTINGS.add(HEADS_UP_STOPLIST_VALUES);
+            PRIVATE_SETTINGS.add(HEADS_UP_BLACKLIST_VALUES);
         }
 
         /**

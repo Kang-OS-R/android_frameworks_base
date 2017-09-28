@@ -700,33 +700,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private ActivityIntentHelper mActivityIntentHelper;
 
-    private StatusBarSettingsObserver mStatusBarSettingsObserver = new StatusBarSettingsObserver(mHandler);
-    private class StatusBarSettingsObserver extends ContentObserver {
-        StatusBarSettingsObserver(Handler handler) {
-            super(handler);
-        }
-
-        void observe() {
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
-                    false, this, UserHandle.USER_ALL);
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN),
-                    false, this, UserHandle.USER_ALL);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            update();
-        }
-
-        public void update() {
-            if (mNotificationShadeWindowViewController != null) {
-                mNotificationShadeWindowViewController.updateSettings();
-            }
-        }
-    }
-
     /**
      * Public constructor for StatusBar.
      *
@@ -962,9 +935,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         mAwakenSettingsObserver.observe();
         mAwakenSettingsObserver.update();
-
-        mStatusBarSettingsObserver.observe();
-        mStatusBarSettingsObserver.update();
 
         if (mWallpaperSupported) {
             // Make sure we always have the most current wallpaper info.
@@ -2026,10 +1996,51 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.QS_TILE_STYLE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_STOPLIST_VALUES),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_BLACKLIST_VALUES),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            /*if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.XXX))) {
+                doXXX();
+            }*/
         }
 
     public void update() {
         updateTileStyle();
+        setStatusDoubleTapToSleep();
+        setHeadsUpStoplist();
+        setHeadsUpBlacklist();
+        }
+    }
+
+    private void setStatusDoubleTapToSleep() {
+        if (mNotificationShadeWindowViewController != null) {
+            mNotificationShadeWindowViewController.updateSettings();
+        }
+    }
+
+    private void setHeadsUpStoplist() {
+        if (mNotificationInterruptStateProvider != null) {
+            mNotificationInterruptStateProvider.setHeadsUpStoplist();
+        }
+    }
+
+    private void setHeadsUpBlacklist() {
+        if (mNotificationInterruptStateProvider != null) {
+            mNotificationInterruptStateProvider.setHeadsUpBlacklist();
         }
     }
 
