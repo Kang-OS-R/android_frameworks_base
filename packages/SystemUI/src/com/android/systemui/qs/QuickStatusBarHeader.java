@@ -208,7 +208,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     public QuickStatusBarHeader(@Named(VIEW_CONTEXT) Context context, AttributeSet attrs,
             NextAlarmController nextAlarmController, ZenModeController zenModeController,
             StatusBarIconController statusBarIconController,
-            ActivityStarter activityStarter, PrivacyItemController privacyItemController,
+            ActivityStarter activityStarter,
             CommandQueue commandQueue, RingerModeTracker ringerModeTracker, BroadcastDispatcher broadcastDispatcher) {
         super(context, attrs);
         mAlarmController = nextAlarmController;
