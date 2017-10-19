@@ -82,7 +82,6 @@ public class BrightnessController implements ToggleSlider.Listener {
 
     private final ImageView mIcon;
     private final Context mContext;
-    private final ImageView mIcon;
     private final ToggleSlider mControl;
     private final boolean mAutomaticAvailable;
     private final DisplayManager mDisplayManager;
@@ -308,7 +307,6 @@ public class BrightnessController implements ToggleSlider.Listener {
             BroadcastDispatcher broadcastDispatcher) {
         mIcon = icon;
         mContext = context;
-        mIcon = icon;
         mControl = control;
         mControl.setMax(GAMMA_SPACE_MAX);
         mBackgroundHandler = new Handler((Looper) Dependency.get(Dependency.BG_LOOPER));
@@ -342,7 +340,6 @@ public class BrightnessController implements ToggleSlider.Listener {
         mVrManager = IVrManager.Stub.asInterface(ServiceManager.getService(
                 Context.VR_SERVICE));
 
-        if (mAutomaticAvailable) {
         mIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
