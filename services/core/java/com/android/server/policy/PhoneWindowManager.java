@@ -213,6 +213,7 @@ import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.ScreenshotHelper;
 import com.android.internal.util.du.Utils;
+import com.android.internal.util.custom.LineageButtons;
 import com.android.server.ExtconStateObserver;
 import com.android.server.ExtconUEventObserver;
 import com.android.server.GestureLauncherService;
@@ -688,6 +689,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private Sensor mProximitySensor;
     private SensorEventListener mProximityListener;
     private android.os.PowerManager.WakeLock mProximityWakeLock;
+
+    private LineageButtons mLineageButtons;
 
     private static final int MSG_DISPATCH_MEDIA_KEY_WITH_WAKE_LOCK = 3;
     private static final int MSG_DISPATCH_MEDIA_KEY_REPEAT_WITH_WAKE_LOCK = 4;
@@ -1510,6 +1513,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false, "Power - Long-Press - Hide Pocket Lock");
                 hidePocketLock(true);
                 mPocketManager.setListeningExternal(false);
+                break;
             case LONG_PRESS_POWER_TORCH:
                 mPowerKeyHandled = true;
                 // Toggle torch state asynchronously to help protect against
@@ -4398,6 +4402,15 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         MediaSessionLegacyHelper.getHelper(mContext).sendVolumeKeyEvent(
                                 event, AudioManager.USE_DEFAULT_STREAM_TYPE, true);
                     }
+                    if (mLineageButtons.handleVolumeKey(event, interactive)) {
+                        break;
+                    }
+
+                    // If we aren't passing to the user and no one else
+                    // handled it send it to the session manager to
+                    // figure out.
+                    MediaSessionLegacyHelper.getHelper(mContext).sendVolumeKeyEvent(
+                            event, AudioManager.USE_DEFAULT_STREAM_TYPE, true);
                 }
                 break;
             }
@@ -5510,6 +5523,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 mKeyguardDelegate.onBootCompleted();
             }
         }
+
+        mLineageButtons = new LineageButtons(mContext);
 
         mAutofillManagerInternal = LocalServices.getService(AutofillManagerInternal.class);
     }
