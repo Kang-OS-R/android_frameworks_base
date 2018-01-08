@@ -5722,6 +5722,13 @@ public final class Settings {
         public static final String CHARGING_ANIMATION = "charging_animation";
 
         /**
+         * 0 - fullscreen
+         * 1 - partial
+         * @hide
+         */
+        public static final String SCREENSHOT_DEFAULT_MODE = "screenshot_default_mode";
+
+        /**
          * Whether to show qs footer text
          * @hide
          */
