@@ -41,6 +41,10 @@ import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
+import com.android.systemui.qs.tiles.ThemeTile;
+import com.android.systemui.qs.tiles.UiModeNightTile;
+import com.android.systemui.qs.tiles.SyncTile;
+import com.android.systemui.qs.tiles.SoundTile;
 import com.android.systemui.qs.tiles.ScreenRecordTile;
 import com.android.systemui.qs.tiles.UiModeNightTile;
 import com.android.systemui.qs.tiles.UserTile;
@@ -181,6 +185,12 @@ public class QSFactoryImpl implements QSFactory {
                 return mScreenRecordTileProvider.get();
             case "aod":
                 return mAODTileProvider.get();
+            case "hwkeys":
+                return mHWKeysTileProvider.get();
+            case "dataswitch":
+                return mDataSwitchTileProvider.get();
+            case "theme":
+                return new ThemeTile(mHost);
         }
 
         // Custom tiles
