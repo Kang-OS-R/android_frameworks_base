@@ -5742,6 +5742,12 @@ public final class Settings {
          */
 
         /**
+         * Whether to change the transparency of the qs panel
+         * @hide
+         */
+        public static final String QS_PANEL_BG_ALPHA = "qs_panel_bg_alpha";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
