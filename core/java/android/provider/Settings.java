@@ -4970,6 +4970,16 @@ public final class Settings {
          * @hide
          */
         public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
+        
+        /**
+         * Whether to blink flashlight for incoming calls
+         * 0 = Disabled (Default)
+         * 1 = Blink flashlight only in Ringer mode
+         * 2 = Blink flashlight only in DND mode
+         * 3 = Blink flashlight always regardless of ringer mode
+         * @hide
+         */
+        public static final String FLASHLIGHT_ON_CALL = "flashlight_on_call";
 
         /**
          * FOD night light
@@ -6180,6 +6190,7 @@ public final class Settings {
          *
          * @hide
          */
+              
         @UnsupportedAppUsage
         public static final Set<String> PUBLIC_SETTINGS = new ArraySet<>();
         static {
@@ -6232,7 +6243,7 @@ public final class Settings {
             PUBLIC_SETTINGS.add(HAPTIC_FEEDBACK_ENABLED);
             PUBLIC_SETTINGS.add(SHOW_WEB_SUGGESTIONS);
             PUBLIC_SETTINGS.add(VIBRATE_WHEN_RINGING);
-        }
+       }
 
         /**
          * These are all hidden system settings.
