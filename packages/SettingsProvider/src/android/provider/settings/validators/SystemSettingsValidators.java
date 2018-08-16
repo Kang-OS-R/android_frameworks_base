@@ -16,6 +16,7 @@
 
 package android.provider.settings.validators;
 
+import static android.provider.settings.validators.SettingsValidators.ANY_INTEGER_VALIDATOR;
 import static android.provider.settings.validators.SettingsValidators.ANY_STRING_VALIDATOR;
 import static android.provider.settings.validators.SettingsValidators.BOOLEAN_VALIDATOR;
 import static android.provider.settings.validators.SettingsValidators.ANY_STRING_VALIDATOR;
@@ -244,5 +245,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.THEMING_SETTINGS_DASHBOARD_ICONS, ANY_INTEGER_VALIDATOR);
         VALIDATORS.put(System.SCREENSHOT_GESTURE_DELAY, new InclusiveIntegerRangeValidator(0, 500));
         VALIDATORS.put(System.FOD_GESTURE, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.FORCE_SHOW_NAVBAR, ANY_INTEGER_VALIDATOR);
     }
 }
