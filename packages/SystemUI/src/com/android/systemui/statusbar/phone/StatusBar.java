@@ -1920,6 +1920,25 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
 
+    private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
+    private class CustomSettingsObserver extends ContentObserver {
+
+        CustomSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                     Settings.System.QS_TILE_STYLE),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+    public void update() {
+        updateTileStyle();
+        }
+    }
+
     @Override
     public void onExpandAnimationFinished(boolean launchIsFullScreen) {
         if (!mPresenter.isCollapsing()) {
@@ -1963,6 +1982,11 @@ public class StatusBar extends SystemUI implements DemoMode,
     void setUserSetupForTest(boolean userSetup) {
         mUserSetup = userSetup;
     }
+
+     public void updateTileStyle() {
+         int qsTileStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+                 Settings.System.QS_TILE_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
+     }
 
     /**
      * All changes to the status bar and notifications funnel through here and are batched.
