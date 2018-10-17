@@ -109,7 +109,10 @@ LOCAL_REQUIRED_MODULES := \
         Contained \
         Retro \
         Narrow \
-        Stockish
+        Stockish \
+        QStileCircleTrim \
+        QStileDualToneCircle \
+        QStileSquircleTrim
 
 
 include $(BUILD_PHONY_PACKAGE)
