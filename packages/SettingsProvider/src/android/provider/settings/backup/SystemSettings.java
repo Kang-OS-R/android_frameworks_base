@@ -114,5 +114,6 @@ public class SystemSettings {
         Settings.System.BATTERY_LIGHT_REALLYFULL_COLOR,
         Settings.System.QS_FOOTER_TEXT_SHOW,
         Settings.System.QS_FOOTER_TEXT_STRING,
+        Settings.System.THEMING_SETTINGS_DASHBOARD_ICONS,
     };
 }
