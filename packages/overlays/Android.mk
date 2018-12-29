@@ -99,7 +99,9 @@ LOCAL_REQUIRED_MODULES := \
         QSHeaderAccent \
         QSHeaderTransparent \
         SolarizedDarkSystemOverlay \
-        SolarizedDarkSystemUIOverlay
+        SolarizedDarkSystemUIOverlay \
+        MD2Switch \
+        OnePlusSwitch \
 
 
 include $(BUILD_PHONY_PACKAGE)
