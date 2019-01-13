@@ -77,5 +77,10 @@
     <dimen name="navigation_home_handle_width">75dp</dimen>
     <dimen name="navigation_edge_panel_height">20dp</dimen>
     <!-- navigation end-->
+
+   <!-- Network traffic monitor -->
+   <dimen name="net_traffic_multi_text_size">8dp</dimen>
+   <dimen name="net_traffic_txt_img_padding">2dp</dimen>
+
 </resources>
 
