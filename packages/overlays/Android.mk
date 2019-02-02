@@ -119,7 +119,8 @@ LOCAL_REQUIRED_MODULES := \
         QStileBadge \
         QStileBadgetwo \
         QStileDiamond \
-        QStileSquircleTrim
+        QStileSquircleTrim \
+        QSTileCookie
 
 include $(BUILD_PHONY_PACKAGE)
 include $(CLEAR_VARS)
