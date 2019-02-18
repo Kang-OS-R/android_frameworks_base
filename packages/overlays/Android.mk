@@ -26,6 +26,12 @@ LOCAL_REQUIRED_MODULES := \
 	AccentColorPurpleOverlay \
 	AccentColorPaletteOverlay \
 	AccentColorCarbonOverlay \
+        FadedPink \
+        DeepRed \
+        PinkRed \
+        KindaIndigo \
+        ArmyGreen \
+        Grey \
 	AccentColorSandOverlay \
 	AccentColorAmethystOverlay \
 	AccentColorAquamarineOverlay \
