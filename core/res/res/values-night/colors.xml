@@ -40,5 +40,6 @@
     <color name="personal_apps_suspension_notification_color">#8AB4F8</color>
     <color name="toast_bg">@color/material_grey_800</color>
     <color name="toast_text">@color/white</color>
+    <color name="BottomBarBackground">@*android:color/notification_material_background_color</color>
 
 </resources>
