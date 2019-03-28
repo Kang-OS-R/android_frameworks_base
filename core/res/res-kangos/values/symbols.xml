@@ -135,4 +135,6 @@
   <!-- Default fod pressed icon -->
   <java-symbol type="integer" name="config_fod_pressed_color" />
 
+  <!-- Smart charging battery percentage -->
+  <java-symbol type="integer" name="config_smartChargingBatteryLevel" />
 </resources>
