@@ -193,4 +193,7 @@
 
     <!-- Default fod pressed color -->
     <integer name="config_fod_pressed_color">1</integer>
+
+    <!-- Smart charging battery percentage -->
+    <integer name="config_smartChargingBatteryLevel">80</integer>
 </resources>
