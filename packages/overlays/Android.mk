@@ -112,8 +112,11 @@ LOCAL_REQUIRED_MODULES := \
         Stockish \
         QStileCircleTrim \
         QStileDualToneCircle \
-        QStileSquircleTrim
-
+        QStileSquircleTrim \
+        QStileBadge \
+        QStileSquare \
+        QStileStar \
+        QStileTearDrop
 
 include $(BUILD_PHONY_PACKAGE)
 include $(CLEAR_VARS)
