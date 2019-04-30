@@ -113,10 +113,12 @@ LOCAL_REQUIRED_MODULES := \
         QStileCircleTrim \
         QStileDualToneCircle \
         QStileSquircleTrim \
-        QStileBadge \
         QStileSquare \
         QStileStar \
-        QStileTearDrop
+        QStileTearDrop \
+        QStileGear \
+        QStileSun
+
 
 include $(BUILD_PHONY_PACKAGE)
 include $(CLEAR_VARS)
