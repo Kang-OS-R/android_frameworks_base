@@ -610,6 +610,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private VolumePluginManager mVolumePluginManager;
 
+    private boolean mChargingAnimation;
+
     private final BroadcastReceiver mWallpaperChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -2140,6 +2142,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_MEDIA_BLUR),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_CHARGING_ANIMATION),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -2160,7 +2165,10 @@ public class StatusBar extends SystemUI implements DemoMode,
                 stockTileStyle();
                 updateTileStyle();
                 mQSPanel.getHost().reloadAllTiles();
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.LOCKSCREEN_CHARGING_ANIMATION))) {
+                updateChargingAnimation();
             }
+       	    update();
         }
 
     public void update() {
@@ -2173,6 +2181,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateQsPanelResources();
         setLockScreenMediaBlurLevel();
         setGamingMode();
+        updateChargingAnimation();
         }
     }
 
@@ -2265,6 +2274,14 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void setLockScreenMediaBlurLevel() {
         if (mMediaManager != null) {
             mMediaManager.setLockScreenMediaBlurLevel();
+        }
+    }
+
+    private void updateChargingAnimation() {
+        mChargingAnimation = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_CHARGING_ANIMATION, 1, UserHandle.USER_CURRENT) == 1;
+        if (mKeyguardIndicationController != null) {
+            mKeyguardIndicationController.updateChargingIndication(mChargingAnimation);
         }
     }
 
