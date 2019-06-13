@@ -107,6 +107,9 @@ public class MobileSignalController extends SignalController<
     private boolean mDataDisabledIcon;
     private boolean mRoamingIconAllowed;
 
+    // Volte Icon
+    private boolean mVoLTEicon;
+
     // TODO: Reduce number of vars passed in, if we have the NetworkController, probably don't
     // need listener lists anymore.
     public MobileSignalController(Context context, Config config, boolean hasMobileData,
@@ -180,16 +183,19 @@ public class MobileSignalController extends SignalController<
 
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(
-                    Settings.System.getUriFor(Settings.System.SHOW_FOURG_ICON), false,
-                    this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(
-                    Settings.System.getUriFor(Settings.System.DATA_DISABLED_ICON), false,
-                    this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(
-                    Settings.System.getUriFor(Settings.System.ROAMING_INDICATOR_ICON), false,
-                    this, UserHandle.USER_ALL);
-            updateSettings();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                  Settings.System.SHOW_FOURG_ICON),
+                  false,  this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                  Settings.System.DATA_DISABLED_ICON),
+                  false,  this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                  Settings.System.ROAMING_INDICATOR_ICON),
+                  false,  this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                  Settings.System.SHOW_VOLTE_ICON),
+                  false, this, UserHandle.USER_ALL);
+           updateSettings();
         }
 
         /*
@@ -214,6 +220,10 @@ public class MobileSignalController extends SignalController<
 
         mRoamingIconAllowed = Settings.System.getIntForUser(resolver,
                 Settings.System.ROAMING_INDICATOR_ICON, 1,
+                UserHandle.USER_CURRENT) == 1;
+
+        mVoLTEicon = Settings.System.getIntForUser(resolver,
+                Settings.System.SHOW_VOLTE_ICON, 0,
                 UserHandle.USER_CURRENT) == 1;
 
         mapIconSets();
@@ -466,7 +476,7 @@ public class MobileSignalController extends SignalController<
     private int getVolteResId() {
         int resId = 0;
         if ( (mCurrentState.voiceCapable || mCurrentState.videoCapable)
-                &&  mCurrentState.imsRegistered ) {
+                &&  mCurrentState.imsRegistered && mVoLTEicon ) {
             resId = R.drawable.ic_volte;
         }
         return resId;
@@ -941,9 +951,7 @@ public class MobileSignalController extends SignalController<
     private final BroadcastReceiver mVolteSwitchObserver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             Log.d(mTag, "action=" + intent.getAction());
-            if ( mConfig.showVolteIcon ) {
-                notifyListeners();
-            }
+            notifyListeners();
         }
     };
 
