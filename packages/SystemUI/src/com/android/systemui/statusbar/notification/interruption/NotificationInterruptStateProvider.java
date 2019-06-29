@@ -59,4 +59,6 @@ public interface NotificationInterruptStateProvider {
 
     void setHeadsUpStoplist();
     void setHeadsUpBlacklist();
+
+    void setGamingPeekMode(boolean skipHeadsUp);
 }
