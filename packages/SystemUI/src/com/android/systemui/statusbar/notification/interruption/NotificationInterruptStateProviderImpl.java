@@ -78,6 +78,7 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
     private boolean mLessBoringHeadsUp;
     private TelecomManager mTm;
     private Context mContext;
+    private boolean mSkipHeadsUp;
 
     ActivityManager mAm;
     private ArrayList<String> mStoplist = new ArrayList<String>();
@@ -361,6 +362,11 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
 
     private static String getDefaultDialerPackage(TelecomManager tm) {
         return tm != null ? tm.getDefaultDialerPackage() : "";
+    }
+
+    @Override
+    public void setGamingPeekMode(boolean skipHeadsUp) {
+        mSkipHeadsUp = skipHeadsUp;
     }
 
     /**
