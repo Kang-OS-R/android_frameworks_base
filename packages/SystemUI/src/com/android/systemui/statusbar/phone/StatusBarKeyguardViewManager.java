@@ -809,7 +809,7 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
     };
 
     private void onKeyguardBouncerFullyShownChanged(boolean fullyShown){
-        KeyguardUpdateMonitor updateMonitor = KeyguardUpdateMonitor.getInstance(mContext);
+        KeyguardUpdateMonitor updateMonitor = mKeyguardUpdateManager;
         updateMonitor.onKeyguardBouncerFullyShown(fullyShown);
     }
 
