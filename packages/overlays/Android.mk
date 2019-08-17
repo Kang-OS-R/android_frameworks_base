@@ -102,7 +102,11 @@ LOCAL_REQUIRED_MODULES := \
         SolarizedDarkSystemUIOverlay \
         MD2Switch \
         OnePlusSwitch \
-        SwitchTelegram
+        SwitchTelegram \
+        Contained \
+        Retro \
+        Narrow
+
 
 include $(BUILD_PHONY_PACKAGE)
 include $(CLEAR_VARS)
