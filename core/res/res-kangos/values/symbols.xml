@@ -177,4 +177,8 @@
   <java-symbol type="style" name="GlobalActionsAnimationTranslucent" />
   <java-symbol type="style" name="GlobalActionsAnimationXylon" />
   <java-symbol type="style" name="GlobalActionsAnimationCard" />
+
+  <!-- Whether device supports internal audio recording -->
+  <java-symbol type="bool" name="config_hasInternalAudioRecordingSupport" />
+
 </resources>

@@ -162,4 +162,7 @@
     <!-- Whether device has VOOC charging support -->
     <bool name="config_hasVoocCharger">false</bool>
 
+    <!-- Whether device supports internal audio recording -->
+    <bool name="config_hasInternalAudioRecordingSupport">true</bool>
+
 </resources>
