@@ -32,6 +32,7 @@ LOCAL_REQUIRED_MODULES := \
 	FontRubikRubikOverlay \
         FontAclonicaSourceOverlay \
         FontAmaranteSourceOverlay \
+        FontArvoLatoOverlay \
         FontBariolSourceOverlay \
         FontCagliostroSourceOverlay \
         FontCoolstorySourceOverlay \
