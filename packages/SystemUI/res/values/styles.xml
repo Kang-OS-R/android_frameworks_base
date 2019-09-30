@@ -23,6 +23,10 @@
         <item name="android:layout_marginEnd">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
     </style>
+    <style name="TriStateUiText">
+        <item name="android:textSize">11.0sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
 
     <!-- Theme used for the activity that shows when the system forced an app to be resizable -->
     <style name="ForcedResizableTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
