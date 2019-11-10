@@ -41,6 +41,7 @@ LOCAL_REQUIRED_MODULES := \
         FontSurferSourceOverlay \
         FontSamsungOneSourceOverlay \
         FontFiraSansSourceOverlay \
+	FontGoogleSansOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
