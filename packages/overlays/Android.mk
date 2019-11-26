@@ -44,6 +44,8 @@ LOCAL_REQUIRED_MODULES := \
 	FontGoogleSansOverlay \
 	FontGoogleSansSourceOverlay \
 	FontComicSansSourceOverlay \
+	FontCircularStdOverlay \
+	FontOnePlusSlateOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
