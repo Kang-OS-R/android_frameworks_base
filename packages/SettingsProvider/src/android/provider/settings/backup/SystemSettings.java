@@ -113,5 +113,6 @@ public class SystemSettings {
         Settings.System.BATTERY_LIGHT_FULL_COLOR,
         Settings.System.BATTERY_LIGHT_REALLYFULL_COLOR,
         Settings.System.QS_FOOTER_TEXT_SHOW,
+        Settings.System.QS_FOOTER_TEXT_STRING,
     };
 }
