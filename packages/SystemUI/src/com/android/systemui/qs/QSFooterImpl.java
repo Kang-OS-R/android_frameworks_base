@@ -161,17 +161,25 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     }
 
     private void setBuildText() {
-        /*TextView v = findViewById(R.id.build);
+        TextView v = findViewById(R.id.build);
         if (v == null) return;
         boolean isShow = Settings.System.getIntForUser(mContext.getContentResolver(),
                         Settings.System.QS_FOOTER_TEXT_SHOW, 0,
                         UserHandle.USER_CURRENT) == 1;
+        String text = Settings.System.getStringForUser(mContext.getContentResolver(),
+                        Settings.System.QS_FOOTER_TEXT_STRING,
+                        UserHandle.USER_CURRENT);
         if (isShow) {
-            v.setText("YAAP");
-            v.setVisibility(View.VISIBLE);
+            if (text == null || text == "") {
+                v.setText("YAAP");
+                v.setVisibility(View.VISIBLE);
+            } else {
+                v.setText(text);
+                v.setVisibility(View.VISIBLE);
+            }
         } else {
-            v.setVisibility(View.GONE);
-        }*/
+              v.setVisibility(View.GONE);
+        }
     }
 
     private void updateAnimator(int width) {
@@ -253,6 +261,9 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         super.onAttachedToWindow();
         mContext.getContentResolver().registerContentObserver(
                 Settings.System.getUriFor(Settings.System.QS_FOOTER_TEXT_SHOW), false,
+                mSettingsObserver, UserHandle.USER_ALL);
+        mContext.getContentResolver().registerContentObserver(
+                Settings.System.getUriFor(Settings.System.QS_FOOTER_TEXT_STRING), false,
                 mSettingsObserver, UserHandle.USER_ALL);
     }
 
