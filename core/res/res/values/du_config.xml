@@ -17,4 +17,8 @@
 <resources>
     <!-- Default value for Ambiant Pulse light color -->
     <integer name="config_ambientNotificationDefaultColor">0xFF3980FF</integer>
+
+   <string-array translatable="false" name="config_customPermissionsList">
+        <!-- <item>more packages</item>-->
+    </string-array>
 </resources>
