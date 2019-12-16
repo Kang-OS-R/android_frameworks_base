@@ -498,7 +498,7 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
     public void hideCircle() {
         mIsCircleShowing = false;
 
-        setImageResource(R.drawable.fod_icon_default);
+        setFODIcon();
         invalidate();
 
         ThreadUtils.postOnBackgroundThread(() -> {
@@ -507,6 +507,71 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
         setDim(false);
 
         setKeepScreenOn(false);
+    }
+
+    private int getFODIcon() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.FOD_ICON, 0);
+    }
+
+    private void setFODIcon() {
+        int fodicon = getFODIcon();
+
+        if (fodicon == 0) {
+            this.setImageResource(R.drawable.fod_icon_default);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 1) {
+            this.setImageResource(R.drawable.fod_icon_default_1);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 2) {
+            this.setImageResource(R.drawable.fod_icon_default_2);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 3) {
+            this.setImageResource(R.drawable.fod_icon_default_3);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 4) {
+            this.setImageResource(R.drawable.fod_icon_default_4);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 5) {
+            this.setImageResource(R.drawable.fod_icon_default_5);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 6) {
+            this.setImageResource(R.drawable.fod_icon_arc_reactor);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 7) {
+            this.setImageResource(R.drawable.fod_icon_cpt_america_flat);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 8) {
+            this.setImageResource(R.drawable.fod_icon_cosmos);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 9) {
+            this.setImageResource(R.drawable.fod_icon_vivo);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 10) {
+            this.setImageResource(R.drawable.fod_icon_future);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 11) {
+            this.setImageResource(R.drawable.fod_icon_glow_circle);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 12) {
+            this.setImageResource(R.drawable.fod_icon_neon_circle_pink);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 13) {
+            this.setImageResource(R.drawable.fod_icon_paint_splash_circle);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 14) {
+            this.setImageResource(R.drawable.fod_icon_rainbow);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 15) {
+            this.setImageResource(R.drawable.fod_icon_spiral_blue);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 16) {
+            this.setImageResource(R.drawable.fod_icon_sun_metro);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        } else if (fodicon == 17) {
+            this.setImageResource(R.drawable.fod_icon_transparent);
+            this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
     }
 
     public void show() {
