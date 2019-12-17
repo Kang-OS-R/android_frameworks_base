@@ -44,6 +44,14 @@ LOCAL_REQUIRED_MODULES := \
 	AccentColorAmethystOverlay \
 	AccentColorAquamarineOverlay \
 	AccentColorTangerineOverlay \
+	AccentColorBlueGrayOverlay \
+	AccentColorCyanOverlay \
+	AccentColorFlatPinkOverlay \
+	AccentColorIndigoOverlay \
+	AccentColorLightPurpleOverlay \
+	AccentColorPinkOverlay \
+	AccentColorRedOverlay \
+	AccentColorTealOverlay \
 	AccentColorCocaColaOverlay \
 	AccentColorDiscordOverlay \
 	AccentColorGoldenShowerOverlay \
