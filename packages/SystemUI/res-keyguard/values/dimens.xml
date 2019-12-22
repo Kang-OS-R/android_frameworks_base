@@ -18,6 +18,8 @@
 */
 -->
 <resources>
+    <!-- Padding added to keyguard status area when Type clock is in use -->
+    <dimen name="keyguard_status_area_typeclock_padding">32dp</dimen>
 
     <!-- Size of the generic status lines keyguard's status view  -->
     <dimen name="kg_status_line_font_size">14sp</dimen>
