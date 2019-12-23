@@ -17,6 +17,7 @@
 package com.android.internal.util.du;
 
 import android.Manifest;
+import android.app.UiModeManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.om.IOverlayManager;
@@ -215,6 +216,16 @@ public class Utils {
             return mService.getOverlayInfosForTarget(target, userId);
         }
     }
+
+    // Method to detect whether the system dark theme is enabled or not
+    public static boolean isDarkTheme(Context context) {
+        UiModeManager mUiModeManager =
+                context.getSystemService(UiModeManager.class);
+        if (mUiModeManager == null) return false;
+        int mode = mUiModeManager.getNightMode();
+        return (mode == UiModeManager.MODE_NIGHT_YES);
+    }
+
 
     // Method to detect navigation bar is in use
     public static boolean hasNavigationBar(Context context) {
