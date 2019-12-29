@@ -52,6 +52,8 @@ LOCAL_REQUIRED_MODULES := \
 	IconShapeTaperedRectOverlay \
 	IconShapeTeardropOverlay \
 	IconShapeVesselOverlay \
+        IconShapeCylinderOverlay \
+        IconShapeHexagonOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
 	NavigationBarModeGesturalOverlayNarrowBack \
