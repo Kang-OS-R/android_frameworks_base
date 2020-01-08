@@ -57,7 +57,12 @@ LOCAL_REQUIRED_MODULES := \
 	NavigationBarModeGesturalOverlayNarrowBack \
 	NavigationBarModeGesturalOverlayWideBack \
 	NavigationBarModeGesturalOverlayExtraWideBack \
-	preinstalled-packages-platform-overlays.xml
+	preinstalled-packages-platform-overlays.xml \
+        PitchBlackSystemOverlay \
+        PitchBlackSystemUIOverlay \
+        SolarizedDarkSystemOverlay \
+        SolarizedDarkSystemUIOverlay
+
 
 include $(BUILD_PHONY_PACKAGE)
 include $(CLEAR_VARS)
