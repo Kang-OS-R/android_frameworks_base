@@ -49,6 +49,10 @@ LOCAL_REQUIRED_MODULES := \
 	FontSlateForOnePlusOverlay \
         FontFiraSansSourceOverlay \
 	FontSFProOverlay \
+        BakedGreenSystemOverlay \
+        BakedGreenSystemUIOverlay \
+        ChocoXSystemOverlay \
+        ChocoXSystemUIOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
