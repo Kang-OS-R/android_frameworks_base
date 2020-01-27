@@ -33,4 +33,7 @@
     <!-- Custom Carrier Label -->
     <dimen name="status_bar_carrier_height">14dp</dimen>
 
+    <!-- Recognizing fingerprint animation -->
+    <dimen name="fod_animation_size">280dp</dimen>
+
 </resources>
