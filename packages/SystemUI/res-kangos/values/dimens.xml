@@ -24,4 +24,7 @@
     <!-- Volume Panel -->
     <dimen name="volume_dialog_panel_land_margin">68dp</dimen>
 
+    <!-- Custom clock -->
+    <dimen name="custom_clock_left_padding">50dp</dimen>
+
 </resources>
