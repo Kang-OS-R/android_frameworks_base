@@ -2024,6 +2024,11 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                 && strongAuthAllowsScanning && mIsPrimaryUser
                 && !mSecureCameraLaunched && !mIsDeviceInPocket;
 
+        if (shouldListen && mFaceAuthOnSecurityView && !mBouncerFullyShown){
+            shouldListen = false;
+        }
+
+
         // Aggregate relevant fields for debug logging.
         if (DEBUG_FACE || DEBUG_SPEW) {
             final KeyguardFaceListenModel model = new KeyguardFaceListenModel(
@@ -2044,8 +2049,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                     mIsPrimaryUser,
                     mSecureCameraLaunched);
             maybeLogFaceListenerModelData(model);
-        if (shouldListen && mFaceAuthOnSecurityView && !mBouncerFullyShown){
-            shouldListen = false;
         }
 
         return shouldListen;
@@ -2067,6 +2070,9 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                 mFaceListenModels.remove();
             }
             mFaceListenModels.add(model);
+
+        }
+    }
 
     public void onKeyguardBouncerFullyShown(boolean fullyShow) {
         if (mBouncerFullyShown != fullyShow){
