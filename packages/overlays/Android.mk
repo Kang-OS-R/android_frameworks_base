@@ -58,6 +58,8 @@ LOCAL_REQUIRED_MODULES := \
         BakedGreenSystemUIOverlay \
         ChocoXSystemOverlay \
         ChocoXSystemUIOverlay \
+        DarkGreySystemOverlay \
+        DarkGreySystemUIOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
