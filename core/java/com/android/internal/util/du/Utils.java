@@ -43,6 +43,7 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.app.ActivityManager;
 import android.os.SystemProperties;
 import android.os.SystemClock;
 import android.telephony.TelephonyManager;
@@ -212,6 +213,20 @@ public class Utils {
                 } catch (RemoteException e) {}
             }
         }
+
+        // Clear notifications
+        public static void clearAllNotifications() {
+            IStatusBarService service = getStatusBarService();
+            if (service != null) {
+                try {
+                    service.onClearAllNotifications(ActivityManager.getCurrentUser());
+                } catch (RemoteException e) {}
+            }
+        }
+    }
+
+    public static void clearAllNotifications() {
+        FireActions.clearAllNotifications();
     }
 
     public static void toggleQsPanel() {
