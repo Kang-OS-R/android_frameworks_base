@@ -198,6 +198,17 @@ public class Utils {
             }
         }
 
+        public static void killForegroundApp() {
+            IStatusBarService service = getStatusBarService();
+            if (service != null) {
+                try {
+                    service.killForegroundApp();
+                } catch (RemoteException e) {
+                    // do nothing.
+                }
+            }
+        }
+
         // Toggle notifications panel
         public static void toggleNotifications() {
             IStatusBarService service = getStatusBarService();
@@ -249,6 +260,10 @@ public class Utils {
 
     public static void toggleNotifications() {
         FireActions.toggleNotifications();
+    }
+
+    public static void killForegroundApp() {
+        FireActions.killForegroundApp();
     }
 
     // Check to see if device not only supports the Fingerprint scanner but also if is enrolled
