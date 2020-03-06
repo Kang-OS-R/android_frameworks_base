@@ -88,6 +88,13 @@ LOCAL_REQUIRED_MODULES := \
         SolarizedDarkSystemOverlay \
         SolarizedDarkSystemUIOverlay
 
+# Navbar
+PRODUCT_PACKAGES += \
+    NavbarAsusOverlay \
+    NavbarOnePlusOverlay \
+    NavbarOneUiOverlay \
+    NavbarTecnoCamonOverlay
+
 
 include $(BUILD_PHONY_PACKAGE)
 include $(CLEAR_VARS)
