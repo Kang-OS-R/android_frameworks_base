@@ -4223,6 +4223,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             return 0;
         }
 
+        // Specific device key handling
+        if (dispatchKeyToKeyHandlers(event)) {
+            return 0;
+        }
+
         // Basic policy based on interactive state.
         boolean isVolumeRockerWake = !isScreenOn()
                 && mVolumeRockerWake
@@ -4288,11 +4293,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 && event.getRepeatCount() == 0
                 && !isHwKeysDisabled()
                 && !keyguardOn();
-
-        // Specific device key handling
-        if (dispatchKeyToKeyHandlers(event)) {
-            return 0;
-        }
 
         // Handle special keys.
         switch (keyCode) {
