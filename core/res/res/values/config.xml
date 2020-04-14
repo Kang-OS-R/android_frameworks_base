@@ -4403,4 +4403,8 @@
 
     <!-- FOD icon dim-->
     <bool name="config_targetUsesInKernelDimming">false</bool>
+
+    <!-- Enable face auth when swiping security view -->
+    <bool name="config_faceAuthOnSecurityView">false</bool>
+
 </resources>
