@@ -82,18 +82,19 @@ LOCAL_REQUIRED_MODULES := \
 	NavigationBarModeGesturalOverlayNarrowBack \
 	NavigationBarModeGesturalOverlayWideBack \
 	NavigationBarModeGesturalOverlayExtraWideBack \
-	preinstalled-packages-platform-overlays.xml \
+        NavbarAsusOverlay \
+        NavbarOnePlusOverlay \
+        NavbarOneUiOverlay \
+        NavbarTecnoCamonOverlay \
+        preinstalled-packages-platform-overlays.xml \
         PitchBlackSystemOverlay \
         PitchBlackSystemUIOverlay \
+        QSHeaderGrey \
+        QSHeaderLightGrey \
+        QSHeaderAccent \
+        QSHeaderTransparent \
         SolarizedDarkSystemOverlay \
         SolarizedDarkSystemUIOverlay
-
-# Navbar
-PRODUCT_PACKAGES += \
-    NavbarAsusOverlay \
-    NavbarOnePlusOverlay \
-    NavbarOneUiOverlay \
-    NavbarTecnoCamonOverlay
 
 
 include $(BUILD_PHONY_PACKAGE)
