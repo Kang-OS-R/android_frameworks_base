@@ -127,7 +127,7 @@ public class MNMLBoxClockController implements ClockPlugin {
 
     @Override
     public Bitmap getThumbnail() {
-        return BitmapFactory.decodeResource(mResources, R.drawable.default_bold_thumbnail);
+        return BitmapFactory.decodeResource(mResources, R.drawable.mmnl_box);
     }
 
     @Override
