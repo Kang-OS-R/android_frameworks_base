@@ -50,6 +50,10 @@ LOCAL_REQUIRED_MODULES := \
 	FontSlateForOnePlusOverlay \
         FontFiraSansSourceOverlay \
 	FontSFProOverlay \
+        FontFiraSansSourceOverlay \
+        FontExotwoSourceOverlay \
+        FontStoropiaSourceOverlay \
+        FontUbuntuSourceOverlay \
         BakedGreenSystemOverlay \
         BakedGreenSystemUIOverlay \
         ChocoXSystemOverlay \
