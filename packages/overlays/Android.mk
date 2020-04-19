@@ -41,6 +41,7 @@ LOCAL_REQUIRED_MODULES := \
         FontSonySketchSourceOverlay \
         FontSurferSourceOverlay \
         FontSamsungOneSourceOverlay \
+        FontComfortaaSourceOverlay \
         FontFiraSansSourceOverlay \
 	FontGoogleSansOverlay \
 	FontGoogleSansSourceOverlay \
