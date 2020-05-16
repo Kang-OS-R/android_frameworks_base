@@ -105,7 +105,8 @@ LOCAL_REQUIRED_MODULES := \
         SwitchTelegram \
         Contained \
         Retro \
-        Narrow
+        Narrow \
+        Stockish
 
 
 include $(BUILD_PHONY_PACKAGE)
