@@ -4921,6 +4921,11 @@ public final class Settings {
          * @hide
          */
         public static final String POCKET_JUDGE = "pocket_judge";
+        /**
+         * Whether to use new QS panel bg tint or not
+         * @hide
+         */
+        public static final String QS_PANEL_BG_USE_NEW_TINT = "qs_panel_bg_use_new_tint";
 
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
@@ -4929,8 +4934,6 @@ public final class Settings {
          * the setting value. See an example above.
          */
 
-        /**
-        
         /**
          * @hide
          */
@@ -5165,6 +5168,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(COLOR_BUCKET_OVERLAY);
             PRIVATE_SETTINGS.add(COLOR_BUCKET_OVERLAY);
             PRIVATE_SETTINGS.add(USE_OLD_MOBILETYPE);
+            PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_NEW_TINT);
         }
 
         /**
