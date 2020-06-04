@@ -125,6 +125,8 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
                 R.string.system_theme_style_darkgrey, "dark_grey"));
         sStyleItems.add(new ThemeTileItem(UiModeManager.MODE_NIGHT_YES, -1,
                 R.string.system_theme_style_materialocean, "material_ocean"));
+        sStyleItems.add(new ThemeTileItem(UiModeManager.MODE_NIGHT_YES, -1,
+                R.string.system_theme_style_transparentclear, "transparent_clear"));
     }
 
     private enum Mode {
@@ -135,7 +137,7 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
     private Mode mMode;
     private static UiModeManager mUiModeManager;
 
-    @Inject	
+    @Inject
     public ThemeTile(QSHost host) {
         super(host);
         mOverlayManager = IOverlayManager.Stub.asInterface(
@@ -352,6 +354,15 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
                     try {
                         mOverlayManager.setEnabled(material_ocean,
                                 themeItem.uri.equals("material_ocean"), USER_SYSTEM);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+                for (int i = 0; i < ThemesUtils.TRANSPARENT_CLEAR.length; i++) {
+                    String transparent_clear = ThemesUtils.TRANSPARENT_CLEAR[i];
+                    try {
+                        mOverlayManager.setEnabled(transparent_clear,
+                                themeItem.uri.equals("transparent_clear"), USER_SYSTEM);
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
