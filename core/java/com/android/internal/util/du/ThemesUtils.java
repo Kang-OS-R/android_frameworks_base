@@ -106,6 +106,11 @@ public class ThemesUtils {
             "com.android.theme.materialocean.systemui",
     };
 
+    public static final String[] TRANSPARENT_CLEAR = {
+            "com.android.theme.transparentclear.system",
+            "com.android.theme.transparentclear.systemui",
+    };
+
     public static final String[] STATUSBAR_ICONS = {
             "com.android.theme.icon_pack.filled.android",
             "com.android.theme.icon_pack.rounded.android",

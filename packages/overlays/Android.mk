@@ -86,6 +86,8 @@ LOCAL_REQUIRED_MODULES := \
         GesturalNavigationOverlayHidden \
         MaterialOceanSystemOverlay \
         MaterialOceanSystemUIOverlay \
+        TransparentClearSystemOverlay \
+        TransparentClearSystemUIOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
