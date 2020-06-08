@@ -231,6 +231,8 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Rect;
+import android.hardware.SensorManager;
+import android.hardware.SystemSensorManager;
 import android.hardware.display.DisplayManagerInternal;
 import android.location.LocationManager;
 import android.media.audiofx.AudioEffect;
@@ -1681,6 +1683,8 @@ public class ActivityManagerService extends IActivityManager.Stub
     static final HostingRecord sNullHostingRecord = new HostingRecord(null);
 
    private GamingModeController mGamingModeController;
+
+    private SystemSensorManager mSystemSensorManager;
 
     /**
      * Used to notify activity lifecycle events.
@@ -7926,6 +7930,8 @@ public class ActivityManagerService extends IActivityManager.Stub
         RescueParty.onSettingsProviderPublished(mContext);
 
         //mUsageStatsService.monitorPackages();
+
+        mSystemSensorManager = new SystemSensorManager(mContext, mHandler.getLooper());
 
         // Gaming mode provider
         mGamingModeController = new GamingModeController(mContext);
@@ -16207,6 +16213,9 @@ public class ActivityManagerService extends IActivityManager.Stub
                                         mBatteryStatsService.notePackageUninstalled(ssp);
                                         if (mGamingModeController != null) {
                                              mGamingModeController.notePackageUninstalled(ssp);
+                                        }
+                                        if (mSystemSensorManager != null) {
+                                           mSystemSensorManager.notePackageUninstalled(ssp);
                                         }
                                     }
                                 } else {
