@@ -4190,6 +4190,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mMediaManager != null) {
             mMediaManager.setLockScreenMediaBlurLevel();
         }
+    }
 
     public void updateQSDataUsageInfo() {
         DataUsageView.updateUsage();

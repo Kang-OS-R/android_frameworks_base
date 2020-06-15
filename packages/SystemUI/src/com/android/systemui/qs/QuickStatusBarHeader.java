@@ -471,7 +471,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         updateQSBatteryMode();
         updateSBBatteryStyle();
         updateResources();
-	updateDataUsageView()
+	updateDataUsageView();
      }
 
      private void updateQSBatteryMode() {
