@@ -1199,8 +1199,6 @@ public class NetworkControllerImpl extends BroadcastReceiver
         boolean inflateSignalStrengths = false;
         boolean alwaysShowDataRatIcon = false;
 
-        boolean showVowifiIcon = false;
-
         static Config readConfig(Context context) {
             Config config = new Config();
             Resources res = context.getResources();
