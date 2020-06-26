@@ -120,7 +120,8 @@ LOCAL_REQUIRED_MODULES := \
         QStileBadgetwo \
         QStileDiamond \
         QStileSquircleTrim \
-        QSTileCookie
+        QSTileCookie \
+        QStileCircleOutline
 
 include $(BUILD_PHONY_PACKAGE)
 include $(CLEAR_VARS)
