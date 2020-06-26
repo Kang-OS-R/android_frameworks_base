@@ -121,7 +121,14 @@ LOCAL_REQUIRED_MODULES := \
         QStileDiamond \
         QStileSquircleTrim \
         QSTileCookie \
-        QStileCircleOutline
+        QStileCircleOutline \
+        QSTileInkdrop \
+        QSTileWavey \
+        QSTileAttemptMountain \
+        QSTileDottedCircle \
+        QSTileNinja \
+        QSTileTriangles \
+        QSTileNeonLight
 
 include $(BUILD_PHONY_PACKAGE)
 include $(CLEAR_VARS)
