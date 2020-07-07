@@ -136,6 +136,7 @@ public class ThemesUtils {
             "com.android.theme.font.storopia",
             "com.android.theme.font.surfersource",
             "com.android.theme.font.ubuntu",
+            "com.android.theme.font.linotte",
     };
 
     public static final String[] NAVBAR_STYLES = {
