@@ -53,6 +53,7 @@ LOCAL_REQUIRED_MODULES := \
         FontExotwoSourceOverlay \
         FontStoropiaSourceOverlay \
         FontUbuntuSourceOverlay \
+        FontLinotteOverlay \
         BakedGreenSystemOverlay \
         BakedGreenSystemUIOverlay \
         ChocoXSystemOverlay \
