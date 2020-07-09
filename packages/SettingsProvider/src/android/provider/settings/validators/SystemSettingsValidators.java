@@ -237,5 +237,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.ENABLE_SUGGESTIONS, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.RINGTONE_VIBRATION_PATTERN, new InclusiveIntegerRangeValidator(0, 4));
         VALIDATORS.put(System.CUSTOM_RINGTONE_VIBRATION_PATTERN, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.FOD_GESTURE, BOOLEAN_VALIDATOR);
     }
 }
