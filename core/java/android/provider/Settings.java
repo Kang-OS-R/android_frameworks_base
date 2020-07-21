@@ -6083,6 +6083,12 @@ public final class Settings {
         public static final String LOCKSCREEN_ACCENT_COLOR_CUSTOM = "lockscreen_accent_color_custom";
 
         /**
+         * Toggle for clipboard access toast.
+         * @hide
+         */
+        public static final String SHOW_CLIPBOARD_TOAST = "show_clipboard_toast";
+
+        /**
          * @hide
          */
         public static final String FORCE_SHOW_NAVBAR = "navigation_bar_show_new";
