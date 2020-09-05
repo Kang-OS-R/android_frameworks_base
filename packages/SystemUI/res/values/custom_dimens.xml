@@ -18,4 +18,7 @@
 <resources>
     <!-- Qs visibility -->
     <dimen name="qs_tile_height_wo_label">64dp</dimen>
+
+    <!-- Per app volume -->
+    <dimen name="volume_row_app_icon_padding">8dp</dimen>
 </resources>
