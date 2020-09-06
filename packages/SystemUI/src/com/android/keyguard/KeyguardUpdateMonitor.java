@@ -291,6 +291,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
     private final Executor mBackgroundExecutor;
 
     private final boolean mFaceAuthOnSecurityView;
+    private boolean mBouncerFullyShown;
 
     /**
      * Short delay before restarting biometric authentication after a successful try
@@ -305,7 +306,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
     private static final int HAL_ERROR_RETRY_TIMEOUT = 500; // ms
     private static final int HAL_ERROR_RETRY_MAX = 10;
 
-    private boolean mKeyguardReset = false;
 
     private final Runnable mCancelNotReceived = new Runnable() {
         @Override
@@ -942,7 +942,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
     }
 
     private void handleFaceLockoutReset() {
-        updateFaceListeningState();
+        mHandler.postDelayed(this::updateFaceListeningState, 1000);
     }
 
     private void setFaceRunningState(int faceRunningState) {
@@ -1987,10 +1987,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
      * If face auth is allows to scan on this exact moment.
      */
     public boolean shouldListenForFace() {
-        if (mFaceAuthOnSecurityView && mKeyguardReset){
-            mKeyguardReset = false;
-            return false;
-        }
 
 
         final boolean statusBarShadeLocked =
@@ -2025,7 +2021,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
 
         // Only listen if this KeyguardUpdateMonitor belongs to the primary user. There is an
         // instance of KeyguardUpdateMonitor for each user but KeyguardUpdateMonitor is user-aware.
-        final boolean shouldListen =
+        boolean shouldListen =
                 (mBouncer || mAuthInterruptActive || awakeKeyguard
                         || shouldListenForFaceAssistant())
                 && !mSwitchingUser && !isFaceDisabled(user) && becauseCannotSkipBouncer
@@ -2054,6 +2050,8 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                     mIsPrimaryUser,
                     mSecureCameraLaunched);
             maybeLogFaceListenerModelData(model);
+        if (shouldListen && mFaceAuthOnlyOnSecurityView && !mBouncerFullyShown){
+            shouldListen = false;
         }
 
         return shouldListen;
@@ -2075,6 +2073,13 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                 mFaceListenModels.remove();
             }
             mFaceListenModels.add(model);
+
+    public void onKeyguardBouncerFullyShown(boolean fullyShow) {
+        if (mBouncerFullyShown != fullyShow){
+            mBouncerFullyShown = fullyShow;
+            if (mFaceAuthOnlyOnSecurityView){
+                updateFaceListeningState();
+            }
         }
     }
 
@@ -2536,11 +2541,9 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
      */
     private void handleKeyguardReset() {
         if (DEBUG) Log.d(TAG, "handleKeyguardReset");
+        mBouncerFullyShown = false;
         updateBiometricListeningState();
         mNeedsSlowUnlockTransition = resolveNeedsSlowUnlockTransition();
-        if (mFaceAuthOnSecurityView){
-            mKeyguardReset = true;
-        }
     }
 
     private boolean resolveNeedsSlowUnlockTransition() {
