@@ -184,4 +184,7 @@
     <!-- Whether the device supports Smart Pixels -->
     <java-symbol type="bool" name="config_enableSmartPixels" />
 
+    <!-- Vendor platform signatures -->
+    <java-symbol type="array" name="config_vendorPlatformSignatures" />
+
 </resources>
