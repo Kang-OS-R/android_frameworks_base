@@ -62,6 +62,7 @@ import com.android.systemui.statusbar.policy.UserInfoController;
 import com.android.systemui.statusbar.policy.UserInfoController.OnUserInfoChangedListener;
 import com.android.systemui.statusbar.policy.UserInfoControllerImpl;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
+import com.android.systemui.volume.SystemUIInterpolators;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -441,7 +442,7 @@ public class KeyguardStatusBarView extends RelativeLayout
                         .translationX(0)
                         .setDuration(400)
                         .setStartDelay(userSwitcherHiding ? 300 : 0)
-                        .setInterpolator(Interpolators.FAST_OUT_SLOW_IN)
+                        .setInterpolator(new SystemUIInterpolators.LogDecelerateInterpolator(800f, 2.1f, 0))
                         .start();
                 if (userSwitcherHiding) {
                     getOverlay().add(mMultiUserSwitch);
@@ -449,7 +450,7 @@ public class KeyguardStatusBarView extends RelativeLayout
                             .alpha(0f)
                             .setDuration(300)
                             .setStartDelay(0)
-                            .setInterpolator(Interpolators.ALPHA_OUT)
+                            .setInterpolator(new SystemUIInterpolators.LogAccelerateInterpolator(200, 0))
                             .withEndAction(() -> {
                                 mMultiUserSwitch.setAlpha(1f);
                                 getOverlay().remove(mMultiUserSwitch);
@@ -462,7 +463,7 @@ public class KeyguardStatusBarView extends RelativeLayout
                             .alpha(1f)
                             .setDuration(300)
                             .setStartDelay(200)
-                            .setInterpolator(Interpolators.ALPHA_IN);
+                            .setInterpolator(new SystemUIInterpolators.LogDecelerateInterpolator(800f, 2.1f, 0));
                 }
                 return true;
             }
