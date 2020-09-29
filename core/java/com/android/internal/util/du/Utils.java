@@ -31,6 +31,7 @@ import android.graphics.Color;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.input.InputManager;
 import android.net.ConnectivityManager;
+import android.hardware.input.InputManager;
 import android.net.NetworkInfo;
 import android.os.UserHandle;
 import android.os.PowerManager;
@@ -44,6 +45,9 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.SystemClock;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.os.UserHandle;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
 import android.util.DisplayMetrics;
@@ -56,11 +60,10 @@ import com.android.internal.statusbar.IStatusBarService;
 
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Utils {
-
 
     private static OverlayManager mOverlayService;
 
@@ -69,19 +72,6 @@ public class Utils {
         ConnectivityManager cm = (ConnectivityManager)context.getSystemService(
                 Context.CONNECTIVITY_SERVICE);
         return (cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE) == false);
-    }
-
-    public static String batteryTemperature(Context context, Boolean ForC) {
-        Intent intent = context.registerReceiver(null, new IntentFilter(
-                Intent.ACTION_BATTERY_CHANGED));
-        float  temp = ((float) (intent != null ? intent.getIntExtra(
-                BatteryManager.EXTRA_TEMPERATURE, 0) : 0)) / 10;
-        // Round up to nearest number
-        int c = (int) ((temp) + 0.5f);
-        float n = temp + 0.5f;
-        // Use boolean to determine celsius or fahrenheit
-        return String.valueOf((n - c) % 2 == 0 ? (int) temp :
-                ForC ? c * 9/5 + 32 + "°F" :c + "°C");
     }
 
     // Check to see if a package is installed
@@ -225,6 +215,35 @@ public class Utils {
         newColor[2] = empty[2] + ((full[2]-empty[2])*blendFactor);
         int newAlpha = (int) (emptyAlpha + ((fullAlpha-emptyAlpha)*blendFactor));
         return Color.HSVToColor(newAlpha, newColor);
+    }
+
+    public static String batteryTemperature(Context context, Boolean ForC) {
+        Intent intent = context.registerReceiver(null, new IntentFilter(
+                Intent.ACTION_BATTERY_CHANGED));
+        float  temp = ((float) (intent != null ? intent.getIntExtra(
+                BatteryManager.EXTRA_TEMPERATURE, 0) : 0)) / 10;
+        // Round up to nearest number
+        int c = (int) ((temp) + 0.5f);
+        float n = temp + 0.5f;
+        // Use boolean to determine celsius or fahrenheit
+        return String.valueOf((n - c) % 2 == 0 ? (int) temp :
+                ForC ? c * 9/5 + 32:c);
+    }
+
+    // Method to detect countries that use Fahrenheit
+    public static boolean mccCheck(Context context) {
+        // MCC's belonging to countries that use Fahrenheit
+        String[] mcc = {"364", "552", "702", "346", "550", "376", "330",
+                "310", "311", "312", "551"};
+
+        TelephonyManager tel = (TelephonyManager) context.getSystemService(
+                Context.TELEPHONY_SERVICE);
+        String networkOperator = tel.getNetworkOperator();
+
+        // Check the array to determine celsius or fahrenheit.
+        // Default to celsius if can't access MCC
+        return !TextUtils.isEmpty(networkOperator) && Arrays.asList(mcc).contains(
+                networkOperator.substring(0, /*Filter only 3 digits*/ 3));
     }
 
     // Method to turn off the screen
