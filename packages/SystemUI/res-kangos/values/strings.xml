@@ -217,5 +217,7 @@
     <!-- Change clockface -->
     <string name="change_clock_face">Swipe to change the clock face</string>
 
+    <string name="clock_title_squary_clock">Cal Clock</string>
+
 </resources>
 
