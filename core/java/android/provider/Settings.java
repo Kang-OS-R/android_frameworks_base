@@ -5123,6 +5123,9 @@ public final class Settings {
          */
         public static final String ALWAYS_ON_DISPLAY_CONSTANTS_CUST = "always_on_display_constants_cust";
 
+        /** @hide */
+        public static final String BACK_GESTURE_HAPTIC = "back_gesture_haptic";
+
         /**
          * Whether to show battery percent on ambient bottom
          * @hide
@@ -5274,6 +5277,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_COLUMNS);
             PRIVATE_SETTINGS.add(OMNI_QS_TILE_TITLE_VISIBILITY);
             PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_ROWS);
+            PRIVATE_SETTINGS.add(BACK_GESTURE_HAPTIC);
         }
 
         /**
