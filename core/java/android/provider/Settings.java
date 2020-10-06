@@ -5613,6 +5613,12 @@ public final class Settings {
         public static final String QS_DATAUSAGE = "qs_datausage";
 
         /**
+         * Enable/Disable screenshot sound
+         * @hide
+         */
+        public static final String SCREENSHOT_SOUND = "screenshot_sound";
+
+         /**
          * Whether to show lock icon on lockscreen
          * @hide
          */
@@ -5777,6 +5783,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(VIBRATE_ON_CONNECT);
             PRIVATE_SETTINGS.add(VIBRATE_ON_CALLWAITING);
             PRIVATE_SETTINGS.add(VIBRATE_ON_DISCONNECT);
+            PRIVATE_SETTINGS.add(SCREENSHOT_SOUND);
         }
 
         /**
