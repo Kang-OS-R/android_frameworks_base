@@ -69,6 +69,7 @@ LOCAL_REQUIRED_MODULES := \
         DarkGreySystemUIOverlay \
         GesturalNavigationOverlayLong \
         GesturalNavigationOverlayMedium \
+        GesturalNavigationOverlayHidden \
         MaterialOceanSystemOverlay \
         MaterialOceanSystemUIOverlay \
 	IconPackCircularAndroidOverlay \
