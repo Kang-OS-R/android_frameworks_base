@@ -5568,6 +5568,12 @@ public final class Settings {
         public static final String HEADS_UP_NOTIFICATION_SNOOZE = "heads_up_notification_snooze";
 
         /**
+         * Number of maximum qs rows to show
+         * @hide
+         */
+        public static final String QS_LAYOUT_ROWS = "qs_layout_rows";
+
+        /**
          * Adaptive playback
          * Automatically pause media when the volume is muted and
          * will resume automatically when volume is restored.

@@ -83,6 +83,9 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import android.content.ContentResolver;
+import android.database.ContentObserver;
+import android.net.Uri;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -166,6 +169,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     private int mMediaTotalBottomMargin;
     private int mFooterMarginStartHorizontal;
     private Consumer<Boolean> mMediaVisibilityChangedListener;
+    private boolean mMediaVisible;
 
 
     @Inject
@@ -233,11 +237,41 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         updateResources();
     }
 
+    private class CustomSettingsObserver extends ContentObserver {
+        CustomSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_LAYOUT_ROWS),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        void unobserve() {
+            mContext.getContentResolver().unregisterContentObserver(this);;
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+           if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.QS_LAYOUT_ROWS))) {
+                updateMinRows();
+            }
+        }
+
+        public void update() {
+            updateMinRows();
+        }
+    }
+
+    private CustomSettingsObserver mCustomSettingsObserver;
+
     protected void onMediaVisibilityChanged(Boolean visible) {
         switchTileLayout();
-        if (getTileLayout() != null) {
-            getTileLayout().setMinRows(visible ? 2 : 3);
-        }
+        mMediaVisible = visible;
+        updateMinRows();
         if (mMediaVisibilityChangedListener != null) {
             mMediaVisibilityChangedListener.accept(visible);
         }
@@ -418,6 +452,22 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         view.setVisibility(TunerService.parseIntegerSwitch(newValue, true) ? VISIBLE : GONE);
     }
 
+    private void updateMinRows() {
+        if (getTileLayout() == null) {
+            return;
+        }
+        if (!mMediaVisible) {
+            int rows = Settings.System.getIntForUser(
+                    mContext.getContentResolver(), Settings.System.QS_LAYOUT_ROWS, 3,
+                    UserHandle.USER_CURRENT);
+            boolean isPortrait = mContext.getResources().getConfiguration().orientation
+                    == Configuration.ORIENTATION_PORTRAIT;
+            getTileLayout().setMinRows(isPortrait ? rows : 1);
+        } else {
+            getTileLayout().setMinRows(2);
+        }
+    }
+
     public void openDetails(String subPanel) {
         QSTile tile = getTile(subPanel);
         // If there's no tile with that name (as defined in QSFactoryImpl or other QSFactory),
@@ -546,6 +596,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         if (newConfig.orientation != mLastOrientation) {
             mLastOrientation = newConfig.orientation;
             switchTileLayout();
+            updateMinRows();
         }
     }
 
@@ -1254,6 +1305,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                 configureTile(r.tile, r.tileView);
             }
         }
+        updateMinRows();
     }
 
     public int getNumColumns() {

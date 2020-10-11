@@ -244,7 +244,7 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.GAMING_MODE_HW_BUTTONS, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.GAMING_MODE_BRIGHTNESS_ENABLED, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.GAMING_MODE_MEDIA_ENABLED, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.GAMING_MODE_MEDIA, new InclusiveIntegerRangeValidator(0, 100));	
-
+        VALIDATORS.put(System.GAMING_MODE_MEDIA, new InclusiveIntegerRangeValidator(0, 100));
+        VALIDATORS.put(System.QS_LAYOUT_ROWS, new InclusiveIntegerRangeValidator(2, 3));
     }
 }
