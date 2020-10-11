@@ -217,4 +217,7 @@
     <string name="quick_settings_smart_pixels">Smart Pixels</string>
     <string name="quick_settings_smart_pixels_on_power_save">Auto-enabled Smart Pixels</string>
 
+    <string name="qs_menu_item_qs_rows">Max rows</string>
+    <string name="qs_menu_item_columns_two">2</string>
+
 </resources>
