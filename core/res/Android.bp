@@ -40,7 +40,7 @@ android_app {
     export_package_resources: true,
 
     resource_dirs: [
-        "res-revengeos",
+        "res-kangos",
         "res",
     ],
 

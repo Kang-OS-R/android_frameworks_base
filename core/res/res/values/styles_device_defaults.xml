@@ -38,7 +38,7 @@ easier.
     <style name="Widget.DeviceDefault.Button.Inset" parent="Widget.Material.Button.Inset"/>
     <style name="Widget.DeviceDefault.Button.Toggle" parent="Widget.Material.Button.Toggle"/>
     <style name="Widget.DeviceDefault.Button.Colored" parent="Widget.Material.Button.Colored">
-        <item name="background">@drawable/btn_colored_revengeos</item>
+        <item name="background">@drawable/btn_colored_kangos</item>
         <item name="outlineAmbientShadowColor">@color/btn_colored_background_material</item>
         <item name="outlineSpotShadowColor">@color/btn_colored_background_material</item>
         <item name="textAppearance">?attr/textAppearanceButton</item>
@@ -57,8 +57,8 @@ easier.
     <style name="Widget.DeviceDefault.PopupWindow" parent="Widget.Material.PopupWindow"/>
     <style name="Widget.DeviceDefault.ProgressBar" parent="Widget.Material.ProgressBar"/>
     <style name="Widget.DeviceDefault.ProgressBar.Horizontal" parent="Widget.Material.ProgressBar.Horizontal">
-        <item name="progressDrawable">@drawable/progress_horizontal_revengeos</item>
-        <item name="indeterminateDrawable">@drawable/progress_horizontal_revengeos</item>
+        <item name="progressDrawable">@drawable/progress_horizontal_kangos</item>
+        <item name="indeterminateDrawable">@drawable/progress_horizontal_kangos</item>
     </style>
     <style name="Widget.DeviceDefault.ProgressBar.Small" parent="Widget.Material.ProgressBar.Small"/>
     <style name="Widget.DeviceDefault.ProgressBar.Small.Title" parent="Widget.Material.ProgressBar.Small.Title"/>
@@ -66,9 +66,9 @@ easier.
     <style name="Widget.DeviceDefault.SeekBar" parent="Widget.Material.SeekBar">
         <item name="background">@null</item>
         <item name="splitTrack">false</item>
-        <item name="progressDrawable">@drawable/seekbar_track_revengeos</item>
-        <item name="indeterminateDrawable">@drawable/seekbar_track_revengeos</item>
-        <item name="thumb">@drawable/seekbar_thumb_revengeos</item>
+        <item name="progressDrawable">@drawable/seekbar_track_kangos</item>
+        <item name="indeterminateDrawable">@drawable/seekbar_track_kangos</item>
+        <item name="thumb">@drawable/seekbar_thumb_kangos</item>
     </style>
     <style name="Widget.DeviceDefault.RatingBar" parent="Widget.Material.RatingBar"/>
     <style name="Widget.DeviceDefault.RatingBar.Indicator" parent="Widget.Material.RatingBar.Indicator"/>
@@ -137,8 +137,8 @@ easier.
     <style name="Widget.DeviceDefault.PopupWindow.ActionMode" parent="Widget.Material.PopupWindow.ActionMode"/>
     <style name="Widget.DeviceDefault.CompoundButton.Switch" parent="Widget.Material.CompoundButton.Switch">
         <item name="switchTextAppearance">@style/TextAppearance.DeviceDefault.Widget.Switch</item>
-        <item name="track">@drawable/switch_track_revengeos</item>
-        <item name="thumb">@drawable/switch_thumb_revengeos</item>
+        <item name="track">@drawable/switch_track_kangos</item>
+        <item name="thumb">@drawable/switch_thumb_kangos</item>
     </style>
     <style name="Widget.DeviceDefault.ExpandableListView.White" parent="Widget.Material.ExpandableListView.White"/>
     <style name="Widget.DeviceDefault.FastScroll" parent="Widget.Material.FastScroll"/>
@@ -202,8 +202,8 @@ easier.
     <style name="Widget.DeviceDefault.Light.PopupWindow" parent="Widget.Material.Light.PopupWindow"/>
     <style name="Widget.DeviceDefault.Light.ProgressBar" parent="Widget.Material.Light.ProgressBar"/>
     <style name="Widget.DeviceDefault.Light.ProgressBar.Horizontal" parent="Widget.Material.Light.ProgressBar.Horizontal">
-        <item name="progressDrawable">@drawable/progress_horizontal_revengeos</item>
-        <item name="indeterminateDrawable">@drawable/progress_horizontal_revengeos</item>
+        <item name="progressDrawable">@drawable/progress_horizontal_kangos</item>
+        <item name="indeterminateDrawable">@drawable/progress_horizontal_kangos</item>
     </style>
     <style name="Widget.DeviceDefault.Light.ProgressBar.Small" parent="Widget.Material.Light.ProgressBar.Small"/>
     <style name="Widget.DeviceDefault.Light.ProgressBar.Small.Title" parent="Widget.Material.Light.ProgressBar.Small.Title"/>
@@ -214,9 +214,9 @@ easier.
     <style name="Widget.DeviceDefault.Light.SeekBar" parent="Widget.Material.Light.SeekBar">
         <item name="background">@null</item>
         <item name="splitTrack">false</item>
-        <item name="progressDrawable">@drawable/seekbar_track_revengeos</item>
-        <item name="indeterminateDrawable">@drawable/seekbar_track_revengeos</item>
-        <item name="thumb">@drawable/seekbar_thumb_revengeos</item>
+        <item name="progressDrawable">@drawable/seekbar_track_kangos</item>
+        <item name="indeterminateDrawable">@drawable/seekbar_track_kangos</item>
+        <item name="thumb">@drawable/seekbar_thumb_kangos</item>
     </style>
     <style name="Widget.DeviceDefault.Light.RatingBar" parent="Widget.Material.Light.RatingBar"/>
     <style name="Widget.DeviceDefault.Light.RatingBar.Indicator" parent="Widget.Material.Light.RatingBar.Indicator"/>

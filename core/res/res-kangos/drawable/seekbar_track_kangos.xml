@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2020 RevengeOS
+<!-- Copyright (C) 2020 KangOS
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@
           android:gravity="center_vertical|fill_horizontal">
         <shape android:shape="rectangle"
                android:tint="?attr/colorProgressBackgroundNormal">
-            <corners android:radius="@dimen/seekbar_track_background_height_revengeos" />
-            <size android:height="@dimen/seekbar_track_background_height_revengeos" />
+            <corners android:radius="@dimen/seekbar_track_background_height_kangos" />
+            <size android:height="@dimen/seekbar_track_background_height_kangos" />
             <solid android:color="@color/white_disabled_material" />
         </shape>
     </item>
@@ -32,8 +32,8 @@
                       android:drawable="@color/transparent" />
                 <item>
                     <shape android:shape="rectangle">
-                        <corners android:radius="@dimen/seekbar_track_background_height_revengeos" />
-                        <size android:height="@dimen/seekbar_track_background_height_revengeos" />
+                        <corners android:radius="@dimen/seekbar_track_background_height_kangos" />
+                        <size android:height="@dimen/seekbar_track_background_height_kangos" />
                         <gradient 
                             android:startColor="@color/gradient_start"
                             android:endColor="@color/gradient_end"

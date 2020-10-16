@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2020 RevengeOS
+<!-- Copyright (C) 2020 KangOS
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -35,15 +35,15 @@
     <item
         android:id="@+id/pressed"
         android:state_pressed="true"
-        android:drawable="@drawable/seekbar_thumb_pressed_revengeos" />
+        android:drawable="@drawable/seekbar_thumb_pressed_kangos" />
     <item
         android:id="@+id/unpressed"
-        android:drawable="@drawable/seekbar_thumb_unpressed_revengeos" />
+        android:drawable="@drawable/seekbar_thumb_unpressed_kangos" />
     <transition
         android:fromId="@+id/unpressed"
         android:toId="@+id/pressed">
         <animated-vector
-            android:drawable="@drawable/seekbar_thumb_unpressed_revengeos" >
+            android:drawable="@drawable/seekbar_thumb_unpressed_kangos" >
             <target android:name="thumb_unpressed">
                 <aapt:attr name="android:animation">
                     <set>
@@ -70,7 +70,7 @@
         android:fromId="@+id/pressed"
         android:toId="@+id/unpressed">
         <animated-vector
-            android:drawable="@drawable/seekbar_thumb_pressed_revengeos" >
+            android:drawable="@drawable/seekbar_thumb_pressed_kangos" >
             <target android:name="thumb_pressed">
                 <aapt:attr name="android:animation">
                     <set>

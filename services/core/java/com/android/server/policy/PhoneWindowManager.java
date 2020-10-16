@@ -88,7 +88,7 @@ import static com.android.server.wm.WindowManagerPolicyProto.ROTATION_MODE;
 import static com.android.server.wm.WindowManagerPolicyProto.SCREEN_ON_FULLY;
 import static com.android.server.wm.WindowManagerPolicyProto.WINDOW_MANAGER_DRAW_COMPLETE;
 
-import static com.revengeos.internal.util.hwkeys.DeviceKeysConstants.*;
+import static com.kangos.internal.util.hwkeys.DeviceKeysConstants.*;
 
 import android.annotation.Nullable;
 import android.app.ActivityManager;

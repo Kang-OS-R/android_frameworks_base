@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2020 RevengeOS
+<!-- Copyright (C) 2020 KangOS
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -23,11 +23,9 @@
     android:viewportWidth="32"
     android:viewportHeight="32">
     <group
-        android:name="thumb_pressed"
+        android:name="thumb_unpressed"
         android:translateX="16"
-        android:translateY="16"
-        android:scaleX="1.25"
-        android:scaleY="1.25">
+        android:translateY="16">
         <path
             android:pathData="M 0 -11 C 6.076 -11 11 -6.076 11 0 C 11 6.076 6.076 11 0 11 C -6.076 11 -11 6.076 -11 0 C -11 -6.076 -6.076 -11 0 -11 Z">
             <aapt:attr name="android:fillColor">

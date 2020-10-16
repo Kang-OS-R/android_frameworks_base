@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.revengeos.internal.util.hwkeys;
+package com.kangos.internal.util.hwkeys;
 
 import android.content.ContentResolver;
 import android.os.UserHandle;

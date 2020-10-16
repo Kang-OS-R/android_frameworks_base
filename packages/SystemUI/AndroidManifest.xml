@@ -386,7 +386,7 @@
                   android:theme="@style/ExTunerSettings"
                   android:label="@string/statusbar_items_title"
                   android:process=":tuner"
-                  android:parentActivityName="com.settings.fragments.revengeos.StatusBarSettings"
+                  android:parentActivityName="com.settings.fragments.kangos.StatusBarSettings"
                   android:exported="true">
         </activity>
 

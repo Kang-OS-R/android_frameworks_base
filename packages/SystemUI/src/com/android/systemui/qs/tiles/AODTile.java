@@ -89,7 +89,7 @@ public class AODTile extends QSTileImpl<BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.REVENGEOS;
+        return MetricsEvent.KANGOS;
     }
 
     @Override

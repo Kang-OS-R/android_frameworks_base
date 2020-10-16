@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2019 RevengeOS
+ *  Copyright (C) 2019 KangOS
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  *
  */
 
-package com.revengeos.internal.util;
+package com.kangos.internal.util;
 
 import android.content.Context;
 import android.os.PowerManager;
