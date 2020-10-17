@@ -83,10 +83,17 @@
         android:elevation="4dp"
         android:paddingBottom="5dp">
         <View
+<<<<<<< HEAD
             android:layout_width="46dp"
             android:layout_height="3dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+=======
+            android:layout_width="40dp"
+            android:layout_height="3dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+>>>>>>> d3164ab... Base: Cleanup some unneeded commits
             android:background="@drawable/qs_footer_drag_handle" />
     </FrameLayout>
 
