@@ -7432,5 +7432,8 @@ message MetricsEvent {
     // KangOS constant
     KANGOS = 1999;
 
+    // DU tweaks
+    DIRTYTWEAKS = 2000;
+
   }
 }
