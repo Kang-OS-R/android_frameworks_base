@@ -7435,5 +7435,8 @@ message MetricsEvent {
     // DU tweaks
     DIRTYTWEAKS = 2000;
 
+   //CUSTOM_QUICK_TILES
+    CUSTOM_QUICK_TILES = 2001;
+
   }
 }
