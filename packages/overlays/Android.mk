@@ -113,7 +113,6 @@ LOCAL_REQUIRED_MODULES := \
         QStileCircleTrim \
         QStileDualToneCircle \
         QStileStar \
-        QStileTearDrop \
         QStileSquare \
         QStileGear \
         QStileBadge \
