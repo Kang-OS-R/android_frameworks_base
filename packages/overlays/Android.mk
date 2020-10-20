@@ -29,6 +29,7 @@ LOCAL_REQUIRED_MODULES := \
         DisplayCutoutEmulationHoleOverlay \
 	DisplayCutoutEmulationTallOverlay \
 	DisplayCutoutEmulationWaterfallOverlay \
+	FontRubikRubikOverlay \
         FontAclonicaSourceOverlay \
         FontAmaranteSourceOverlay \
         FontBariolSourceOverlay \
