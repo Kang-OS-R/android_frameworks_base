@@ -111,17 +111,17 @@ LOCAL_REQUIRED_MODULES := \
         Retro \
         Narrow \
         Stockish \
-        QStileCircleTrim \
-        QStileDualToneCircle \
-        QStileStar \
-        QStileSquare \
-        QStileGear \
-        QStileBadge \
-        QStileBadgetwo \
-        QStileDiamond \
-        QStileSquircleTrim \
+        QSTileCircleTrim \
+        QSTileDualToneCircle \
+        QSTileStar \
+        QSTileSquare \
+        QSTileGear \
+        QSTileBadge \
+        QSTileBadgetwo \
+        QSTileDiamond \
+        QSTileSquircleTrim \
         QSTileCookie \
-        QStileCircleOutline \
+        QSTileCircleOutline \
         QSTileInkdrop \
         QSTileWavey \
         QSTileAttemptMountain \
