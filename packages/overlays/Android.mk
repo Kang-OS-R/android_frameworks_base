@@ -43,7 +43,6 @@ LOCAL_REQUIRED_MODULES := \
         FontSamsungOneSourceOverlay \
         FontComfortaaSourceOverlay \
         FontFiraSansSourceOverlay \
-	FontGoogleSansOverlay \
 	FontGoogleSansSourceOverlay \
 	FontComicSansSourceOverlay \
 	FontCircularStdOverlay \
