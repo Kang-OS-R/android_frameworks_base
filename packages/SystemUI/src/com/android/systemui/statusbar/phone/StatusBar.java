@@ -62,6 +62,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentCallbacks2;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -905,6 +906,9 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         // Set up the initial notification state. This needs to happen before CommandQueue.disable()
         setUpPresenter();
+
+        mCustomSettingsObserver.observe();
+        mCustomSettingsObserver.update();
 
         if (containsType(result.mTransientBarTypes, ITYPE_STATUS_BAR)) {
             showTransientUnchecked();
