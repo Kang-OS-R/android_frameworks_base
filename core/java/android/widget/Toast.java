@@ -33,6 +33,8 @@ import android.compat.annotation.UnsupportedAppUsage;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Binder;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -706,6 +708,7 @@ public class Toast {
                 // remove the old view if necessary
                 handleHide();
                 mView = mNextView;
+                Context context = mView.getContext().getApplicationContext();
                 mPresenter.show(mView, mToken, windowToken, mDuration, mGravity, mX, mY,
                         mHorizontalMargin, mVerticalMargin,
                         new CallbackBinder(getCallbacks(), mHandler));

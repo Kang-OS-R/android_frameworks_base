@@ -125,6 +125,6 @@ public class ImmersiveTile extends QSTileImpl<BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.AWAKEN;
+        return MetricsEvent.DIRTYTWEAKS;
     }
 }

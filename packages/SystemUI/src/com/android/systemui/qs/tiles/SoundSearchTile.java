@@ -26,7 +26,7 @@ import android.service.quicksettings.Tile;
 import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.util.awaken.Utils;
+import com.android.internal.util.du.Utils;
 import com.android.systemui.Dependency;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.plugins.qs.QSTile.BooleanState;
@@ -44,7 +44,7 @@ public class SoundSearchTile extends QSTileImpl<BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.AWAKEN;
+        return MetricsEvent.DIRTYTWEAKS;
     }
 
     @Override
