@@ -137,7 +137,6 @@ public class QSFactoryImpl implements QSFactory {
             Provider<RebootTile> rebootTileProvider,
             Provider<CaffeineTile> caffeineTileProvider,
             Provider<ImmersiveTile> immersiveTileProvider,
-            Provider<UsbTetherTile> usbTetherTileProvider,
             Provider<SoundTile> soundTileProvider,
             Provider<CompassTile> compassTileProvider,
             Provider<SyncTile> syncTileProvider,
