@@ -54,9 +54,6 @@ public class BatteryStatus {
     public static final int CHARGING_WARP = 4;
     public static final int CHARGING_VOOC = 5;
 
-    // dev-harsh1998 port vooc charging to Android R fuel gauge
-    public static final int CHARGING_VOOC = 3;
-
     public final int status;
     public final int level;
     public final int plugged;
@@ -67,9 +64,6 @@ public class BatteryStatus {
     public final float temperature;
     public final boolean dashChargeStatus;
     public final boolean warpChargeStatus;
-    public final boolean voocChargeStatus;
-
-    // dev-harsh1998 port vooc charging to Android R fuel gauge
     public final boolean voocChargeStatus;
 
     public BatteryStatus(int status, int level, int plugged, int health,
