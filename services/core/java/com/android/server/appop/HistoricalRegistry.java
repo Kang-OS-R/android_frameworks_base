@@ -740,7 +740,7 @@ final class HistoricalRegistry {
     private static boolean isApiEnabled() {
         return Binder.getCallingUid() == Process.myUid()
                 || DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
-                SystemUiDeviceConfigFlags.PROPERTY_PERMISSIONS_HUB_ENABLED, true);
+                PROPERTY_PERMISSIONS_HUB_ENABLED, false);
     }
 
     private static final class Persistence {
