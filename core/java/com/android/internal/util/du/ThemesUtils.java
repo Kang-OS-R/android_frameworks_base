@@ -39,8 +39,16 @@ public class ThemesUtils {
             "com.android.theme.color.ocean", // Ocean
             "com.android.theme.color.green", // Green
             "com.android.theme.color.cinnamon", // Cinnamon
+            // New AOSP colors from Android 11
+            "com.android.theme.color.amethyst", // Amethyst
+            "com.android.theme.color.aquamarine", // Aquamarine
+            "com.android.theme.color.carbon", // Carbon
+            "com.android.theme.color.palette", // Palette
+            "com.android.theme.color.sand", // Sand
+            "com.android.theme.color.tangerine", // Tangerine
             // Custom colors
             "com.android.theme.color.amber", // Amber
+            "com.android.theme.color.azureradiance", // AzureRadiance
             "com.android.theme.color.blue", // Blue
             "com.android.theme.color.bluegrey", // Blue Grey
             "com.android.theme.color.brown", // Brown
@@ -57,14 +65,39 @@ public class ThemesUtils {
             "com.android.theme.color.red", // Red
             "com.android.theme.color.teal", // Teal
             "com.android.theme.color.yellow", // Yellow
+            // Brand colors
+            "com.android.theme.color.androidonegreen", // AndroidOneGreen
+            "com.android.theme.color.cocacolared", // CocaColaRed
+            "com.android.theme.color.discordpurple", // DiscordPurple
+            "com.android.theme.color.facebookblue", // FacebookBlue
+            "com.android.theme.color.instagramcerise", // InstagramCerise
+            "com.android.theme.color.jollibeecrimson", // JollibeeCrimson
+            "com.android.theme.color.monsterenergygreen", // MonsterEnergyGreen
+            "com.android.theme.color.nextbitmint", // NextbitMint
+            "com.android.theme.color.oneplusred", // OneplusRed
+            "com.android.theme.color.pepsiblue", // PepsiBlue
+            "com.android.theme.color.pocophoneyellow", // PocophoneYellow
+            "com.android.theme.color.razergreen", // RazerGreen
+            "com.android.theme.color.samsungblue", // SamsungBlue
+            "com.android.theme.color.spotifygreen", // SpotifyGreen
+            "com.android.theme.color.starbucksgreen", // StarbucksGreen
+            "com.android.theme.color.twitchpurple", // TwitchPurple
+            "com.android.theme.color.twitterblue", // TwitterBlue
+            "com.android.theme.color.xboxgreen", // XboxGreen
+            "com.android.theme.color.xiaomiorange", // XiaomiOrange
     };
 
     public static final String[] ADAPTIVE_ICON_SHAPE = {
+            "com.android.theme.icon.pebble",
+            "com.android.theme.icon.vessel",
+            "com.android.theme.icon.taperedrect",
             "com.android.theme.icon.teardrop",
             "com.android.theme.icon.squircle",
             "com.android.theme.icon.roundedrect",
-            "com.android.theme.icon.cylinder",
+            "com.android.theme.icon.square",
             "com.android.theme.icon.hexagon",
+            "com.android.theme.icon.cylinder",
+            "com.android.theme.icon.heart",
     };
 
    // QS Tile Styles
@@ -128,6 +161,9 @@ public class ThemesUtils {
             "com.android.theme.icon_pack.filled.android",
             "com.android.theme.icon_pack.rounded.android",
             "com.android.theme.icon_pack.circular.android",
+            "com.android.theme.icon_pack.kai.android",
+            "com.android.theme.icon_pack.sam.android",
+            "com.android.theme.icon_pack.victor.android",
     };
 
     public static final String[] FONTS = {
