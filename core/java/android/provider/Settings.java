@@ -6069,6 +6069,15 @@ public final class Settings {
         public static final String NETWORK_TRAFFIC_HIDEARROW = "network_traffic_hidearrow";
 
         /**
+         * Show network traffic indicator
+         * 0 - Statusbar (default)
+         * 1 - QS Header
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_VIEW_LOCATION = "network_traffic_view_location";
+
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
@@ -6249,6 +6258,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_TILE_STYLE);
             PRIVATE_SETTINGS.add(QS_TILES_BG_DISCO);
             PRIVATE_SETTINGS.add(HIDE_SMART_REPLIES);
+            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_VIEW_LOCATION);
         }
 
         /**
