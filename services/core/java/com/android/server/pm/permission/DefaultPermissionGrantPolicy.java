@@ -203,6 +203,11 @@ public final class DefaultPermissionGrantPolicy {
         STORAGE_PERMISSIONS.add(Manifest.permission.ACCESS_MEDIA_LOCATION);
     }
 
+    private static final Set<String> SUSPEND_APP_PERMISSIONS = new ArraySet<>();
+    static {
+        SUSPEND_APP_PERMISSIONS.add(Manifest.permission.SUSPEND_APPS);
+    }
+
     private static final int MSG_READ_DEFAULT_PERMISSION_EXCEPTIONS = 1;
 
     private static final String ACTION_TRACK = "com.android.fitness.TRACK";
@@ -902,11 +907,57 @@ public final class DefaultPermissionGrantPolicy {
         grantSystemFixedPermissionsToSystemPackage(pm, "com.google.android.dialer", userId, PHONE_PERMISSIONS,
                 CONTACTS_PERMISSIONS, SMS_PERMISSIONS);
 
-        // ThemePicker
-        grantSystemFixedPermissionsToSystemPackage(pm, "com.android.wallpaper", userId, STORAGE_PERMISSIONS);
+        // Mediascanner
+
+        grantSystemFixedPermissionsToSystemPackage(pm,
+                getDefaultProviderAuthorityPackage("com.android.providers.media.MediaProvider", userId), userId,
+                STORAGE_PERMISSIONS);
+
+        // Device Personalization Services
+        grantSystemFixedPermissionsToSystemPackage(pm,"com.google.android.as", userId, CALENDAR_PERMISSIONS,
+                CAMERA_PERMISSIONS, CONTACTS_PERMISSIONS, ALWAYS_LOCATION_PERMISSIONS,
+                MICROPHONE_PERMISSIONS, PHONE_PERMISSIONS, SMS_PERMISSIONS);
+
+        // Google sound picker
+        grantSystemFixedPermissionsToSystemPackage(pm,"com.google.android.soundpicker", userId, STORAGE_PERMISSIONS);
+
+        // Google Wallpapers
+        grantSystemFixedPermissionsToSystemPackage(pm,"com.google.android.apps.wallpaper", userId, PHONE_PERMISSIONS,
+                STORAGE_PERMISSIONS);
+
+        // Pixel Launcher
+        grantSystemFixedPermissionsToSystemPackage(pm,"com.google.android.apps.nexuslauncher", userId, PHONE_PERMISSIONS,
+                STORAGE_PERMISSIONS);
+
+        // Pixel Live Wallpapers
+        grantSystemFixedPermissionsToSystemPackage(pm,"com.google.pixel.livewallpaper", userId, ALWAYS_LOCATION_PERMISSIONS);
 
         // Google Markup
-        grantSystemFixedPermissionsToSystemPackage(pm, "com.google.android.markup", userId, STORAGE_PERMISSIONS);
+        grantSystemFixedPermissionsToSystemPackage(pm,"com.google.android.markup", userId, STORAGE_PERMISSIONS);
+
+        // Google Photos
+        grantSystemFixedPermissionsToSystemPackage(pm,"com.google.android.apps.photos", userId, CONTACTS_PERMISSIONS,
+                PHONE_PERMISSIONS, STORAGE_PERMISSIONS, ALWAYS_LOCATION_PERMISSIONS);
+
+        // Google Recorder
+        grantSystemFixedPermissionsToSystemPackage(pm,"com.google.android.apps.recorder", userId, MICROPHONE_PERMISSIONS,
+                ALWAYS_LOCATION_PERMISSIONS);
+
+        // Flipendo
+        grantSystemFixedPermissionsToSystemPackage(pm,
+                getDefaultProviderAuthorityPackage("com.google.android.flipendo", userId),
+                userId, SUSPEND_APP_PERMISSIONS);
+
+        // SafetyHub
+        grantSystemFixedPermissionsToSystemPackage(pm,"com.google.android.apps.safetyhub", userId, SENSORS_PERMISSIONS,
+                CONTACTS_PERMISSIONS, ALWAYS_LOCATION_PERMISSIONS, MICROPHONE_PERMISSIONS, PHONE_PERMISSIONS);
+
+        // Settings Services
+        grantSystemFixedPermissionsToSystemPackage(pm,"com.google.android.settings.intelligence", userId, PHONE_PERMISSIONS,
+                ALWAYS_LOCATION_PERMISSIONS);
+
+        // ThemePicker
+        grantSystemFixedPermissionsToSystemPackage(pm, "com.android.wallpaper", userId, STORAGE_PERMISSIONS);
     }
 
     private String getDefaultSystemHandlerActivityPackageForCategory(PackageManagerWrapper pm,
