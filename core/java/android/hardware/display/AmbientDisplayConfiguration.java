@@ -35,12 +35,14 @@ public class AmbientDisplayConfiguration {
 
     private final Context mContext;
     private final boolean mAlwaysOnByDefault;
+    private final boolean mDeviceHasSoli;
 
     /** {@hide} */
     @TestApi
     public AmbientDisplayConfiguration(Context context) {
         mContext = context;
         mAlwaysOnByDefault = mContext.getResources().getBoolean(R.bool.config_dozeAlwaysOnEnabled);
+        mDeviceHasSoli = mContext.getResources().getBoolean(R.bool.config_has_Soli);
     }
 
     /** {@hide} */
@@ -262,5 +264,10 @@ public class AmbientDisplayConfiguration {
             return ambientLightsActivated && !accessibilityInversionEnabled(user) && alwaysOnAvailable();
         }
         return false;
+    }
+
+    /** {@hide} */
+    public boolean deviceHasSoli() {
+        return mDeviceHasSoli;
     }
 }

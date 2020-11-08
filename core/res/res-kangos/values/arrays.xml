@@ -32,4 +32,6 @@
         <item>voiceassist</item>
         <item>restart</item>
     </string-array>
+
+    <bool name="config_has_Soli">false</bool>
 </resources>

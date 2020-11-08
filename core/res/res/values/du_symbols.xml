@@ -22,4 +22,5 @@
   <java-symbol type="array" name="config_customPermissionsList" />
   <!-- NightLight FOD -->
   <java-symbol type="bool" name="disable_fod_night_light"/>
+  <java-symbol type="bool" name="config_has_Soli" />
 </resources>
