@@ -39,6 +39,7 @@ import android.os.SystemProperties;
 import android.os.SystemClock;
 import android.os.BatteryManager;
 import android.os.Handler;
+import android.os.Bundle;
 import android.os.Looper;
 import android.os.PowerManager;
 import android.os.RemoteException;
@@ -223,6 +224,16 @@ public class Utils {
             if (service != null) {
                 try {
                     service.onClearAllNotifications(ActivityManager.getCurrentUser());
+                } catch (RemoteException e) {}
+            }
+        }
+
+        // Clear notifications
+        public static void startAssist() {
+            IStatusBarService service = getStatusBarService();
+            if (service != null) {
+                try {
+                    service.startAssist(new Bundle());
                 } catch (RemoteException e) {}
             }
         }
@@ -533,5 +544,10 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
+    public static void startAssist() {
+        FireActions.startAssist();
+    }
 }
+
 
