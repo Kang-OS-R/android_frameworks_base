@@ -17,14 +17,6 @@
  */
 -->
 <resources>
-    <!-- KangOS gradients -->
-    <java-symbol type="color" name="gradient_start_light" />
-    <java-symbol type="color" name="gradient_start_dark" />
-    <java-symbol type="color" name="gradient_end_light" />
-    <java-symbol type="color" name="gradient_end_dark" />
-    <java-symbol type="color" name="gradient_start" />
-    <java-symbol type="color" name="gradient_end" />
-
     <java-symbol type="dimen" name="qs_status_bar_height" />
     <java-symbol type="dimen" name="qs_status_bar_top_padding" />
     <java-symbol type="dimen" name="custom_quick_qs_total_height" />
