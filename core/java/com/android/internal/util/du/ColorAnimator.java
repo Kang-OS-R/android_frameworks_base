@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.android.internal.util.awaken;
+package com.android.internal.util.du;
 
 import android.animation.ValueAnimator;
 import android.graphics.Color;

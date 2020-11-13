@@ -107,7 +107,6 @@ public class ThemesUtils {
     };
 
     public static final String[] STATUSBAR_ICONS = {
-            "com.android.theme.icon_pack.filled.android",
             "com.android.theme.icon_pack.rounded.android",
             "com.android.theme.icon_pack.circular.android",
     };

@@ -37,7 +37,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.android.internal.graphics.palette.Palette;
-import com.android.internal.util.awaken.ColorAnimator;
+import com.android.internal.util.du.ColorAnimator;
 
 public class VisualizerView extends View
         implements Palette.PaletteAsyncListener, ColorAnimator.ColorAnimationListener {
