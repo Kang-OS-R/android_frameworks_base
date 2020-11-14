@@ -595,6 +595,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
         if (newConfig.orientation != mLastOrientation) {
             mLastOrientation = newConfig.orientation;
+            updateMinRows();
             switchTileLayout();
             updateMinRows();
         }
@@ -604,6 +605,8 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     protected void onFinishInflate() {
         super.onFinishInflate();
         mFooter = findViewById(R.id.qs_footer);
+        mMediaVisible = mMediaHost.getVisible();
+        updateMinRows();
         switchTileLayout(true /* force */);
     }
 
