@@ -69,8 +69,6 @@ import android.os.ServiceManager;
 import android.os.Trace;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.pocket.IPocketCallback;
-import android.pocket.PocketManager;
 import android.provider.Settings;
 import android.service.dreams.DreamService;
 import android.service.dreams.IDreamManager;
@@ -180,9 +178,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
     private static final int MSG_USER_STOPPED = 340;
     private static final int MSG_USER_REMOVED = 341;
     private static final int MSG_KEYGUARD_GOING_AWAY = 342;
-
-    // Additional messages should be 600+
-    private static final int MSG_POCKET_STATE_CHANGED = 600;
 
     /** Biometric authentication state: Not listening. */
     private static final int BIOMETRIC_STATE_STOPPED = 0;
@@ -324,31 +319,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
             mHandler.obtainMessage(MSG_RINGER_MODE_CHANGED, ringer, 0).sendToTarget();
         }
     };
-
-    private PocketManager mPocketManager;
-    private boolean mIsDeviceInPocket;
-    private final IPocketCallback mPocketCallback = new IPocketCallback.Stub() {
-        @Override
-        public void onStateChanged(boolean isDeviceInPocket, int reason) {
-            boolean changed = false;
-            if (reason == PocketManager.REASON_SENSOR) {
-                if (isDeviceInPocket != mIsDeviceInPocket) {
-                    mIsDeviceInPocket = isDeviceInPocket;
-                    changed = true;
-                }
-            } else {
-                changed = isDeviceInPocket != mIsDeviceInPocket;
-                mIsDeviceInPocket = false;
-            }
-            if (changed) {
-                mHandler.sendEmptyMessage(MSG_POCKET_STATE_CHANGED);
-            }
-        }
-    };
-
-    public boolean isPocketLockVisible(){
-        return mPocketManager.isPocketLockVisible();
-    }
 
     private SparseBooleanArray mFaceSettingEnabledForUser = new SparseBooleanArray();
     private BiometricManager mBiometricManager;
@@ -1706,9 +1676,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                     case MSG_KEYGUARD_GOING_AWAY:
                         handleKeyguardGoingAway((boolean) msg.obj);
                         break;
-                    case MSG_POCKET_STATE_CHANGED:
-                        updateBiometricListeningState();
-                        break;
                     default:
                         super.handleMessage(msg);
                         break;
@@ -1789,11 +1756,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
 
         mDreamManager = IDreamManager.Stub.asInterface(
                 ServiceManager.getService(DreamService.DREAM_SERVICE));
-
-        mPocketManager = (PocketManager) context.getSystemService(Context.POCKET_SERVICE);
-        if (mPocketManager != null) {
-            mPocketManager.addCallback(mPocketCallback);
-        }
 
         if (mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
             mFpm = (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
@@ -2022,7 +1984,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                 && !mSwitchingUser && !isFaceDisabled(user) && becauseCannotSkipBouncer
                 && !mKeyguardGoingAway && mFaceSettingEnabledForUser.get(user) && !mLockIconPressed
                 && strongAuthAllowsScanning && mIsPrimaryUser
-                && !mSecureCameraLaunched && !mIsDeviceInPocket;
+                && !mSecureCameraLaunched;
 
         if (shouldListen && mFaceAuthOnSecurityView && !mBouncerFullyShown){
             shouldListen = false;

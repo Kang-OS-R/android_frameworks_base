@@ -4983,14 +4983,6 @@ public final class Settings {
         public static final String KEY_APP_SWITCH_LONG_PRESS_ACTION = "key_app_switch_long_press_action";
 
         /**
-         * Whether allowing pocket service to register sensors and dispatch informations.
-         *   0 = disabled
-         *   1 = enabled
-         * @author Carlo Savignano
-         * @hide
-         */
-        public static final String POCKET_JUDGE = "pocket_judge";
-        /**
          * Whether to use new QS panel bg tint or not
          * @hide
          */
@@ -5557,7 +5549,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(KEY_APP_SWITCH_ACTION);
             PRIVATE_SETTINGS.add(KEY_APP_SWITCH_LONG_PRESS_ACTION);
             PRIVATE_SETTINGS.add(LOCKSCREEN_MEDIA_ART);
-            PRIVATE_SETTINGS.add(POCKET_JUDGE);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_TIMEOUT);
             PRIVATE_SETTINGS.add(BUTTON_BRIGHTNESS);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED);
