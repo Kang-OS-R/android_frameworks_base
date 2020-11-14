@@ -61,6 +61,7 @@ import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.UserInfoController;
 import com.android.systemui.statusbar.policy.UserInfoController.OnUserInfoChangedListener;
 import com.android.systemui.tuner.TunerService;
+import com.android.systemui.qs.carrier.QSCarrierGroup;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -82,6 +83,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     private boolean mQsDisabled;
     private QSPanel mQsPanel;
     private QuickQSPanel mQuickQsPanel;
+    private QSCarrierGroup mCarrierGroup;
 
     private boolean mExpanded;
 
@@ -151,6 +153,8 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
         mActionsContainer = findViewById(R.id.qs_footer_actions_container);
         mEditContainer = findViewById(R.id.qs_footer_actions_edit_container);
+
+        mCarrierGroup = findViewById(R.id.carrier_group);
 
         // RenderThread is doing more harm than good when touching the header (to expand quick
         // settings), so disable it for this view

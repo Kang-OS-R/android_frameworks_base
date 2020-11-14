@@ -527,12 +527,11 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        updateBrightnessMirror();
         if (mSecurityFooter != null) {
             mSecurityFooter.onConfigurationChanged();
         }
         updateResources();
-
-        updateBrightnessMirror();
 
         if (newConfig.orientation != mLastOrientation) {
             mLastOrientation = newConfig.orientation;
@@ -737,6 +736,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         }
         mMetricsLogger.visibility(MetricsEvent.QS_PANEL, mExpanded);
         if (!mExpanded) {
+            updateVerticalMargin(mBrightnessView, -18);
             mUiEventLogger.log(closePanelEvent());
             closeDetail();
         } else {
@@ -1147,6 +1147,12 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         lp.setMarginStart(start);
         lp.setMarginEnd(end);
         view.setLayoutParams(lp);
+    }
+
+    protected void updateVerticalMargin(View view, int top) {
+        LayoutParams params = (LayoutParams) view.getLayoutParams();
+        params.setMargins(0, top, 0, 0);
+        view.setLayoutParams(params);
     }
 
     public MediaHost getMediaHost() {
