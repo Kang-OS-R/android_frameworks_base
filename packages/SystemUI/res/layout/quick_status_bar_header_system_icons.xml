@@ -82,12 +82,6 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-    <com.android.systemui.statusbar.phone.StatusIconContainer
-        android:id="@+id/statusIcons"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingEnd="2dp"/>
-
     <com.android.systemui.BatteryMeterView
         android:id="@+id/battery"
         android:layout_height="match_parent"
