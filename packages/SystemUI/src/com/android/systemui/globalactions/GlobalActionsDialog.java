@@ -682,11 +682,6 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         buildMenuList();
     }
 
-    private void onRotate() {
-        // re-allocate actions between main and overflow lists
-        this.createActionItems();
-    }
-
     public void settingsChanged() {
         final String globalAction = Settings.System.getStringForUser(mContext.getContentResolver(),
                 Settings.System.GLOBAL_ACTIONS_LIST, UserHandle.USER_CURRENT);

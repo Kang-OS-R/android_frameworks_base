@@ -350,6 +350,8 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
         } else {
             mDozeEnabled = TunerService.parseIntegerSwitch(newValue, true);
         }
+        mCurrentBrightness = newValue != null ? Integer.parseInt(newValue) : 0;
+        updateIconDim(false);
     }
 
     private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
@@ -377,12 +379,6 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
         public void update() {
             updateStyle();
         }
-    }
-
-    @Override
-    public void onTuningChanged(String key, String newValue) {
-        mCurrentBrightness = newValue != null ? Integer.parseInt(newValue) : 0;
-        updateIconDim(false);
     }
 
     private int interpolate(int i, int i2, int i3, int i4, int i5) {
