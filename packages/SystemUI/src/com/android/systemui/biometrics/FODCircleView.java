@@ -461,7 +461,6 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             hideCircle();
-            mHandler.post(() -> mFODAnimation.hideFODanimation());
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             return true;
@@ -540,6 +539,8 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
             dispatchPress();
         });
 
+        mHandler.post(() -> mFODAnimation.showFODanimation());
+
         setImageDrawable(null);
         updateIconDim(false);
         invalidate();
@@ -555,6 +556,8 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
             dispatchRelease();
         });
         setDim(false);
+
+        mHandler.post(() -> mFODAnimation.hideFODanimation());
 
         setKeepScreenOn(false);
     }
