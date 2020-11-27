@@ -599,6 +599,11 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
             return;
         }
 
+        if (mIsKeyguard && mUpdateMonitor.getUserCanSkipBouncer(mUpdateMonitor.getCurrentUser())) {
+            // Ignore show calls if user can skip bouncer
+            return;
+        }
+
         updatePosition();
 
         Dependency.get(TunerService.class).addTunable(this, SCREEN_BRIGHTNESS);
