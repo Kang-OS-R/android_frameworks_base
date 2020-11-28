@@ -248,8 +248,6 @@ public class FODCircleView extends ImageView implements TunerService.Tunable {
                         show();
                     }
                 }
-            } else {
-                hide();
             }
             if (mFODAnimation != null) {
                 mFODAnimation.setAnimationKeyguard(mIsBouncer);
