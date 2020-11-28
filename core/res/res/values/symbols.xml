@@ -2521,6 +2521,9 @@
   <!-- Face config -->
   <java-symbol type="integer" name="config_faceMaxTemplatesPerUser" />
 
+  <!-- Vendor platform signatures -->
+  <java-symbol type="array" name="config_vendorPlatformSignatures" />
+
   <!-- From various Material changes -->
   <java-symbol type="attr" name="titleTextAppearance" />
   <java-symbol type="attr" name="subtitleTextAppearance" />
