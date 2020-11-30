@@ -6026,6 +6026,11 @@ public final class Settings {
          */
         public static final String FOD_ANIM = "fod_anim";
 
+        /**
+         * FOD pressed color
+         * @hide
+         */
+        public static final String FOD_COLOR = "fod_color";
 
         /**
          * FOD icon picker
