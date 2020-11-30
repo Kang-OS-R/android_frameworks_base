@@ -453,18 +453,23 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     }
 
     private void updateMinRows() {
-        if (getTileLayout() == null) {
-            return;
-        }
-        if (!mMediaVisible) {
-            int rows = Settings.System.getIntForUser(
-                    mContext.getContentResolver(), Settings.System.QS_LAYOUT_ROWS, 3,
-                    UserHandle.USER_CURRENT);
-            boolean isPortrait = mContext.getResources().getConfiguration().orientation
-                    == Configuration.ORIENTATION_PORTRAIT;
-            getTileLayout().setMinRows(isPortrait ? rows : 1);
+        if (getTileLayout() == null) return;
+        if (!needsDynamicRowsAndColumns()) return;
+        final boolean isPortrait = mContext.getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_PORTRAIT;
+        final boolean isMedia = mUsingMediaPlayer && mMediaVisible;
+        final int rows = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.QS_LAYOUT_ROWS, 3,
+                UserHandle.USER_CURRENT);
+
+        QSTileLayout layout = getTileLayout();
+        if (isPortrait) {
+            layout.setLessRows(true);
+            layout.setMinRows(isMedia ? 2 : rows);
         } else {
-            getTileLayout().setMinRows(2);
+            layout.setLessRows(isMedia);
+            layout.setMinRows(isMedia ? 2 : 1);
+            layout.setMaxColumns(isMedia ? 3 : TileLayout.NO_MAX_COLUMNS);
         }
     }
 
@@ -595,7 +600,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
         if (newConfig.orientation != mLastOrientation) {
             mLastOrientation = newConfig.orientation;
-            updateMinRows();
             switchTileLayout();
             updateMinRows();
         }
@@ -606,7 +610,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         super.onFinishInflate();
         mFooter = findViewById(R.id.qs_footer);
         mMediaVisible = mMediaHost.getVisible();
-        updateMinRows();
         switchTileLayout(true /* force */);
     }
 
@@ -643,11 +646,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             mTileLayout = newLayout;
             if (mHost != null) setTiles(mHost.getTiles());
             newLayout.setListening(mListening);
-            if (needsDynamicRowsAndColumns()) {
-                newLayout.setMinRows(horizontal ? 2 : 1);
-                // Let's use 3 columns to match the current layout
-                newLayout.setMaxColumns(horizontal ? 3 : TileLayout.NO_MAX_COLUMNS);
-            }
             updateTileLayoutMargins();
             updateFooterMargin();
             updateMediaDisappearParameters();
@@ -1286,6 +1284,13 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         default boolean setMaxColumns(int maxColumns) {
             return false;
         }
+
+        /**
+         * Set whether should use minimum possible rows
+         *
+         * @param enabled should use minimum
+         */
+        default void setLessRows(boolean enabled) {}
 
         default void setExpansion(float expansion) {}
 
