@@ -27,11 +27,15 @@ import android.view.View;
 import com.android.internal.R;
 
 import com.android.systemui.SystemUI;
+import com.android.systemui.biometrics.FODCircleViewImplCallback;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.CommandQueue.Callbacks;
+import com.android.systemui.util.Assert;
 
 import com.android.internal.util.custom.FodUtils;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -40,10 +44,15 @@ public class FODCircleViewImpl extends SystemUI implements CommandQueue.Callback
     private static final String TAG = "FODCircleViewImpl";
 
     private FODCircleView mFodCircleView;
+
+    private final ArrayList<WeakReference<FODCircleViewImplCallback>>
+            mCallbacks = new ArrayList<>();
     private final CommandQueue mCommandQueue;
     private boolean mDisableNightMode;
     private boolean mNightModeActive;
     private int mAutoModeState;
+
+    private boolean mIsFODVisible;
 
     @Inject
     public FODCircleViewImpl(Context context, CommandQueue commandQueue) {
@@ -61,6 +70,12 @@ public class FODCircleViewImpl extends SystemUI implements CommandQueue.Callback
         mCommandQueue.addCallback(this);
         try {
             mFodCircleView = new FODCircleView(mContext);
+            for (int i = 0; i < mCallbacks.size(); i++) {
+                FODCircleViewImplCallback cb = mCallbacks.get(i).get();
+                if (cb != null) {
+                    cb.onFODStart();
+                }
+            }
         } catch (RuntimeException e) {
             Slog.e(TAG, "Failed to initialize FODCircleView", e);
         }
@@ -70,6 +85,13 @@ public class FODCircleViewImpl extends SystemUI implements CommandQueue.Callback
     @Override
     public void showInDisplayFingerprintView() {
         if (mFodCircleView != null) {
+            for (int i = 0; i < mCallbacks.size(); i++) {
+                FODCircleViewImplCallback cb = mCallbacks.get(i).get();
+                if (cb != null) {
+                    cb.onFODStatusChange(true);
+                }
+            }
+            mIsFODVisible = true;
             if (isNightLightEnabled()) {
                 disableNightMode();
             }
@@ -86,12 +108,46 @@ public class FODCircleViewImpl extends SystemUI implements CommandQueue.Callback
     public void hideInDisplayFingerprintView() {
         if (mFodCircleView != null) {
             if (isNightLightEnabled()) {
+            for (int i = 0; i < mCallbacks.size(); i++) {
+                FODCircleViewImplCallback cb = mCallbacks.get(i).get();
+                if (cb != null) {
+                    cb.onFODStatusChange(false);
+                }
+            }
+        }
+            mIsFODVisible = false;
+            if (isNightLightEnabled()) {
                 setNightMode(mNightModeActive, mAutoModeState);
             }
             mFodCircleView.hide();
         }
     }
+    public void registerCallback(FODCircleViewImplCallback callback) {
+        Assert.isMainThread();
+        Slog.v(TAG, "*** register callback for " + callback);
+        for (int i = 0; i < mCallbacks.size(); i++) {
+            if (mCallbacks.get(i).get() == callback) {
+                Slog.e(TAG, "Object tried to add another callback",
+                        new Exception("Called by"));
+                return;
+            }
+        }
+        mCallbacks.add(new WeakReference<>(callback));
+        removeCallback(null);
+        sendUpdates(callback);
+    }
 
+    public void removeCallback(FODCircleViewImplCallback callback) {
+        Assert.isMainThread();
+        Slog.v(TAG, "*** unregister callback for " + callback);
+        mCallbacks.removeIf(el -> el.get() == callback);
+    }
+
+    private void sendUpdates(FODCircleViewImplCallback callback) {
+        callback.onFODStart();
+        callback.onFODStatusChange(mIsFODVisible);
+
+    }
     private void disableNightMode() {
         ColorDisplayManager colorDisplayManager = mContext.getSystemService(ColorDisplayManager.class);
         mAutoModeState = colorDisplayManager.getNightDisplayAutoMode();
