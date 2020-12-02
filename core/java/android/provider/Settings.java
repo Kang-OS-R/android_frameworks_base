@@ -6112,6 +6112,11 @@ public final class Settings {
          */
         public static final String QS_SMART_PULLDOWN = "qs_smart_pulldown";
 
+        /**
+         * Enable\Disable visibility of smart replies in notifications
+         * @hide
+         */
+        public static final String HIDE_SMART_REPLIES = "hide_smart_replies";
 
         /**
          * Whether to show or hide the running services icon
@@ -6301,6 +6306,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DOZE_BRIGHTNESS_FORCE);
             PRIVATE_SETTINGS.add(QS_TILE_STYLE);
             PRIVATE_SETTINGS.add(QS_TILES_BG_DISCO);
+            PRIVATE_SETTINGS.add(HIDE_SMART_REPLIES);
         }
 
         /**
