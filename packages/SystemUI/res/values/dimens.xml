@@ -101,7 +101,7 @@
     <dimen name="status_bar_battery_icon_width">7.2dp</dimen>
 
     <!-- The font size for the clock in the status bar. -->
-    <dimen name="status_bar_clock_size">16sp</dimen>
+    <dimen name="status_bar_clock_size">14sp</dimen>
 
     <!-- The starting padding for the clock in the status bar. -->
     <dimen name="status_bar_clock_starting_padding">7dp</dimen>
