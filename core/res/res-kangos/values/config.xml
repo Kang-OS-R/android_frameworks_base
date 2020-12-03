@@ -208,4 +208,8 @@
     <integer name="config_screenBrightnessPulse">-1</integer>
 
     <bool name="config_has_weird_dt_sensor">false</bool>
+
+    <!-- Whether device supports variable refresh rate -->
+    <bool name="config_hasVariableRefreshRate">false</bool>
+
 </resources>

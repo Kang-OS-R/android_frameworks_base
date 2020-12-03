@@ -160,4 +160,6 @@
 
   <java-symbol type="bool" name="config_has_weird_dt_sensor" />
 
+  <!-- Whether device supports variable refresh rate -->
+  <java-symbol type="bool" name="config_hasVariableRefreshRate" />
 </resources>
