@@ -224,4 +224,8 @@
     <!-- Screenshot QS tile -->
     <string name="quick_settings_screenshot_label">Screenshot</string>
     <string name="quick_settings_region_screenshot_label">Partial screenshot</string>
+
+    <!-- Reading mode tile -->
+    <string name="quick_settings_reading_mode">Reading mode</string>
+
 </resources>
