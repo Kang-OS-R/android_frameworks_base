@@ -46,6 +46,13 @@
 
     <java-symbol type="bool" name="config_trim_baseband_version_string" />
     
+    <!-- Pocket bridge -->
+    <java-symbol type="string" name="config_pocketBridgeSysfsInpocket" />
+    <java-symbol type="bool" name="config_pocketModeSupported" />
+
+    <!-- Pocket Service -->
+    <java-symbol type="string" name="config_pocketJudgeVendorSensorName" />
+
     <!-- Button backlight -->
     <java-symbol type="dimen" name="config_buttonBrightnessSettingDefaultFloat" />
     <java-symbol type="bool" name="config_deviceHasVariableButtonBrightness" />
