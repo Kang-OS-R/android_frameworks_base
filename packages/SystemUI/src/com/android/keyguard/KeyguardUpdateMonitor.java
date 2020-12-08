@@ -1105,15 +1105,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                 STRONG_AUTH_REQUIRED_AFTER_USER_LOCKDOWN);
     }
 
-    private boolean isEncryptedOrLockdown(int userId) {
-        final int strongAuth = mStrongAuthTracker.getStrongAuthForUser(userId);
-        final boolean isLockDown =
-                containsFlag(strongAuth, STRONG_AUTH_REQUIRED_AFTER_DPM_LOCK_NOW)
-                        || containsFlag(strongAuth, STRONG_AUTH_REQUIRED_AFTER_USER_LOCKDOWN);
-        final boolean isEncrypted = containsFlag(strongAuth, STRONG_AUTH_REQUIRED_AFTER_BOOT);
-        return isEncrypted || isLockDown;
-    }
-
     public boolean userNeedsStrongAuth() {
         return mStrongAuthTracker.getStrongAuthForUser(getCurrentUser())
                 != LockPatternUtils.StrongAuthTracker.STRONG_AUTH_NOT_REQUIRED;
@@ -1289,10 +1280,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
             handleFaceLockoutReset();
         }
     };
-
-    // Trigger the fingerprint success path so the bouncer can be shown
-    private final FingerprintManager.FingerprintDetectionCallback mFingerprintDetectionCallback
-            = this::handleFingerprintAuthenticated;
 
     private FingerprintManager.AuthenticationCallback mFingerprintAuthenticationCallback
             = new AuthenticationCallback() {
@@ -2123,15 +2110,8 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                 mFingerprintCancelSignal.cancel();
             }
             mFingerprintCancelSignal = new CancellationSignal();
-
-            if (isEncryptedOrLockdown(userId)) {
-                mFpm.detectFingerprint(mFingerprintCancelSignal, mFingerprintDetectionCallback,
-                        userId);
-            } else {
-                mFpm.authenticate(null, mFingerprintCancelSignal, 0,
-                        mFingerprintAuthenticationCallback, null, userId);
-            }
-
+            mFpm.authenticate(null, mFingerprintCancelSignal, 0, mFingerprintAuthenticationCallback,
+                    null, userId);
             setFingerprintRunningState(BIOMETRIC_STATE_RUNNING);
         }
     }
@@ -2167,7 +2147,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
 
     private boolean isUnlockWithFingerprintPossible(int userId) {
         return mFpm != null && mFpm.isHardwareDetected() && !isFingerprintDisabled(userId)
-                && mFpm.hasEnrolledTemplates(userId);
+                && mFpm.getEnrolledFingerprints(userId).size() > 0;
     }
 
     private boolean isUnlockWithFacePossible(int userId) {
