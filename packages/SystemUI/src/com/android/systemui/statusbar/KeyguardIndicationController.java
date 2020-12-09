@@ -157,7 +157,7 @@ public class KeyguardIndicationController implements StateListener,
      * Creates a new KeyguardIndicationController and registers callbacks.
      */
     @Inject
-    KeyguardIndicationController(Context context,
+    public KeyguardIndicationController(Context context,
             WakeLock.Builder wakeLockBuilder,
             KeyguardStateController keyguardStateController,
             StatusBarStateController statusBarStateController,
@@ -607,8 +607,7 @@ public class KeyguardIndicationController implements StateListener,
                 });
     }
 
-    @VisibleForTesting
-    String computePowerIndication() {
+    protected String computePowerIndication() {
         if (mPowerCharged) {
             return mContext.getResources().getString(R.string.keyguard_charged);
         }

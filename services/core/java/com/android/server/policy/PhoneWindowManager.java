@@ -70,6 +70,7 @@ import static android.view.WindowManager.TAKE_SCREENSHOT_SELECTED_REGION;
 import static android.view.WindowManagerGlobal.ADD_OKAY;
 import static android.view.WindowManagerGlobal.ADD_PERMISSION_DENIED;
 
+import static com.android.internal.config.sysui.SystemUiDeviceConfigFlags.SCREENSHOT_KEYCHORD_DELAY;
 import static com.android.server.policy.WindowManagerPolicy.WindowManagerFuncs.CAMERA_LENS_COVERED;
 import static com.android.server.policy.WindowManagerPolicy.WindowManagerFuncs.CAMERA_LENS_COVER_ABSENT;
 import static com.android.server.policy.WindowManagerPolicy.WindowManagerFuncs.CAMERA_LENS_UNCOVERED;
@@ -158,6 +159,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.pocket.IPocketCallback;
 import android.pocket.PocketManager;
+import android.provider.DeviceConfig;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.service.dreams.DreamManagerInternal;
@@ -224,7 +226,6 @@ import com.android.server.policy.pocket.PocketLock;
 import com.android.server.statusbar.StatusBarManagerInternal;
 import com.android.server.vr.VrManagerInternal;
 import com.android.server.wm.ActivityTaskManagerInternal;
-import com.android.server.wm.ActivityTaskManagerInternal.SleepToken;
 import com.android.server.wm.AppTransition;
 import com.android.server.wm.DisplayPolicy;
 import com.android.server.wm.DisplayRotation;
@@ -527,7 +528,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private boolean mPendingKeyguardOccluded;
     private boolean mKeyguardOccludedChanged;
 
-    SleepToken mScreenOffSleepToken;
+    private ActivityTaskManagerInternal.SleepTokenAcquirer mScreenOffSleepTokenAcquirer;
     volatile boolean mKeyguardOccluded;
     boolean mMenuPressed;
     boolean mAppSwitchLongPressed;
@@ -1650,12 +1651,14 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     }
 
     private long getScreenshotChordLongPressDelay() {
+        long delayMs = DeviceConfig.getLong(
+                DeviceConfig.NAMESPACE_SYSTEMUI, SCREENSHOT_KEYCHORD_DELAY,
+                ViewConfiguration.get(mContext).getScreenshotChordKeyTimeout());
         if (mKeyguardDelegate.isShowing()) {
             // Double the time it takes to take a screenshot from the keyguard
-            return (long) (KEYGUARD_SCREENSHOT_CHORD_DELAY_MULTIPLIER *
-                    ViewConfiguration.get(mContext).getScreenshotChordKeyTimeout());
+            return (long) (KEYGUARD_SCREENSHOT_CHORD_DELAY_MULTIPLIER * delayMs);
         }
-        return ViewConfiguration.get(mContext).getScreenshotChordKeyTimeout();
+        return delayMs;
     }
 
     private long getRingerToggleChordDelay() {
@@ -2057,6 +2060,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         mAccessibilityShortcutController =
                 new AccessibilityShortcutController(mContext, new Handler(), mCurrentUserId);
         mLogger = new MetricsLogger();
+
+        mScreenOffSleepTokenAcquirer = mActivityTaskManagerInternal
+                .createSleepTokenAcquirer("ScreenOff");
 
         Resources res = mContext.getResources();
         mWakeOnDpadKeyPress =
@@ -5698,15 +5704,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     // TODO (multidisplay): Support multiple displays in WindowManagerPolicy.
     private void updateScreenOffSleepToken(boolean acquire) {
         if (acquire) {
-            if (mScreenOffSleepToken == null) {
-                mScreenOffSleepToken = mActivityTaskManagerInternal.acquireSleepToken(
-                        "ScreenOff", DEFAULT_DISPLAY);
-            }
+            mScreenOffSleepTokenAcquirer.acquire(DEFAULT_DISPLAY);
         } else {
-            if (mScreenOffSleepToken != null) {
-                mScreenOffSleepToken.release();
-                mScreenOffSleepToken = null;
-            }
+            mScreenOffSleepTokenAcquirer.release(DEFAULT_DISPLAY);
         }
     }
 

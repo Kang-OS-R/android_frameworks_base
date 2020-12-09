@@ -76,6 +76,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     private SettingsButton mSettingsButton;
     protected View mSettingsContainer;
     private PageIndicator mPageIndicator;
+
     private View mRunningServicesButton;
 
     private boolean mQsDisabled;
@@ -176,7 +177,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
                         UserHandle.USER_CURRENT);
         if (isShow) {
             if (text == null || text == "") {
-                v.setText("YAAP");
+                v.setText("KangOS");
                 v.setVisibility(View.VISIBLE);
             } else {
                 v.setText(text);

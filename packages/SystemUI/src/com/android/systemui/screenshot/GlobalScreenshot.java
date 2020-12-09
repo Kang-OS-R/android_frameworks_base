@@ -217,6 +217,7 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
     private View mScreenshotLayout;
     private LinearLayout mScreenshotButtonsLayout;
     private ScreenshotSelectorView mScreenshotSelectorView;
+    private final ScreenshotSmartActions mScreenshotSmartActions;
     private ImageView mScreenshotAnimatedView;
     private ImageView mScreenshotPreview;
     private ImageView mScreenshotFlash;
@@ -301,10 +302,11 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
      */
     @Inject
     public GlobalScreenshot(
-            Context context, @Main Resources resources,
+            Context context, @Main Resources resources, ScreenshotSmartActions screenshotSmartActions,
             ScreenshotNotificationsController screenshotNotificationsController,
             UiEventLogger uiEventLogger, @UiBackground Executor uiBgExecutor) {
         mContext = context;
+        mScreenshotSmartActions = screenshotSmartActions;
         mNotificationsController = screenshotNotificationsController;
         mUiEventLogger = uiEventLogger;
 
@@ -580,7 +582,7 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
         mNotificationsController.reset();
         mNotificationsController.setImage(mScreenBitmap);
 
-        mSaveInBgTask = new SaveImageInBackgroundTask(mContext, data);
+        mSaveInBgTask = new SaveImageInBackgroundTask(mContext, mScreenshotSmartActions, data);
         mSaveInBgTask.execute();
     }
 
@@ -659,6 +661,15 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
 
         mDisplay.getRealMetrics(mDisplayMetrics);
         takeScreenshot(
+                finisher,
+                new Rect(0, 0, mDisplayMetrics.widthPixels, mDisplayMetrics.heightPixels));
+    }
+
+    void takeScreenshotFullscreen(Consumer<Uri> finisher, Runnable onComplete) {
+        mOnCompleteRunnable = onComplete;
+
+        mDisplay.getRealMetrics(mDisplayMetrics);
+        takeScreenshotInternal(
                 finisher,
                 new Rect(0, 0, mDisplayMetrics.widthPixels, mDisplayMetrics.heightPixels));
     }
@@ -759,6 +770,67 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
         }
 
         setBlockedGesturalNavigation(false);
+    }
+
+    /**
+     * Takes a screenshot of the current display and shows an animation.
+     */
+    private void takeScreenshotInternal(Consumer<Uri> finisher, Rect crop) {
+        if (mScreenshotLayout.getParent() != null) {
+            finisher.accept(null);
+            return;
+        }
+        // copy the input Rect, since SurfaceControl.screenshot can mutate it
+        Rect screenRect = new Rect(crop);
+        int rot = mDisplay.getRotation();
+        int width = crop.width();
+        int height = crop.height();
+        saveScreenshot(SurfaceControl.screenshot(crop, width, height, rot), finisher, screenRect,
+                Insets.NONE, true);
+    }
+
+    private void saveScreenshot(Bitmap screenshot, Consumer<Uri> finisher, Rect screenRect,
+            Insets screenInsets, boolean showFlash) {
+        if (mScreenshotLayout.isAttachedToWindow()) {
+            // if we didn't already dismiss for another reason
+            if (mDismissAnimation == null || !mDismissAnimation.isRunning()) {
+                mUiEventLogger.log(ScreenshotEvent.SCREENSHOT_REENTERED);
+            }
+            dismissScreenshot("new screenshot requested", true);
+        }
+
+        mScreenBitmap = screenshot;
+
+        if (mScreenBitmap == null) {
+            mNotificationsController.notifyScreenshotError(
+                    R.string.screenshot_failed_to_capture_text);
+            finisher.accept(null);
+            mOnCompleteRunnable.run();
+            return;
+        }
+
+        if (!isUserSetupComplete()) {
+            // User setup isn't complete, so we don't want to show any UI beyond a toast, as editing
+            // and sharing shouldn't be exposed to the user.
+            saveScreenshotAndToast(finisher);
+            return;
+        }
+
+        // Optimizations
+        mScreenBitmap.setHasAlpha(false);
+        mScreenBitmap.prepareToDraw();
+
+        onConfigChanged(mContext.getResources().getConfiguration());
+
+        if (mDismissAnimation != null && mDismissAnimation.isRunning()) {
+            mDismissAnimation.cancel();
+        }
+
+        // The window is focusable by default
+        setWindowFocusable(true);
+
+        // Start the post-screenshot animation
+        startAnimation(finisher, screenRect, screenInsets, showFlash);
     }
 
     /**
@@ -1327,8 +1399,6 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
                 String actionType = Intent.ACTION_EDIT.equals(intent.getAction())
                         ? ACTION_TYPE_EDIT
                         : ACTION_TYPE_SHARE;
-                ScreenshotSmartActions.notifyScreenshotAction(
-                        context, intent.getStringExtra(EXTRA_ID), actionType, false);
             }
         }
     }
@@ -1357,14 +1427,6 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
             // Clear the notification when the image is deleted
             ScreenshotNotificationsController.cancelScreenshotNotification(context);
             Toast.makeText(context, R.string.delete_screenshot_toast, Toast.LENGTH_SHORT).show();
-
-            // And delete the image from the media store
-            final Uri uri = Uri.parse(intent.getStringExtra(SCREENSHOT_URI_ID));
-            new DeleteImageInBackgroundTask(context).execute(uri);
-            if (intent.getBooleanExtra(EXTRA_SMART_ACTIONS_ENABLED, false)) {
-                ScreenshotSmartActions.notifyScreenshotAction(
-                        context, intent.getStringExtra(EXTRA_ID), ACTION_TYPE_DELETE, false);
-            }
         }
     }
 
@@ -1385,8 +1447,6 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
                 Log.e(TAG, "Pending intent canceled", e);
             }
 
-            ScreenshotSmartActions.notifyScreenshotAction(
-                    context, intent.getStringExtra(EXTRA_ID), actionType, true);
         }
     }
 }
