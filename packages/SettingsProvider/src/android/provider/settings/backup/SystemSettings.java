@@ -116,5 +116,6 @@ public class SystemSettings {
         Settings.System.QS_FOOTER_TEXT_SHOW,
         Settings.System.QS_FOOTER_TEXT_STRING,
         Settings.System.THEMING_SETTINGS_DASHBOARD_ICONS,
+        Settings.System.SCREENSHOT_GESTURE_DELAY,
     };
 }
