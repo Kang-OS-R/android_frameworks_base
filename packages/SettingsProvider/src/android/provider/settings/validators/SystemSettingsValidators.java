@@ -260,5 +260,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.QS_FOOTER_TEXT_SHOW, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.QS_FOOTER_TEXT_STRING, ANY_STRING_VALIDATOR);
         VALIDATORS.put(System.THEMING_SETTINGS_DASHBOARD_ICONS, ANY_INTEGER_VALIDATOR);
+        VALIDATORS.put(System.SCREENSHOT_GESTURE_DELAY, new InclusiveIntegerRangeValidator(0, 500));
     }
 }
