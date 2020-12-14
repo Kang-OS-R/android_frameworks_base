@@ -20,4 +20,6 @@
   <java-symbol type="integer" name="config_ambientNotificationDefaultColor" />
   <!--Manual Permisiion -->
   <java-symbol type="array" name="config_customPermissionsList" />
+  <!-- NightLight FOD -->
+  <java-symbol type="bool" name="disable_fod_night_light"/>
 </resources>
