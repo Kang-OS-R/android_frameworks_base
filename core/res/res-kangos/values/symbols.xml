@@ -158,4 +158,6 @@
   <!-- Whether to allow process with media UID to access CameraServiceProxy -->
   <java-symbol type="bool" name="config_allowMediaUidForCameraServiceProxy" />
 
+  <!-- Pulse brightness -->
+  <java-symbol type="integer" name="config_screenBrightnessPulse" />
 </resources>
