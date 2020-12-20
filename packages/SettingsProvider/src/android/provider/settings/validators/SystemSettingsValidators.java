@@ -248,8 +248,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.GAMING_MODE_HW_BUTTONS, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.GAMING_MODE_BRIGHTNESS_ENABLED, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.GAMING_MODE_MEDIA_ENABLED, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.GAMING_MODE_MEDIA, new InclusiveIntegerRangeValidator(0, 100));
-        VALIDATORS.put(System.QS_LAYOUT_ROWS, new InclusiveIntegerRangeValidator(2, 3));
         VALIDATORS.put(System.BATTERY_LIGHT_ENABLED, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.BATTERY_LIGHT_ALLOW_ON_DND, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.BATTERY_LIGHT_LOW_BLINKING, BOOLEAN_VALIDATOR);
@@ -261,5 +259,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.QS_FOOTER_TEXT_STRING, ANY_STRING_VALIDATOR);
         VALIDATORS.put(System.THEMING_SETTINGS_DASHBOARD_ICONS, ANY_INTEGER_VALIDATOR);
         VALIDATORS.put(System.SCREENSHOT_GESTURE_DELAY, new InclusiveIntegerRangeValidator(0, 500));
+        VALIDATORS.put(System.GAMING_MODE_MEDIA, new InclusiveIntegerRangeValidator(0, 100));
     }
 }

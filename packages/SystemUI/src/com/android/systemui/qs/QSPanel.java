@@ -37,7 +37,6 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,9 +82,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import android.content.ContentResolver;
-import android.database.ContentObserver;
-import android.net.Uri;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -169,7 +165,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     private int mMediaTotalBottomMargin;
     private int mFooterMarginStartHorizontal;
     private Consumer<Boolean> mMediaVisibilityChangedListener;
-    private boolean mMediaVisible;
 
 
     @Inject
@@ -233,45 +228,11 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                     (PagedTileLayout) mRegularTileLayout);
         }
         mQSLogger.logAllTilesChangeListening(mListening, getDumpableTag(), mCachedSpecs);
-        updateSettings();
         updateResources();
     }
 
-    private class CustomSettingsObserver extends ContentObserver {
-        CustomSettingsObserver(Handler handler) {
-            super(handler);
-        }
-
-        void observe() {
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.QS_LAYOUT_ROWS),
-                    false, this, UserHandle.USER_ALL);
-        }
-
-        void unobserve() {
-            mContext.getContentResolver().unregisterContentObserver(this);;
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-           if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.QS_LAYOUT_ROWS))) {
-                updateMinRows();
-            }
-        }
-
-        public void update() {
-            updateMinRows();
-        }
-    }
-
-    private CustomSettingsObserver mCustomSettingsObserver;
-
     protected void onMediaVisibilityChanged(Boolean visible) {
         switchTileLayout();
-        mMediaVisible = visible;
-        updateMinRows();
         if (mMediaVisibilityChangedListener != null) {
             mMediaVisibilityChangedListener.accept(visible);
         }
@@ -303,6 +264,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         }
         return mRegularTileLayout;
     }
+
 
     protected QSTileLayout createHorizontalTileLayout() {
         return createRegularTileLayout();
@@ -452,27 +414,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         view.setVisibility(TunerService.parseIntegerSwitch(newValue, true) ? VISIBLE : GONE);
     }
 
-    private void updateMinRows() {
-        if (getTileLayout() == null) return;
-        if (!needsDynamicRowsAndColumns()) return;
-        final boolean isPortrait = mContext.getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_PORTRAIT;
-        final boolean isMedia = mUsingMediaPlayer && mMediaVisible;
-        final int rows = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.QS_LAYOUT_ROWS, 3,
-                UserHandle.USER_CURRENT);
-
-        QSTileLayout layout = getTileLayout();
-        if (isPortrait) {
-            layout.setLessRows(true);
-            layout.setMinRows(isMedia ? 2 : rows);
-        } else {
-            layout.setLessRows(isMedia);
-            layout.setMinRows(isMedia ? 2 : 1);
-            layout.setMaxColumns(isMedia ? 3 : TileLayout.NO_MAX_COLUMNS);
-        }
-    }
-
     public void openDetails(String subPanel) {
         QSTile tile = getTile(subPanel);
         // If there's no tile with that name (as defined in QSFactoryImpl or other QSFactory),
@@ -601,7 +542,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         if (newConfig.orientation != mLastOrientation) {
             mLastOrientation = newConfig.orientation;
             switchTileLayout();
-            updateMinRows();
         }
     }
 
@@ -609,7 +549,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     protected void onFinishInflate() {
         super.onFinishInflate();
         mFooter = findViewById(R.id.qs_footer);
-        mMediaVisible = mMediaHost.getVisible();
         switchTileLayout(true /* force */);
     }
 
@@ -646,6 +585,11 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             mTileLayout = newLayout;
             if (mHost != null) setTiles(mHost.getTiles());
             newLayout.setListening(mListening);
+            if (needsDynamicRowsAndColumns()) {
+                newLayout.setMinRows(horizontal ? 2 : 1);
+                // Let's use 3 columns to match the current layout
+                newLayout.setMaxColumns(horizontal ? 3 : TileLayout.NO_MAX_COLUMNS);
+            }
             updateTileLayoutMargins();
             updateFooterMargin();
             updateMediaDisappearParameters();
@@ -958,7 +902,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
         if (mTileLayout != null) {
             mTileLayout.addTile(r);
-            configureTile(r.tile, r.tileView);
             tileClickListener(r.tile, r.tileView);
         }
 
@@ -1257,9 +1200,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         int getOffsetTop(TileRecord tile);
 
         boolean updateResources();
-        int getNumColumns();
-        void updateSettings();
-        boolean isShowTitles();
 
         void setSidePadding(int paddingStart, int paddingEnd);
 
@@ -1285,39 +1225,9 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             return false;
         }
 
-        /**
-         * Set whether should use minimum possible rows
-         *
-         * @param enabled should use minimum
-         */
-        default void setLessRows(boolean enabled) {}
-
         default void setExpansion(float expansion) {}
 
-
-
         int getNumVisibleTiles();
-    }
-
-    private void configureTile(QSTile t, QSTileView v) {
-        if (mTileLayout != null) {
-            v.setHideLabel(!mTileLayout.isShowTitles());
-        }
-    }
-
-    public void updateSettings() {
-        if (mTileLayout != null) {
-            mTileLayout.updateSettings();
-
-            for (TileRecord r : mRecords) {
-                configureTile(r.tile, r.tileView);
-            }
-        }
-        updateMinRows();
-    }
-
-    public int getNumColumns() {
-        return mTileLayout.getNumColumns();
     }
 
     private void setAnimationTile(QSTileView v) {

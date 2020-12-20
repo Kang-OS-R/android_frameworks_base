@@ -5188,23 +5188,6 @@ public final class Settings {
         public static final String ROAMING_INDICATOR_ICON = "roaming_indicator_icon";
 
         /**
-         * Number of qs columns on landscape orientation
-         * @hide
-         */
-        public static final String OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE = "qs_layout_columns_landscape";
-
-         /**
-         * @hide
-         */
-        public static final String OMNI_QS_LAYOUT_COLUMNS = "qs_layout_columns";
-
-        /**
-         * Whether to display qs tile titles in the qs panel
-         * @hide
-         */
-        public static final String OMNI_QS_TILE_TITLE_VISIBILITY = "qs_tile_title_visibility";
-
-        /**
          * Controls whether to show notification headers
          * @hide
          */
@@ -5215,18 +5198,6 @@ public final class Settings {
          * @hide
          */
         public static final String CENTER_NOTIFICATION_HEADERS = "center_notification_headers";
-
-        /**
-         * Use doubletap as doze pulse trigger
-         * @hide
-         */
-        public static final String OMNI_QS_LAYOUT_ROWS = "qs_layout_rows";
-
-        /**
-         * Number of qs columns on quickbar
-         * @hide
-         */
-        public static final String QS_QUICKBAR_COLUMNS = "qs_quickbar_columns";
 
         /**
          * Ambient screen settings
@@ -5272,33 +5243,11 @@ public final class Settings {
         public static final String STATUS_BAR_BATTERY_TEXT_CHARGING = "status_bar_battery_text_charging";
 
         /**
-         * Whether to show the clock in the right or left position or show it in the center
-         * 0: show the clock in the right position (LTR)
-         * 1: show the clock in the center
-         * 2: show the clock in the left position (LTR)
-         * default: 0
-         *
-         * @hide
-         */
-        public static final String STATUS_BAR_CLOCK = "status_bar_clock";
-
-        /**
          * Whether to control brightness from status bar
          *
          * @hide
          */
         public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
-
-        /**
-         * Display style of AM/PM next to clock in status bar
-         * 0: Normal display (Eclair stock)
-         * 1: Small display (Froyo stock)
-         * 2: No display (Gingerbread/ICS stock)
-         * default: 2
-         *
-         * @hide
-         */
-        public static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
 
         /**
          * Disable dashboard conditions in settings
@@ -5592,12 +5541,6 @@ public final class Settings {
          * @hide
          */
         public static final String HEADS_UP_NOTIFICATION_SNOOZE = "heads_up_notification_snooze";
-
-        /**
-         * Number of maximum qs rows to show
-         * @hide
-         */
-        public static final String QS_LAYOUT_ROWS = "qs_layout_rows";
 
         /**
          * Adaptive playback
@@ -6001,10 +5944,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(COLOR_BUCKET_OVERLAY);
             PRIVATE_SETTINGS.add(USE_OLD_MOBILETYPE);
             PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_NEW_TINT);
-            PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE);
-            PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_COLUMNS);
-            PRIVATE_SETTINGS.add(OMNI_QS_TILE_TITLE_VISIBILITY);
-            PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_ROWS);
             PRIVATE_SETTINGS.add(BACK_GESTURE_HAPTIC);
             PRIVATE_SETTINGS.add(ENABLE_CONDITIONS);
             PRIVATE_SETTINGS.add(ENABLE_SUGGESTIONS);
