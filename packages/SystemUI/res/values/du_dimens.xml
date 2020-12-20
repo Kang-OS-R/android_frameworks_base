@@ -82,5 +82,7 @@
    <dimen name="net_traffic_txt_img_padding">1dp</dimen>
    <dimen name="net_traffic_sb_txt_img_padding">2dp</dimen>
 	
+    <!-- Margin on the left side of the heads up notification -->
+    <dimen name="heads_up_status_bar_padding_start">0dp</dimen>
 </resources>
 
