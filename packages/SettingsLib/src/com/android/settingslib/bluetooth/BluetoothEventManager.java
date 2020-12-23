@@ -43,6 +43,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * BluetoothEventManager receives broadcasts and callbacks from the Bluetooth
@@ -62,6 +64,8 @@ public class BluetoothEventManager {
     private final android.os.Handler mReceiverHandler;
     private final UserHandle mUserHandle;
     private final Context mContext;
+    private final String ACT_BROADCAST_SOURCE_INFO =
+          "android.bluetooth.BroadcastAudioSAManager.action.BROADCAST_SOURCE_INFO";
 
     interface Handler {
         void onReceive(Context context, Intent intent, BluetoothDevice device);
@@ -128,6 +132,23 @@ public class BluetoothEventManager {
         // ACL connection changed broadcasts
         addHandler(BluetoothDevice.ACTION_ACL_CONNECTED, new AclStateChangedHandler());
         addHandler(BluetoothDevice.ACTION_ACL_DISCONNECTED, new AclStateChangedHandler());
+        Object sourceInfoHandler = null;
+        try {
+           Class<?> classSourceInfoHandler =
+               Class.forName("com.android.settingslib.bluetooth.BroadcastSourceInfoHandler");
+           Constructor ctor;
+           ctor = classSourceInfoHandler.getDeclaredConstructor(
+                      new Class[] {CachedBluetoothDeviceManager.class});
+           sourceInfoHandler = ctor.newInstance(mDeviceManager);
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException
+                  | InstantiationException | InvocationTargetException e) {
+              e.printStackTrace();
+        }
+        if (sourceInfoHandler != null) {
+           Log.d(TAG, "adding SourceInfo Handler");
+           addHandler(ACT_BROADCAST_SOURCE_INFO,
+                    (Handler)sourceInfoHandler);
+        }
 
         registerAdapterIntentReceiver();
 
