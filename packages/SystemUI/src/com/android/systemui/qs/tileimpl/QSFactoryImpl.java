@@ -41,7 +41,6 @@ import com.android.systemui.qs.tiles.DataSwitchTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.FPSInfoTile;
-import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.ImmersiveTile;
@@ -113,7 +112,6 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<CompassTile> mCompassTileProvider;
     private final Provider<SyncTile> mSyncTileProvider;
     private final Provider<WeatherTile> mWeatherTileProvider;
-    private final Provider<GamingModeTile> mGamingModeTileProvider;
     private final Provider<SmartPixelsTile> mSmartPixelsTileProvider;
     private final Provider<ScreenshotTile> mScreenshotTileProvider;
     private final Provider<SleepScreenTile> mSleepScreenTileProvider;
@@ -158,7 +156,6 @@ public class QSFactoryImpl implements QSFactory {
             Provider<FPSInfoTile> fpsInfoTileProvider,
             Provider<UsbTetherTile> usbTetherTileProvider,
             Provider<WeatherTile> weatherTileProvider,
-            Provider<GamingModeTile> gamingModeTileProvider,
             Provider<SmartPixelsTile> smartPixelsTileProvider,
             Provider<ScreenshotTile> screenshotTileProvider,
             Provider<SleepScreenTile> sleepScreenTileProvider,
@@ -199,7 +196,6 @@ public class QSFactoryImpl implements QSFactory {
         mSyncTileProvider = syncTileProvider;
         mFPSInfoTileProvider = fpsInfoTileProvider;
         mWeatherTileProvider = weatherTileProvider;
-        mGamingModeTileProvider = gamingModeTileProvider;
         mSmartPixelsTileProvider = smartPixelsTileProvider;
         mScreenshotTileProvider = screenshotTileProvider;
         mSleepScreenTileProvider = sleepScreenTileProvider;
@@ -285,8 +281,6 @@ public class QSFactoryImpl implements QSFactory {
                 return mFPSInfoTileProvider.get();
             case "weather":
                 return mWeatherTileProvider.get();
-            case "gaming":
-                return mGamingModeTileProvider.get();
             case "smartpixels":
                 return mSmartPixelsTileProvider.get();
             case "screenshot":
