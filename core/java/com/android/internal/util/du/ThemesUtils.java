@@ -218,4 +218,9 @@ public class ThemesUtils {
             "com.jrinfected.panel.outline", // 3
     };
 
+    public static final String[] UI_RADIUS = {
+            "com.gnonymous.gvisualmod.urm_r", // 1
+            "com.gnonymous.gvisualmod.urm_m", // 2
+            "com.gnonymous.gvisualmod.urm_l", // 3
+    };
 }
