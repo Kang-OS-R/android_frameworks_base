@@ -70,9 +70,6 @@
         android:key="zen"
         android:title="@string/quick_settings_dnd_label" />
 
-    <com.android.systemui.tuner.TunerSwitch
-        android:key="volte"
-        android:title="@string/status_bar_volte"
-        sysui:defValue="false" />
-
 </PreferenceScreen>
+
+
