@@ -39,9 +39,12 @@ public class PixelPropsUtils {
             "com.google.android.as",
             "com.google.android.ext.services",
             "com.google.android.flipendo",
-            "com.google.android.googlequicksearchbox",
             "com.google.android.turboadapter",
-            "com.google.pixel.livewallpaper",
+            "com.google.android.gms",
+            "com.google.android.googlequicksearchbox",
+            "com.google.android.inputmethod.latin",
+            "com.google.pixel.dynamicwallpapers",
+            "com.google.pixel.livewallpaper"
     };
 
     static {
