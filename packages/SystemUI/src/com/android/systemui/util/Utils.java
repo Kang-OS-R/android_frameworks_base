@@ -25,6 +25,8 @@ import android.view.View;
 
 import com.android.systemui.shared.system.QuickStepContract;
 import com.android.systemui.statusbar.CommandQueue;
+import android.os.SystemProperties;
+import android.util.Log;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -141,4 +143,9 @@ public class Utils {
                 Settings.Secure.MEDIA_CONTROLS_RESUME, 1);
         return useQsMediaPlayer(context) && flag > 0;
     }
+
+    public static boolean isKangosDebug() {
+        return SystemProperties.getBoolean("kangos.debug", false);
+    }
+
 }
