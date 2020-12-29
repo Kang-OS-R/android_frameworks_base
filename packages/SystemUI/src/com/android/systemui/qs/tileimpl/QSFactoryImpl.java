@@ -41,6 +41,7 @@ import com.android.systemui.qs.tiles.DataSwitchTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.FPSInfoTile;
+import com.android.systemui.qs.tiles.HeadphonesBuddyTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HotspotTile;
@@ -105,6 +106,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<DataSwitchTile> mDataSwitchTileProvider;
     private final Provider<FPSInfoTile> mFPSInfoTileProvider;
     private final Provider<CPUInfoTile> mCPUInfoTileProvider;
+    private final Provider<HeadphonesBuddyTile> mHeadphonesBuddyTile;
     private final Provider<RebootTile> mRebootTileProvider;
     private final Provider<CaffeineTile> mCaffeineTileProvider;
     private final Provider<ImmersiveTile> mImmersiveTileProvider;
@@ -146,6 +148,7 @@ public class QSFactoryImpl implements QSFactory {
             Provider<ScreenRecordTile> screenRecordTileProvider,
             Provider<AODTile> aodTileProvider,
             Provider<ThemeTile> themeTileProvider,
+            Provider<HeadphonesBuddyTile> headphonesBuddyTile,
             Provider<HeadsUpTile> headsUpTileProvider,
             Provider<DataSwitchTile> dataSwitchTileProvider,
             Provider<CPUInfoTile> cpuInfoTileProvider,
@@ -200,6 +203,7 @@ public class QSFactoryImpl implements QSFactory {
         mFPSInfoTileProvider = fpsInfoTileProvider;
         mWeatherTileProvider = weatherTileProvider;
         mSmartPixelsTileProvider = smartPixelsTileProvider;
+        mHeadphonesBuddyTile = headphonesBuddyTile;
         mScreenshotTileProvider = screenshotTileProvider;
         mSleepScreenTileProvider = sleepScreenTileProvider;
         mMonoToggleTileProvider = monoToggleTileProvider;
@@ -287,6 +291,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mWeatherTileProvider.get();
             case "smartpixels":
                 return mSmartPixelsTileProvider.get();
+            case "headphonesbuddy":
+                return mHeadphonesBuddyTile.get();
             case "screenshot":
                 return mScreenshotTileProvider.get();
             case "sleepscreen":

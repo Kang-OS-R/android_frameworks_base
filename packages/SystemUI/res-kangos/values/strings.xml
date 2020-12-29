@@ -213,4 +213,10 @@
     <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_gaming_mode_enabled">Gaming mode turned on.</string>
 
+    <!-- Headphones Buddy -->
+    <string name="hp_buddy">Headphones Buddy</string>
+    <string name="hp_buddy_left">Left only</string>
+    <string name="hp_buddy_right">Right only</string>
+    <string name="hp_buddy_center">Both</string>
+    <string name="hp_buddy_not_connected">Connect your headphones</string>
 </resources>
