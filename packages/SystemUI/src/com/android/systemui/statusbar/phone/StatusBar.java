@@ -2074,9 +2074,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.QS_TILE_STYLE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -2129,7 +2126,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
 
     public void update() {
-        updateTileStyle();
         setStatusDoubleTapToSleep();
         setHeadsUpStoplist();
         setHeadsUpBlacklist();
@@ -2224,10 +2220,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         mUserSetup = userSetup;
     }
 
-     public void updateTileStyle() {
-         int qsTileStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
-                 Settings.System.QS_TILE_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
-     }
     @Override
     public void setBlockedGesturalNavigation(boolean blocked) {
         if (getNavigationBarView() != null) {
