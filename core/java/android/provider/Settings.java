@@ -6066,6 +6066,12 @@ public final class Settings {
         public static final String QS_TILE_STYLE = "qs_tile_style";
 
         /**
+         * Whether to disco the QS tiles or not
+         * @hide
+         */
+        public static final String QS_TILES_BG_DISCO = "qs_tiles_bg_disco";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
@@ -6245,6 +6251,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DOZE_BRIGHTNESS);
             PRIVATE_SETTINGS.add(DOZE_BRIGHTNESS_FORCE);
             PRIVATE_SETTINGS.add(QS_TILE_STYLE);
+            PRIVATE_SETTINGS.add(QS_TILES_BG_DISCO);
         }
 
         /**
