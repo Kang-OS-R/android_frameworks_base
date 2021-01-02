@@ -6076,6 +6076,11 @@ public final class Settings {
          */
         public static final String NETWORK_TRAFFIC_VIEW_LOCATION = "network_traffic_view_location";
 
+        /**
+         * Whether to use accent lock clock colors
+         * @hide
+         */
+        public static final String LOCKSCREEN_ACCENT_COLOR = "lockscreen_accent_color";
 
         /**
          * Keys we no longer back up under the current schema, but want to continue to

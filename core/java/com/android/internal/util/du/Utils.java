@@ -116,6 +116,12 @@ public class Utils {
         return telephony != null && telephony.isVoiceCapable();
     }
 
+    // Check for lockscreen accent color
+    public static boolean useLockscreenClockAccentColor(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+          Settings.System.LOCKSCREEN_ACCENT_COLOR, 0) == 1;
+    }
+
     public static void takeScreenshot(boolean full) {
         final IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
         try {
