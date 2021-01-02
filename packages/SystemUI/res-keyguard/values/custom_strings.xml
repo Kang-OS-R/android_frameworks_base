@@ -23,4 +23,5 @@
     <string name="clock_title_mnml_minimal" translatable="false">MNML\'s Minimal</string>
     <string name="clock_title_binary" translatable="false">Binary</string>
     <string name="clock_title_swing" translatable="false">Swing animation</string>
+    <string name="clock_title_loading" translatable="false">Loading animation</string>
 </resources>
