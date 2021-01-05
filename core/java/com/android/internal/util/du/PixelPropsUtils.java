@@ -31,18 +31,15 @@ public class PixelPropsUtils {
     private static final Map<String, Object> propsToChange;
 
     private static final String[] packagesToChange = {
+            "com.android.camera",
             "com.breel.wallpapers20",
             "com.google.android.apps.safetyhub",
             "com.google.android.apps.turbo",
             "com.google.android.apps.wallpaper",
             "com.google.android.apps.wallpaper.pixel",
             "com.google.android.as",
-            "com.google.android.ext.services",
             "com.google.android.flipendo",
             "com.google.android.turboadapter",
-            "com.google.android.gms",
-            "com.google.android.googlequicksearchbox",
-            "com.google.android.inputmethod.latin",
             "com.google.pixel.dynamicwallpapers",
             "com.google.pixel.livewallpaper"
     };
