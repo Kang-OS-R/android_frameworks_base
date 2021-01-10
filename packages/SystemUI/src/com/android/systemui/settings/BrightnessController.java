@@ -80,7 +80,6 @@ public class BrightnessController implements ToggleSlider.Listener {
     private final float mMaximumBacklightForVr;
     private final float mDefaultBacklightForVr;
 
-    private final ImageView mIcon;
     private final Context mContext;
     private final ToggleSlider mControl;
     private final boolean mAutomaticAvailable;
@@ -229,7 +228,6 @@ public class BrightnessController implements ToggleSlider.Listener {
                         UserHandle.USER_CURRENT);
                 mHandler.obtainMessage(MSG_UPDATE_ICON, mAutomatic ? 1 : 0).sendToTarget();
                 mAutomatic = automatic != Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
-                mHandler.obtainMessage(MSG_UPDATE_ICON, mAutomatic ? 1 : 0).sendToTarget();
             } else {
                 mHandler.obtainMessage(MSG_SET_CHECKED, 0).sendToTarget();
                 mHandler.obtainMessage(MSG_UPDATE_ICON, 0 /* automatic */).sendToTarget();
@@ -340,16 +338,18 @@ public class BrightnessController implements ToggleSlider.Listener {
         mVrManager = IVrManager.Stub.asInterface(ServiceManager.getService(
                 Context.VR_SERVICE));
 
-        mIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Settings.System.putIntForUser(mContext.getContentResolver(),
+        if (mAutomaticAvailable) {
+            mIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Settings.System.putIntForUser(mContext.getContentResolver(),
                         Settings.System.SCREEN_BRIGHTNESS_MODE, mAutomatic ?
-                            Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL :
-                            Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC,
+                        Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL :
+                        Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC,
                         UserHandle.USER_CURRENT);
-            }
-        });
+                }
+            });
+        }
     }
 
     public void addStateChangedCallback(BrightnessStateChangeCallback cb) {
@@ -448,6 +448,7 @@ public class BrightnessController implements ToggleSlider.Listener {
     private void setBrightness(float brightness) {
         mDisplayManager.setTemporaryBrightness(brightness);
     }
+
 
     private void updateIcon(boolean automatic) {
         if (mIcon != null) {
