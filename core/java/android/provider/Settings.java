@@ -10395,18 +10395,6 @@ public final class Settings {
                 "lock_screen_transparent_notifications_enabled";
 
         /**
-         * @hide
-         */
-        public static final String QS_SHOW_AUTO_BRIGHTNESS =
-                "qs_show_auto_brightness";
-
-        /**
-         * @hide
-         */
-        public static final String QS_SHOW_BRIGHTNESS_SLIDER =
-                "qs_show_brightness_slider";
-
-        /**
          * Whether the Adaptive connectivity option is enabled.
          *
          * @hide
