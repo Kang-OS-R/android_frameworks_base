@@ -69,9 +69,6 @@
     <!-- Whether device has a big physical display cutout -->
     <java-symbol type="bool" name="config_physicalDisplayCutoutCentered" />
 
-    <!-- System update service -->
-    <java-symbol type="array" name="config_forceEnabledComponents" />
-
     <!-- App error dialog -->
     <java-symbol type="id" name="aerr_copy" />
     <java-symbol type="string" name="url_copy_success" />
@@ -160,4 +157,5 @@
 
   <!-- Pulse brightness -->
   <java-symbol type="integer" name="config_screenBrightnessPulse" />
+
 </resources>
