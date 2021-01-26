@@ -33,6 +33,7 @@ import android.view.ViewTreeObserver.OnPreDrawListener;
 
 import com.android.internal.graphics.ColorUtils;
 import com.android.systemui.CustomSystemUIAnimations;
+import com.android.systemui.WaveSystemUIAnimations;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.KeyguardAffordanceView;
@@ -70,7 +71,6 @@ public class LockIcon extends KeyguardAffordanceView {
 
             int newState = mState;
             Drawable icon = getIcon(newState);
-
             mIsFaceUnlock = newState == STATE_SCANNING_FACE;
 
             if (mIsFaceUnlock) {
@@ -279,6 +279,6 @@ public class LockIcon extends KeyguardAffordanceView {
     }
 
     public void shakeFace() {
-        CustomSystemUIAnimations.faceLockShake(this, mIsFaceUnlock ? false :true);
+        WaveSystemUIAnimations.faceLockShake(this, mIsFaceUnlock ? false :true);
     }
 }
