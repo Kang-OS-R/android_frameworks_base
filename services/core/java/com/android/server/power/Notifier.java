@@ -657,7 +657,7 @@ public class Notifier {
         Message msg = mHandler.obtainMessage(MSG_WIRED_CHARGING_STARTED);
         msg.setAsynchronous(true);
         msg.arg1 = userId;
-        msg.arg2 = batteryLevel;
+        msg.arg1 = batteryLevel;
         mHandler.sendMessage(msg);
     }
 
@@ -839,10 +839,8 @@ public class Notifier {
     }
 
     private void showWiredChargingStarted(@UserIdInt int userId,int batteryLevel) {
-        final boolean animationEnabled = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.CHARGING_ANIMATION, 1) == 1;
         playChargingStartedFeedback(userId, false /* wireless */);
-        if (mStatusBarManagerInternal != null && animationEnabled) {
+        if (mStatusBarManagerInternal != null) {
             mStatusBarManagerInternal.showChargingAnimation(batteryLevel);
         }
         mSuspendBlocker.release();

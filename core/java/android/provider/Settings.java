@@ -4673,18 +4673,6 @@ public final class Settings {
         public static final String NOTIFICATION_LIGHT_PULSE = "notification_light_pulse";
 
         /**
-         * FOD recognizing animation
-         * @hide
-         */
-        public static final String FOD_RECOGNIZING_ANIMATION = "fod_recognizing_animation";
-
-        /**
-         * FOD recognizing animation picker
-         * @hide
-         */
-        public static final String FOD_ANIM = "fod_recognizing_animation_list";
-
-        /**
          * Show pointer location on screen?
          * 0 = no
          * 1 = yes
@@ -5071,54 +5059,6 @@ public final class Settings {
          */
         public static final String CUSTOM_AMBIENT_POCKETMODE_GESTURE = "custom_ambient_pocketmode_gesture";
 
-        /**
-         * Enable and disable Lockscreen visualizer
-         * @hide
-         */
-        public static final String LOCKSCREEN_VISUALIZER_ENABLED = "lockscreen_visualizer_enabled";
-
-        /**
-         * Lockscreen lavalamp psychedelic colors
-         * @hide
-         */
-        public static final String LOCKSCREEN_LAVALAMP_ENABLED = "lockscreen_lavalamp_enabled";
-
-        /**
-         * Lockscreen lavalamp animation speed
-         * @hide
-         */
-        public static final String LOCKSCREEN_LAVALAMP_SPEED = "lockscreen_lavalamp_speed";
-
-        /**
-         * Whether to use automatic color for visualizer
-         * @hide
-         */
-        public static final String LOCKSCREEN_VISUALIZER_AUTOCOLOR = "lockscreen_visualizer_autocolor";
-
-        /**
-         * Number of bars shown in visualizer
-         * @hide
-         */
-        public static final String LOCKSCREEN_SOLID_UNITS_COUNT = "lockscreen_solid_units_count";
-
-        /** Whether to pulse ambient on new music tracks
-         *
-         * @hide
-         */
-        public static final String PULSE_ON_NEW_TRACKS = "pulse_on_new_tracks";
-
-        /**
-         * Visualizer sanity level
-         * @hide
-         */
-        public static final String LOCKSCREEN_SOLID_FUDGE_FACTOR = "lockscreen_solid_fudge_factor";
-
-        /**
-         * Visualizer opacity
-         * @hide
-         */
-        public static final String LOCKSCREEN_SOLID_UNITS_OPACITY = "lockscreen_solid_units_opacity";
-
          /**
          * Disable power menu on secure lock screens
          *
@@ -5288,44 +5228,6 @@ public final class Settings {
         public static final String VOLUME_PANEL_ON_LEFT = "volume_panel_on_left";
 
         /**
-         * Wheter to show network traffic indicator in statusbar
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
-
-        /**
-         * Network traffic inactivity threshold (default is 1 kBs)
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD = "network_traffic_autohide_threshold";
-
-        /**
-         * What to show in network traffic indicator in statusbar
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_TYPE = "network_traffic_type";
-
-        /**
-         * Whether to disable showing arrows in statusbar network traffic indicators
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_ARROW = "network_traffic_arrow";
-
-        /**
-         * What size to show for network traffic indicator in statusbar
-         * @hide
-         */
-         public static final String NETWORK_TRAFFIC_FONT_SIZE = "network_traffic_font_size";
-
-        /**
-         * Show network traffic indicator
-         * 0 - Statusbar (default)
-         * 1 - QS Header
-         * @hide
-         */
-         public static final String NETWORK_TRAFFIC_VIEW_LOCATION = "network_traffic_view_location";
-
-        /**
          * @hide
          */
         public static final String OMNIJAWS_WEATHER_ICON_PACK = "omnijaws_weather_icon_pack";
@@ -5429,12 +5331,6 @@ public final class Settings {
         public static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
 
         /**
-         * Screen off fod
-         * @hide
-         */
-        public static final String FOD_GESTURE = "fod_gesture";
-
-        /**
          * Defines the screen-off animation to display
          * @hide
          */
@@ -5497,12 +5393,6 @@ public final class Settings {
          * @hide
          */
         public static final String AMBIENT_LIGHT_DURATION = "ambient_light_duration";
-
-        /**
-         * FOD icon picker
-         * @hide
-         */
-        public static final String FOD_ICON = "fod_icon";
 
         /**
          * Whether to enable status and navigation bar color in battery saver mode.
@@ -5612,12 +5502,6 @@ public final class Settings {
         public static final String LOCKSCREEN_LOCK_ICON = "lockscreen_lock_icon";
 
         /**
-         * Whether to show charging animation
-         * @hide
-         */
-        public static final String CHARGING_ANIMATION = "charging_animation";
-
-        /**
          * 0 - fullscreen
          * 1 - partial
          * @hide
@@ -5665,12 +5549,6 @@ public final class Settings {
          * @hide
          */
         public static final String QS_PANEL_BG_ALPHA = "qs_panel_bg_alpha";
-
-        /**
-         * FOD pressed color
-         * @hide
-         */
-        public static final String FOD_COLOR = "fod_color";
 
         /**
          * Whether to launch default music player when headset plugged in
