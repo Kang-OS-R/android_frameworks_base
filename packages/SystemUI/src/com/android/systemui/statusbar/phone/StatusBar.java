@@ -973,9 +973,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         createAndAddWindows(result);
 
-        mAwakenSettingsObserver.observe();
-        mAwakenSettingsObserver.update();
-
         if (mWallpaperSupported) {
             // Make sure we always have the most current wallpaper info.
             IntentFilter wallpaperChangedFilter = new IntentFilter(Intent.ACTION_WALLPAPER_CHANGED);
@@ -2101,13 +2098,25 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_STOPLIST_VALUES),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.USE_OLD_MOBILETYPE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_PANEL_BG_USE_NEW_TINT),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.PULSE_ON_NEW_TRACKS),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_TILES_BG_DISCO),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.SYSUI_ROUNDED_FWVALS),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_BLACKLIST_VALUES),
@@ -2152,6 +2161,17 @@ public class StatusBar extends SystemUI implements DemoMode,
             if (uri.equals(Settings.Secure.getUriFor(
                     Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS))) {
                 setFpToDismissNotifications();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.USE_OLD_MOBILETYPE))) {
+                setOldMobileType();
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_PANEL_BG_USE_NEW_TINT)) ||
+                          uri.equals(Settings.System.getUriFor(Settings.System.QS_TILES_BG_DISCO))) {
+                mQSPanel.getHost().reloadAllTiles();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.PULSE_ON_NEW_TRACKS))) {
+                setPulseOnNewTracks();
+            } else if (uri.equals(Settings.Secure.getUriFor(Settings.Secure.SYSUI_ROUNDED_FWVALS))) {
+                updateCorners();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_ROWS_PORTRAIT)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_ROWS_LANDSCAPE)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_COLUMNS_PORTRAIT)) ||
@@ -2175,6 +2195,8 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mNotificationShadeWindowViewController != null) {
             mNotificationShadeWindowViewController.updateSettings();
         }
+        setOldMobileType();
+        updateCorners();
         setHeadsUpStoplist();
         setHeadsUpBlacklist();
         setFpToDismissNotifications();
@@ -2182,6 +2204,59 @@ public class StatusBar extends SystemUI implements DemoMode,
         setLockScreenMediaBlurLevel();
         setGamingMode();
         updateChargingAnimation();
+        }
+    }
+
+    private void updateCorners() {
+        mSysuiRoundedFwvals = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SYSUI_ROUNDED_FWVALS, 1,
+                UserHandle.USER_CURRENT) == 1;
+        if (mSysuiRoundedFwvals && !isCurrentRoundedSameAsFw()) {
+            float density = Resources.getSystem().getDisplayMetrics().density;
+            int resourceIdRadius = (int) mContext.getResources().getDimension(com.android.internal.R.dimen.rounded_corner_radius);
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SYSUI_ROUNDED_SIZE, (int) (resourceIdRadius / density), UserHandle.USER_CURRENT);
+            int resourceIdPadding = (int) mContext.getResources().getDimension(R.dimen.rounded_corner_content_padding);
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, (int) (resourceIdPadding / density), UserHandle.USER_CURRENT);
+        }
+    }
+
+    private boolean isCurrentRoundedSameAsFw() {
+        float density = Resources.getSystem().getDisplayMetrics().density;
+        // Resource IDs for framework properties
+        int resourceIdRadius = (int) mContext.getResources().getDimension(com.android.internal.R.dimen.rounded_corner_radius);
+        int resourceIdPadding = (int) mContext.getResources().getDimension(R.dimen.rounded_corner_content_padding);
+
+        // Values on framework resources
+        int cornerRadiusRes = (int) (resourceIdRadius / density);
+        int contentPaddingRes = (int) (resourceIdPadding / density);
+
+        // Values in Settings DBs
+        int cornerRadius = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SYSUI_ROUNDED_SIZE, cornerRadiusRes, UserHandle.USER_CURRENT);
+        int contentPadding = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, contentPaddingRes, UserHandle.USER_CURRENT);
+
+        return (cornerRadiusRes == cornerRadius) && (contentPaddingRes == contentPadding);
+    }
+
+    private void setOldMobileType() {
+        USE_OLD_MOBILETYPE = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.USE_OLD_MOBILETYPE, 0,
+                UserHandle.USER_CURRENT) != 0;
+        TelephonyIcons.updateIcons(USE_OLD_MOBILETYPE);
+    }
+
+    public void updateQSDataUsageInfo() {
+        DataUsageView.updateUsage();
+    }
+
+    private void setPulseOnNewTracks() {
+        if (KeyguardSliceProvider.getAttachedInstance() != null) {
+            KeyguardSliceProvider.getAttachedInstance().setPulseOnNewTracks(Settings.System.getIntForUser(mContext.getContentResolver(),
+                    Settings.System.PULSE_ON_NEW_TRACKS, 1,
+                    UserHandle.USER_CURRENT) == 1);
         }
     }
 
@@ -4381,107 +4456,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateIsKeyguard();
         }
     };
-
-    private AwakenSettingsObserver mAwakenSettingsObserver = new AwakenSettingsObserver(mHandler);
-    private class AwakenSettingsObserver extends ContentObserver {
-        AwakenSettingsObserver(Handler handler) {
-            super(handler);
-        }
-
-        void observe() {
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.USE_OLD_MOBILETYPE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.QS_PANEL_BG_USE_NEW_TINT),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.PULSE_ON_NEW_TRACKS),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.QS_TILES_BG_DISCO),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.Secure.getUriFor(
-                    Settings.Secure.SYSUI_ROUNDED_FWVALS),
-                    false, this, UserHandle.USER_ALL);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.USE_OLD_MOBILETYPE))) {
-                setOldMobileType();
-            } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_PANEL_BG_USE_NEW_TINT)) ||
-                          uri.equals(Settings.System.getUriFor(Settings.System.QS_TILES_BG_DISCO))) {
-                mQSPanel.getHost().reloadAllTiles();
-            } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.PULSE_ON_NEW_TRACKS))) {
-                setPulseOnNewTracks();
-            } else if (uri.equals(Settings.Secure.getUriFor(Settings.Secure.SYSUI_ROUNDED_FWVALS))) {
-                updateCorners();
-            }
-       update();
-        }
-
-        public void update() {
-            setOldMobileType();
-            updateCorners();
-        }
-    }
-
-    private void updateCorners() {
-        mSysuiRoundedFwvals = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SYSUI_ROUNDED_FWVALS, 1,
-                UserHandle.USER_CURRENT) == 1;
-        if (mSysuiRoundedFwvals && !isCurrentRoundedSameAsFw()) {
-            float density = Resources.getSystem().getDisplayMetrics().density;
-            int resourceIdRadius = (int) mContext.getResources().getDimension(com.android.internal.R.dimen.rounded_corner_radius);
-            Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SYSUI_ROUNDED_SIZE, (int) (resourceIdRadius / density), UserHandle.USER_CURRENT);
-            int resourceIdPadding = (int) mContext.getResources().getDimension(R.dimen.rounded_corner_content_padding);
-            Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, (int) (resourceIdPadding / density), UserHandle.USER_CURRENT);
-        }
-    }
-
-    private boolean isCurrentRoundedSameAsFw() {
-        float density = Resources.getSystem().getDisplayMetrics().density;
-        // Resource IDs for framework properties
-        int resourceIdRadius = (int) mContext.getResources().getDimension(com.android.internal.R.dimen.rounded_corner_radius);
-        int resourceIdPadding = (int) mContext.getResources().getDimension(R.dimen.rounded_corner_content_padding);
-
-        // Values on framework resources
-        int cornerRadiusRes = (int) (resourceIdRadius / density);
-        int contentPaddingRes = (int) (resourceIdPadding / density);
-
-        // Values in Settings DBs
-        int cornerRadius = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SYSUI_ROUNDED_SIZE, cornerRadiusRes, UserHandle.USER_CURRENT);
-        int contentPadding = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, contentPaddingRes, UserHandle.USER_CURRENT);
-
-        return (cornerRadiusRes == cornerRadius) && (contentPaddingRes == contentPadding);
-    }
-
-    private void setOldMobileType() {
-        USE_OLD_MOBILETYPE = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.USE_OLD_MOBILETYPE, 0,
-                UserHandle.USER_CURRENT) != 0;
-        TelephonyIcons.updateIcons(USE_OLD_MOBILETYPE);
-    }
-
-    public void updateQSDataUsageInfo() {
-        DataUsageView.updateUsage();
-    }
-
-    private void setPulseOnNewTracks() {
-        if (KeyguardSliceProvider.getAttachedInstance() != null) {
-            KeyguardSliceProvider.getAttachedInstance().setPulseOnNewTracks(Settings.System.getIntForUser(mContext.getContentResolver(),
-                    Settings.System.PULSE_ON_NEW_TRACKS, 1,
-                    UserHandle.USER_CURRENT) == 1);
-        }
-    }
 
     public int getWakefulnessState() {
         return mWakefulnessLifecycle.getWakefulness();
