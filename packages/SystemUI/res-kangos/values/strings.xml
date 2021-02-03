@@ -210,5 +210,8 @@
     <string name="quick_settings_sound_search">Sound search</string>
 
     <string name="quick_settings_killapp_label">Kill app</string>
+
+    <!-- Scrolling Screenshot string -->
+    <string name="scrollss">Scroll</string>
 </resources>
 
