@@ -293,10 +293,6 @@
     <!-- Sync tile -->
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-    <protected-broadcast android:name="com.android.systemui.doze.pulse" />
-
-    <!-- Ambient Music -->
-    <protected-broadcast android:name="com.android.systemui.doze.pulse" />
 
     <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES" />
 
