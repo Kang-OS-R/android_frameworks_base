@@ -188,25 +188,7 @@ LOCAL_REQUIRED_MODULES := \
         Contained \
         Retro \
         Narrow \
-        Stockish \
-        QSTileCircleTrim \
-        QSTileDualToneCircle \
-        QSTileStar \
-        QSTileSquare \
-        QSTileGear \
-        QSTileBadge \
-        QSTileBadgetwo \
-        QSTileDiamond \
-        QSTileSquircleTrim \
-        QSTileCookie \
-        QSTileCircleOutline \
-        QSTileInkdrop \
-        QSTileWavey \
-        QSTileAttemptMountain \
-        QSTileDottedCircle \
-        QSTileNinja \
-        QSTileTriangles \
-        QSTileNeonLight
+        Stockish
 
 include $(BUILD_PHONY_PACKAGE)
 include $(CLEAR_VARS)
