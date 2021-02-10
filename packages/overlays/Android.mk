@@ -17,67 +17,6 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := frameworks-base-overlays
 LOCAL_REQUIRED_MODULES := \
-	AccentColorBlackOverlay \
-        AccentColorRoseOverlay \
-        AccentColorScooterOverlay \
-        AccentColorSlateOverlay \
-        AccentColorSuperNovaOverlay \
-        AccentColorPurpleHeatOverlay \
-        AccentColorHadalZoneOverlay \
-        AccentColorLostInForestOverlay \
-        AccentColorTorchRedOverlay \
-	AccentColorCinnamonOverlay \
-	AccentColorOceanOverlay \
-	AccentColorOrchidOverlay \
-	AccentColorSpaceOverlay \
-	AccentColorGreenOverlay \
-	AccentColorPurpleOverlay \
-	AccentColorPaletteOverlay \
-	AccentColorCarbonOverlay \
-        FadedPink \
-        DeepRed \
-        PinkRed \
-        KindaIndigo \
-        ArmyGreen \
-        Grey \
-	AccentColorSandOverlay \
-	AccentColorAmethystOverlay \
-	AccentColorAquamarineOverlay \
-	AccentColorTangerineOverlay \
-	AccentColorBlueGrayOverlay \
-	AccentColorCyanOverlay \
-	AccentColorDorsetGoldOverlay \
-	AccentColorFlatPinkOverlay \
-	AccentColorIndigoOverlay \
-	AccentColorInfernoRedOverlay \
-	AccentColorLightPurpleOverlay \
-	AccentColorMetallicGoldOverlay \
-	AccentColorPinkOverlay \
-	AccentColorRedOverlay \
-	AccentColorTealOverlay \
-	AccentColorCocaColaOverlay \
-	AccentColorCoralOverlay \
-	AccentColorDiscordOverlay \
-	AccentColorEvolutionBlueOverlay \
-	AccentColorEvolutionGreenOverlay \
-	AccentColorEvolutionRedOverlay \
-	AccentColorEvolutionYellowOverlay \
-	AccentColorFerrariRedOverlay \
-	AccentColorGoldenShowerOverlay \
-	AccentColorJollibeeOverlay \
-	AccentColorMatrixOverlay \
-	AccentColorNextbitOverlay \
-	AccentColorOnePlusOverlay \
-	AccentColorOrangeOverlay \
-	AccentColorParanoidOverlay \
-	AccentColorPepsiOverlay \
-	AccentColorPixelBlueOverlay \
-	AccentColorRazerOverlay \
-	AccentColorSalmonOverlay \
-	AccentColorStarbucksOverlay \
-	AccentColorUbuntuOverlay \
-	AccentColorXboxOverlay \
-	AccentColorXiaomiOverlay \
 	DisplayCutoutEmulationCornerOverlay \
 	DisplayCutoutEmulationDoubleOverlay \
         DisplayCutoutEmulationHoleOverlay \
@@ -152,27 +91,12 @@ LOCAL_REQUIRED_MODULES := \
 	IconPackRoundedSettingsOverlay \
 	IconPackRoundedSystemUIOverlay \
 	IconPackRoundedThemePickerOverlay \
-        IconShapeHeartOverlay \
-	IconShapePebbleOverlay \
-	IconShapeRoundedRectOverlay \
-	IconShapeSquareOverlay \
-	IconShapeSquircleOverlay \
-	IconShapeTaperedRectOverlay \
-	IconShapeTeardropOverlay \
-	IconShapeVesselOverlay \
-        IconShapeCylinderOverlay \
-        IconShapeHexagonOverlay \
-	IconShapeMallowOverlay \
 	NavigationBarMode2ButtonOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
 	NavigationBarModeGesturalOverlayNarrowBack \
 	NavigationBarModeGesturalOverlayWideBack \
 	NavigationBarModeGesturalOverlayExtraWideBack \
-        NavbarAsusOverlay \
-        NavbarOnePlusOverlay \
-        NavbarOneUiOverlay \
-        NavbarTecnoCamonOverlay \
         preinstalled-packages-platform-overlays.xml \
         PitchBlackSystemOverlay \
         PitchBlackSystemUIOverlay \
