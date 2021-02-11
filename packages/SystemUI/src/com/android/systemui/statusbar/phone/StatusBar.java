@@ -148,7 +148,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.statusbar.RegisterStatusBarResult;
 import com.android.internal.util.du.Utils;
-import com.android.internal.util.du.ThemesUtils;
 import com.android.internal.util.hwkeys.ActionConstants;
 import com.android.internal.util.hwkeys.ActionUtils;
 import com.android.internal.util.hwkeys.PackageMonitor;
@@ -4029,12 +4028,12 @@ public class StatusBar extends SystemUI implements DemoMode,
     public void updateTileStyle() {
         int qsTileStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.QS_TILE_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
-        ThemesUtils.updateNewTileStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), qsTileStyle);
+        Utils.updateTileStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), qsTileStyle);
     }
 
     // Unload all qs tile styles back to stock
     public void stockTileStyle() {
-        ThemesUtils.stockNewTileStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+        Utils.stockTileStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
     /**

@@ -81,8 +81,11 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Arrays;
 import java.util.List;
+import android.util.Log;
 
 public class Utils {
+
+    private static final String TAG = "Utils";
 
     private static OverlayManager mOverlayService;
 
@@ -624,6 +627,34 @@ public class Utils {
             e.printStackTrace();
         }
         return false;
+    }
+
+    // Switches qs tile style to user selected.
+    public static void updateTileStyle(IOverlayManager om, int userId, int qsTileStyle) {
+        if (qsTileStyle == 0) {
+            stockTileStyle(om, userId);
+        } else {
+            try {
+                om.setEnabled(ThemesUtils.QS_TILE_THEMES[qsTileStyle],
+                        true, userId);
+            } catch (RemoteException e) {
+                Log.w(TAG, "Can't change qs tile icon", e);
+            }
+        }
+    }
+
+    // Switches qs tile style back to stock.
+    public static void stockTileStyle(IOverlayManager om, int userId) {
+        // skip index 0
+        for (int i = 0; i < ThemesUtils.QS_TILE_THEMES.length; i++) {
+            String qstiletheme = ThemesUtils.QS_TILE_THEMES[i];
+            try {
+                om.setEnabled(qstiletheme,
+                        false /*disable*/, userId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static boolean deviceSupportNavigationBar(Context context) {
