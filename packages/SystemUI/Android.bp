@@ -35,7 +35,6 @@ android_library {
         "src/**/*.kt",
         "src/**/*.java",
         "src/**/I*.aidl",
-        "pulse/**/*.java",
     ],
     resource_dirs: [
         "res-product",
@@ -43,7 +42,6 @@ android_library {
         "res",
         "res-kangos",
         "res-hwkeys",
-        "pulse/res",
     ],
     static_libs: [
         "WindowManager-Shell",
