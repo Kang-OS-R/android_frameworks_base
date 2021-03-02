@@ -46,6 +46,7 @@ import com.android.systemui.dump.DumpManager;
 import com.android.systemui.fragments.FragmentService;
 import com.android.systemui.keyguard.ScreenLifecycle;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
+import com.android.systemui.media.dialog.MediaOutputDialogFactory;
 import com.android.systemui.model.SysUiState;
 import com.android.systemui.omni.OmniSettingsService;
 import com.android.systemui.plugins.ActivityStarter;
@@ -330,6 +331,7 @@ public class Dependency {
     @Inject Lazy<TaskHelper> mTaskHelper;
     @Inject Lazy<OmniSettingsService> mOmniSettingsService;
     @Inject Lazy<PulseController> mPulseController;
+    @Inject Lazy<MediaOutputDialogFactory> mMediaOutputDialogFactory;
 
     @Inject
     public Dependency() {
@@ -530,6 +532,8 @@ public class Dependency {
         mProviders.put(Divider.class, mDivider::get);
         mProviders.put(OmniSettingsService.class, mOmniSettingsService::get);
         mProviders.put(PulseController.class, mPulseController::get);
+
+        mProviders.put(MediaOutputDialogFactory.class, mMediaOutputDialogFactory::get);
 
         sDependency = this;
     }
