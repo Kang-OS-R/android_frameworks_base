@@ -76,6 +76,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     private SettingsButton mSettingsButton;
     protected View mSettingsContainer;
     private PageIndicator mPageIndicator;
+
     private View mRunningServicesButton;
 
     private boolean mQsDisabled;
