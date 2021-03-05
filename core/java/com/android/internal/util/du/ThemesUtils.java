@@ -184,6 +184,8 @@ public class ThemesUtils {
             "com.android.theme.font.inter",
             "com.android.theme.font.manrope",
             "com.android.theme.font.opsans",
+            "com.android.theme.font.aileron",
+            "com.android.theme.font.urbanist",
     };
 
     public static final String[] NAVBAR_STYLES = {
