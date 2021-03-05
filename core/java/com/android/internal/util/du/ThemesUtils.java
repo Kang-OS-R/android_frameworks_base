@@ -181,6 +181,7 @@ public class ThemesUtils {
             "com.android.theme.font.surfersource",
             "com.android.theme.font.ubuntu",
             "com.android.theme.font.linotte",
+            "com.android.theme.font.inter",
     };
 
     public static final String[] NAVBAR_STYLES = {
