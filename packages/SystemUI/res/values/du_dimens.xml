@@ -84,11 +84,25 @@
     <dimen name="net_traffic_txt_img_padding">1dp</dimen>
     <dimen name="net_traffic_sb_txt_img_padding">2dp</dimen>
 
-    <!-- OOS QS values -->
-    <dimen name="op_qs_footer_height">98dp</dimen>
+    <!-- OnePlus QS -->
+    <dimen name="op_qs_footer_height">45dp</dimen>
     <dimen name="op_qs_footer_action_layout_size">96dp</dimen>
     <dimen name="quick_settings_top_margin_media">10dp</dimen>
     <dimen name="quick_settings_top_margin_media_extra">14dp</dimen>
     <dimen name="qs_media_action_button_margin_top">18dp</dimen>
     <dimen name="qs_media_action_button_size">40dp</dimen>
+    <dimen name="op_brightness_margin">37dp</dimen>
+
+    <!-- Margin on the left side of the center clock -->
+    <dimen name="status_bar_center_clock_padding_start">0dp</dimen>
+
+    <!-- Margin on the right side of the center clock -->
+    <dimen name="status_bar_center_clock_padding_end">0dp</dimen>
+
+    <!-- Margin on the left side of the heads up notification -->
+    <dimen name="heads_up_status_bar_padding_start">0dp</dimen>
+
+    <!-- Recognizing fingerprint animation -->
+    <dimen name="fod_animation_size">280dp</dimen>
+    <dimen name="fod_animation_offset">0dp</dimen>
 </resources>
