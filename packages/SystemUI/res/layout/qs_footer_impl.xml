@@ -43,15 +43,6 @@
             android:layout_weight="@integer/qs_footer_actions_weight"
             android:gravity="center_vertical|start" >
 
-            <!-- Carrier Info -->
-            <include layout="@layout/qs_carrier_group"
-                android:id="@+id/carrier_group"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/qs_status_separator"
-                android:layout_gravity="end|center_vertical"
-                android:focusable="false"/>
-
             <TextView
                 android:id="@+id/build"
                 android:layout_width="wrap_content"
@@ -62,6 +53,7 @@
                 android:singleLine="true"
                 android:ellipsize="marquee"
                 android:textAppearance="@style/TextAppearance.QS.Status"
+                android:layout_marginStart="24dp"
                 android:layout_marginEnd="4dp"
                 android:visibility="gone"/>
          </com.android.keyguard.AlphaOptimizedLinearLayout>

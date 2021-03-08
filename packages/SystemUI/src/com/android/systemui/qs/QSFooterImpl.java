@@ -169,7 +169,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
                 oldBottom) -> updateAnimator(right - left));
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
         updateEverything();
-        //setBuildText();
+        setBuildText();
     }
 
     private void setBuildText() {
@@ -183,7 +183,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
                         UserHandle.USER_CURRENT);
         if (isShow) {
             if (text == null || text == "") {
-                v.setText("YAAP");
+                v.setText("KangOS");
                 v.setVisibility(View.VISIBLE);
             } else {
                 v.setText(text);
