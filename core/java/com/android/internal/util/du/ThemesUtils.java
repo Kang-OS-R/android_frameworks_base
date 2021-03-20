@@ -229,7 +229,7 @@ public class ThemesUtils {
             "com.gnonymous.gvisualmod.urm_l", // 3
     };
     
-    public static final String[] BRIGHTNESS_SLIDER_THEMES = {
+    public static final String[] BRIGHTNESS_SLIDER_STYLE = {
             "com.jrinfected.brightness.a",
             "com.jrinfected.brightness.b",
             "com.jrinfected.brightness.c",
