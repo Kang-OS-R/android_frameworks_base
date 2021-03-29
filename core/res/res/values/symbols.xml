@@ -4070,8 +4070,5 @@
   <!-- FOD icon dimming -->
   <java-symbol type="bool" name="config_targetUsesInKernelDimming" />
 
-  <!-- Enable face auth when swiping security view -->
-  <java-symbol type="bool" name="config_faceAuthOnSecurityView" />
-
   <java-symbol type="array" name="config_keep_warming_services" />
 </resources>
