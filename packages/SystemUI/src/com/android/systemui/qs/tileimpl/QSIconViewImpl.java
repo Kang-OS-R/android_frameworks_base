@@ -197,8 +197,7 @@ public class QSIconViewImpl extends QSIconView {
                 float fraction = animation.getAnimatedFraction();
                 int alpha = (int) (fromAlpha + (toAlpha - fromAlpha) * fraction);
                 int channel = (int) (fromChannel + (toChannel - fromChannel) * fraction);
-
-                if (setQsUseNewTint == 1) {
+                if (setQsUseNewTint == 1 || setQsUseNewTint == 2 || setQsUseNewTint == 3) {
                     setTint(iv, toColor);
 		} else if (setQsUseNewTint == 2) {
 		    setTint(iv, toColor);
