@@ -86,5 +86,8 @@
 	
     <!-- Margin on the left side of the heads up notification -->
     <dimen name="heads_up_status_bar_padding_start">0dp</dimen>
+    
+        <!-- keyguard battery bar -->
+    <dimen name="battery_bar_view_height">4dp</dimen>
 </resources>
 

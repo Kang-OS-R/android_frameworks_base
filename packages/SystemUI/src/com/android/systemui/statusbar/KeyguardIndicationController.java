@@ -53,6 +53,8 @@ import android.view.WindowManager;
 import androidx.annotation.Nullable;
 import com.airbnb.lottie.LottieAnimationView;
 
+import com.android.systemui.Dependency;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.logging.nano.MetricsProto;
@@ -62,6 +64,7 @@ import com.android.internal.widget.ViewClippingUtil;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.settingslib.Utils;
+import com.android.systemui.omni.BatteryBarView;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
@@ -75,6 +78,7 @@ import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.util.wakelock.SettableWakeLock;
 import com.android.systemui.util.wakelock.WakeLock;
+import com.android.systemui.tuner.TunerService;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -157,6 +161,12 @@ public class KeyguardIndicationController implements StateListener,
                 }
             };
 
+    // omni additions
+    private static final String KEYGUARD_SHOW_BATTERY_BAR = "sysui_keyguard_show_battery_bar";
+    private static final String KEYGUARD_SHOW_BATTERY_BAR_ALWAYS = "sysui_keyguard_show_battery_bar_always";
+
+    private BatteryBarView mBatteryBar;
+    
     /**
      * Creates a new KeyguardIndicationController and registers callbacks.
      */
@@ -192,27 +202,15 @@ public class KeyguardIndicationController implements StateListener,
     }
 
     public void setIndicationArea(ViewGroup indicationArea) {
-        mChargingIndicationView = (LottieAnimationView) indicationArea.findViewById(
-                R.id.charging_indication);
+      mChargingIndicationView = (LottieAnimationView) indicationArea.findViewById(
+              R.id.charging_indication);
         mIndicationArea = indicationArea;
         mTextView = indicationArea.findViewById(R.id.keyguard_indication_text);
+        mBatteryBar = indicationArea.findViewById(R.id.battery_bar_view);
         mInitialTextColorState = mTextView != null ?
                 mTextView.getTextColors() : ColorStateList.valueOf(Color.WHITE);
         mDisclosure = indicationArea.findViewById(R.id.keyguard_indication_enterprise_disclosure);
         mDisclosureMaxAlpha = mDisclosure.getAlpha();
-        mChargingIndicationView = (LottieAnimationView) indicationArea.findViewById(
-                R.id.charging_indication);
-        if (hasActiveInDisplayFp()) {
-            try {
-                IFingerprintInscreen daemon = IFingerprintInscreen.getService();
-                mFODPositionY = daemon.getPositionY();
-            } catch (RemoteException e) {
-                // do nothing
-            }
-            if (mFODPositionY <= 0) {
-                mFODPositionY = 0;
-            }
-        }
         updateIndication(false /* animate */);
         updateDisclosure();
 
@@ -428,8 +426,14 @@ public class KeyguardIndicationController implements StateListener,
         }
 
         if (mVisible) {
+            final boolean showBatteryBar = Dependency.get(TunerService.class)
+                    .getValue(KEYGUARD_SHOW_BATTERY_BAR, 1) == 1;
+            final boolean showBatteryBarAlways = Dependency.get(TunerService.class)
+                    .getValue(KEYGUARD_SHOW_BATTERY_BAR_ALWAYS, 0) == 1;
+                    
             // Walk down a precedence-ordered list of what indication
             // should be shown based on user or device state
+            mBatteryBar.setVisibility(View.GONE);
             if (mDozing) {
                 // When dozing we ignore any text color and use white instead, because
                 // colors can be hard to read in low brightness.
@@ -446,6 +450,11 @@ public class KeyguardIndicationController implements StateListener,
                     } else {
                         mTextView.switchIndication(indication);
                     }
+                    if (showBatteryBar) {
+                        mBatteryBar.setVisibility(View.VISIBLE);
+                        mBatteryBar.setBatteryPercent(mBatteryLevel);
+                        mBatteryBar.setBarColor(Color.WHITE);
+                    }
                 } else {
                     // Use the high voltage symbol ⚡ (u26A1 unicode) but prevent the system
                     // to load its emoji colored variant with the uFE0E flag
@@ -460,7 +469,7 @@ public class KeyguardIndicationController implements StateListener,
                         mTextView.switchIndication(null);
                     }
                 }
-                updateChargingIndication();
+                mChargingIndicationView.setVisibility(View.GONE);
                 return;
             }
 
@@ -501,6 +510,11 @@ public class KeyguardIndicationController implements StateListener,
                 } else {
                     mTextView.switchIndication(powerIndication);
                 }
+                if (showBatteryBar && showBatteryBarAlways) {
+                    mBatteryBar.setVisibility(View.VISIBLE);
+                    mBatteryBar.setBatteryPercent(mBatteryLevel);
+                    mBatteryBar.setBarColor(mInitialTextColorState);
+                }
             } else if (!TextUtils.isEmpty(trustManagedIndication)
                     && mKeyguardUpdateMonitor.getUserTrustIsManaged(userId)
                     && !mKeyguardUpdateMonitor.getUserHasTrust(userId)) {
@@ -513,7 +527,7 @@ public class KeyguardIndicationController implements StateListener,
             updateChargingIndication();
         }
     }
-
+  
     public void updateChargingIndication() {
         final ContentResolver resolver = mContext.getContentResolver();
         mChargingIndication = Settings.System.getIntForUser(resolver,
@@ -606,7 +620,7 @@ public class KeyguardIndicationController implements StateListener,
         FingerprintManager fpm = (FingerprintManager) mContext.getSystemService(Context.FINGERPRINT_SERVICE);
         return hasInDisplayFingerprint && fpm.getEnrolledFingerprints(userId).size() > 0;
     }
-
+    
     // animates textView - textView moves up and bounces down
     private void animateText(KeyguardIndicationTextView textView, String indication) {
         int yTranslation = mContext.getResources().getInteger(
