@@ -1,3 +1,4 @@
+
 package com.android.keyguard;
 
 import android.content.Context;
@@ -27,10 +28,6 @@ public class SeamlessClockSwitch {
         "com.android.keyguard.clock.SamsungClockController",
         "com.android.keyguard.clock.SamsungBoldClockController",
         "com.android.keyguard.clock.SamsungHighlightClockController",
-        "com.android.keyguard.clock.AnalogClockController",
-        "com.android.keyguard.clock.SpectrumClockController",
-        "com.android.keyguard.clock.DotClockController",
-        "com.android.keyguard.clock.SneekyClockController",
         "com.android.keyguard.clock.TypeClockController",
         "com.android.keyguard.clock.TypeClockAltController",
         "com.android.keyguard.clock.DividedLinesClockController",
@@ -38,7 +35,6 @@ public class SeamlessClockSwitch {
         "com.android.keyguard.clock.MNMLBoxClockController",
         "com.android.keyguard.clock.MNMLMinimalClockController",
         "com.android.keyguard.clock.SammyClockController",
-        "com.android.keyguard.clock.BinaryClockController",
         "com.android.keyguard.clock.TuxClockController",
         "com.android.keyguard.clock.FluidClockController",
         "com.android.keyguard.clock.LineageClockController",
@@ -50,7 +46,9 @@ public class SeamlessClockSwitch {
         "com.android.keyguard.clock.ExplosionCircleClockController",
         "com.android.keyguard.clock.BlueCircleClockController",
         "com.android.keyguard.clock.BlueV2CircleClockController",
-        "com.android.keyguard.clock.SquaryClockController"
+        "com.android.keyguard.clock.SquaryClockController",
+        "com.android.keyguard.clock.ShapeShiftClockController",
+        "com.android.keyguard.clock.LoadingClockController"
     };
 
     public static int getCurrentPosition(String currentClockFace) {
