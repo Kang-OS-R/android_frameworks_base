@@ -538,26 +538,31 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
     public abstract CharSequence getTileLabel();
 
     public static int getColorForState(Context context, int state) {
-        boolean setQsUseNewTint = Settings.System.getIntForUser(context.getContentResolver(),
-                Settings.System.QS_PANEL_BG_USE_NEW_TINT, 1, UserHandle.USER_CURRENT) == 1;
+
+        int setQsUseNewTint = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.QS_PANEL_BG_USE_NEW_TINT, 2, UserHandle.USER_CURRENT);
 
         switch (state) {
             case Tile.STATE_UNAVAILABLE:
-				return Utils.getDisabled(context,
+                    return Utils.getDisabled(context,
                         Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary));
+            case Tile.STATE_ACTIVE:
+                if (setQsUseNewTint == 1) {
+                    return Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent);
+		} else if (setQsUseNewTint == 2){
+                    return context.getResources().getColor(R.color.qs_tile_oos);
+		} else {
+                    return Utils.getColorAttrDefaultColor(context, android.R.attr.colorPrimary);
+                }
             case Tile.STATE_INACTIVE:
-                if (setQsUseNewTint) {
+                if (setQsUseNewTint == 1) {
                     return Utils.getColorAttrDefaultColor(context, android.R.attr.textColorPrimary);
+                } else if (setQsUseNewTint == 2) {
+                    return context.getResources().getColor(R.color.qs_tile_oos_background);
                 } else {
                     return Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
                 }
-            case Tile.STATE_ACTIVE:
-                if (setQsUseNewTint) {
-                    return Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent);
-                } else {
-                    return Utils.getColorAttrDefaultColor(context, android.R.attr.colorPrimary);
-                }
-			default:
+            default:
                 Log.e("QSTile", "Invalid state " + state);
                 return 0;
         }
