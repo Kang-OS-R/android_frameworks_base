@@ -80,11 +80,15 @@
     <dimen name="navigation_edge_panel_height">20dp</dimen>
     <!-- navigation end-->
 
-   <!-- Network traffic monitor -->
-   <dimen name="net_traffic_txt_img_padding">1dp</dimen>
-   <dimen name="net_traffic_sb_txt_img_padding">2dp</dimen>
-	
-    <!-- Margin on the left side of the heads up notification -->
-    <dimen name="heads_up_status_bar_padding_start">0dp</dimen>
-</resources>
+    <!-- Network traffic monitor -->
+    <dimen name="net_traffic_txt_img_padding">1dp</dimen>
+    <dimen name="net_traffic_sb_txt_img_padding">2dp</dimen>
 
+    <!-- OOS QS values -->
+    <dimen name="op_qs_footer_height">98dp</dimen>
+    <dimen name="op_qs_footer_action_layout_size">96dp</dimen>
+    <dimen name="quick_settings_top_margin_media">10dp</dimen>
+    <dimen name="quick_settings_top_margin_media_extra">14dp</dimen>
+    <dimen name="qs_media_action_button_margin_top">18dp</dimen>
+    <dimen name="qs_media_action_button_size">40dp</dimen>
+</resources>
