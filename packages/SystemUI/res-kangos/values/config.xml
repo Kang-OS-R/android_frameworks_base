@@ -37,9 +37,6 @@
     <!-- Default fod pressed color -->
     <integer name="config_fod_pressed_color">3</integer>
 
-    <!-- Whether to invert the icon color for active quicksettings icons -->
-    <bool name="config_useInvertedQsIconColor">false</bool>
-
     <!-- Default bar fill
          User can define this in settings
          Here for reference-->
