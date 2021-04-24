@@ -540,8 +540,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
     public static int getColorForState(Context context, int state) {
         boolean setQsUseNewTint = Settings.System.getIntForUser(context.getContentResolver(),
                 Settings.System.QS_PANEL_BG_USE_NEW_TINT, 0, UserHandle.USER_CURRENT) == 1;
-        boolean shouldDisco = Settings.System.getIntForUser(context.getContentResolver(),
-                Settings.System.QS_TILES_BG_DISCO, 0, UserHandle.USER_CURRENT) == 1;
+
         switch (state) {
             case Tile.STATE_UNAVAILABLE:
                 return Utils.getDisabled(context,
@@ -549,9 +548,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
             case Tile.STATE_INACTIVE:
                 return Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
             case Tile.STATE_ACTIVE:
-                    if (setQsUseNewTint && shouldDisco) {
-                        return Utils.getColorAttrDefaultColor(context, android.R.attr.colorPrimary);
-                    } else if (setQsUseNewTint && !shouldDisco) {
+                    if (setQsUseNewTint) {
                         return Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent);
                     } else
                         return Utils.getColorAttrDefaultColor(context, android.R.attr.colorPrimary);

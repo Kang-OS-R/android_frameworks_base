@@ -5981,12 +5981,6 @@ public final class Settings {
         public static final String QS_TILE_STYLE = "qs_tile_style";
 
         /**
-         * Whether to disco the QS tiles or not
-         * @hide
-         */
-        public static final String QS_TILES_BG_DISCO = "qs_tiles_bg_disco";
-
-        /**
          * Status bar carrier label
          * 0: Hide
          * 1: Display on keyguard status bar
@@ -6353,7 +6347,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DOZE_BRIGHTNESS);
             PRIVATE_SETTINGS.add(DOZE_BRIGHTNESS_FORCE);
             PRIVATE_SETTINGS.add(QS_TILE_STYLE);
-            PRIVATE_SETTINGS.add(QS_TILES_BG_DISCO);
             PRIVATE_SETTINGS.add(HIDE_SMART_REPLIES);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_VIEW_LOCATION);
         }
