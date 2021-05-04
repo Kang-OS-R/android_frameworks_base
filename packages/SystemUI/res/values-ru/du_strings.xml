@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (c) 2009, The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Theme tile -->
+    <string name="system_theme_style_title">Темы</string>
+    <string name="system_theme_style_light">Светная</string>
+    <string name="system_theme_style_dark">Google темная</string>
+    <string name="system_theme_style_pitchblack">Полностью черная</string>
+    <string name="system_theme_style_solarizeddark">Светло темная</string>
+    <string name="system_theme_style_chocox">Шоко X</string>
+    <string name="system_theme_style_bakedgreen">Темно зеленая</string>
+    <string name="system_theme_style_darkgrey">Темно-серая</string>
+    <string name="system_theme_style_materialocean">Морская волна</string>
+    <string name="quick_settings_theme_tile_title">Акцент</string>
+    <string name="quick_settings_theme_tile_accent_detail_title">Выбрать акцент</string>
+    <string name="system_theme_style_transparentclear">Полностью прозрачная</string>
+    <string name="quick_settings_theme_tile_style_detail_title">Выбрать тему</string>
+    <string name="quick_settings_theme_tile_color_default">По умолчанию</string>
+    <string name="quick_settings_theme_tile_color_space">Космос</string>
+    <string name="quick_settings_theme_tile_color_purple">Фиолетовый</string>
+    <string name="quick_settings_theme_tile_color_orchid">Орхидея</string>
+    <string name="quick_settings_theme_tile_color_ocean">Океан</string>
+    <string name="quick_settings_theme_tile_color_green">Зеленый</string>
+    <string name="quick_settings_theme_tile_color_cinnamon">Корица</string>
+    <string name="quick_settings_theme_tile_color_amber">Янтарь</string>
+    <string name="quick_settings_theme_tile_color_blue">Синий</string>
+    <string name="quick_settings_theme_tile_color_bluegrey">Серо-голубой</string>
+    <string name="quick_settings_theme_tile_color_brown">Коричневый</string>
+    <string name="quick_settings_theme_tile_color_cyan">Голубой</string>
+    <string name="quick_settings_theme_tile_color_deeporange">Глубокий оранжевый</string>
+    <string name="quick_settings_theme_tile_color_deeppurple">Глубокий фиолетовый</string>
+    <string name="quick_settings_theme_tile_color_grey">Серый</string>
+    <string name="quick_settings_theme_tile_color_indigo">Индиго</string>
+    <string name="quick_settings_theme_tile_color_lightblue">Светло-синий</string>
+    <string name="quick_settings_theme_tile_color_lightgreen">Светло-зеленый</string>
+    <string name="quick_settings_theme_tile_color_lime">Лайм</string>
+    <string name="quick_settings_theme_tile_color_orange">Оранжевый</string>
+    <string name="quick_settings_theme_tile_color_pink">Розовый</string>
+    <string name="quick_settings_theme_tile_color_red">Красный</string>
+    <string name="quick_settings_theme_tile_color_teal">Бирюзовый</string>
+    <string name="quick_settings_theme_tile_color_yellow">Желтый</string>
+
+    <!-- Screenshot Delete Toast -->
+    <string name="delete_screenshot_toast">Снимок экрана удален</string>
+
+    <!-- Partial screenshot -->
+    <string name="global_screenshot_selector_capture_description">Сделать частичный снимок экрана</string>
+    <string name="global_screenshot_selector_cancel_description">Отменить частичный снимок экрана</string>
+
+</resources>
