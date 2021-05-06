@@ -55,6 +55,7 @@ import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.shared.system.QuickStepContract;
 import com.android.systemui.shared.system.SysUiStatsLog;
+import com.android.systemui.statusbar.BlurUtils;
 import com.android.systemui.statusbar.CrossFadeHelper;
 import com.android.systemui.statusbar.NotificationMediaManager;
 import com.android.systemui.statusbar.RemoteInputController;
@@ -104,6 +105,10 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
             "system:" + Settings.System.LOCKSCREEN_LOCK_ICON;
 
     private boolean mLockIcon;
+    private static final String LOCKSCREEN_BLUR =
+            "system:" + Settings.System.LOCKSCREEN_BLUR;
+
+    private float mLockScreenBlur;
 
     protected final Context mContext;
     private final ConfigurationController mConfigurationController;
@@ -197,6 +202,9 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
     private final KeyguardUpdateMonitor mKeyguardUpdateManager;
     private KeyguardBypassController mBypassController;
 
+    private final TunerService mTunerService;
+    private final BlurUtils mBlurUtils;
+
     private final KeyguardUpdateMonitorCallback mUpdateMonitorCallback =
             new KeyguardUpdateMonitorCallback() {
         @Override
@@ -222,7 +230,9 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
             DockManager dockManager,
             NotificationShadeWindowController notificationShadeWindowController,
             KeyguardStateController keyguardStateController,
-            NotificationMediaManager notificationMediaManager) {
+            NotificationMediaManager notificationMediaManager,
+            TunerService tunerService,
+            BlurUtils blurUtils) {
         mContext = context;
         mViewMediatorCallback = callback;
         mLockPatternUtils = lockPatternUtils;
@@ -234,6 +244,8 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
         mKeyguardUpdateManager = keyguardUpdateMonitor;
         mStatusBarStateController = sysuiStatusBarStateController;
         mDockManager = dockManager;
+        mTunerService = tunerService;
+        mBlurUtils = blurUtils;
     }
 
     @Override
@@ -273,6 +285,7 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
             mIsDocked = mDockManager.isDocked();
         }
         Dependency.get(TunerService.class).addTunable(this, LOCKSCREEN_LOCK_ICON);
+        mTunerService.addTunable(this, LOCKSCREEN_BLUR);
     }
 
     @Override
@@ -281,6 +294,9 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
             case LOCKSCREEN_LOCK_ICON:
                 mLockIcon =
                     TunerService.parseIntegerSwitch(newValue, true);
+            case LOCKSCREEN_BLUR:
+                mLockScreenBlur =
+                    (float) TunerService.parseInteger(newValue, 0) / 100f;
                 break;
             default:
                 break;
@@ -840,6 +856,16 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
         boolean bouncerInTransit = mBouncer.inTransit();
         boolean bouncerDismissible = !mBouncer.isFullscreenBouncer();
         boolean remoteInputActive = mRemoteInputActive;
+
+        if (mLockScreenBlur > 0f && mBlurUtils.supportsBlursOnWindows()) {
+            if (showing && !occluded) {
+                mBlurUtils.applyBlur(getViewRootImpl(),
+                    mBlurUtils.blurRadiusOfRatio(mLockScreenBlur));
+            } else {
+                mBlurUtils.applyBlur(getViewRootImpl(),
+                    mBlurUtils.blurRadiusOfRatio(0));
+            }
+        }
 
         if ((bouncerDismissible || !showing || remoteInputActive) !=
                 (mLastBouncerDismissible || !mLastShowing || mLastRemoteInputActive)
