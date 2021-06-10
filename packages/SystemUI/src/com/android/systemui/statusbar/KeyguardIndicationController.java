@@ -558,6 +558,7 @@ public class KeyguardIndicationController implements StateListener,
         }
         mTextView.setTextColor(isError ? Utils.getColorError(mContext)
                 : mInitialTextColorState);
+        updateChargingIndication();
         if (hideIndication) {
             mIndicationArea.setVisibility(View.GONE);
 
