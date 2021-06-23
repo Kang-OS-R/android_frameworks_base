@@ -6153,6 +6153,11 @@ public final class Settings {
          */
         public static final String SENSOR_BLOCK = "sensor_block";
 
+	/**
+         * @hide
+        */
+        public static final String EDGE_MUSIC_CONTROL = "edge_music_control";
+
         /**
          * Sensor blocked packages
          * @hide
@@ -6393,6 +6398,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_TILES_BG_DISCO);
             PRIVATE_SETTINGS.add(HIDE_SMART_REPLIES);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_VIEW_LOCATION);
+            PRIVATE_SETTINGS.add(EDGE_MUSIC_CONTROL);
         }
 
         /**
